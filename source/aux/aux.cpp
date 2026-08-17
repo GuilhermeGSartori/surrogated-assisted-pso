@@ -7,6 +7,7 @@
 #include <chrono>
 #include <iomanip>
 #include <filesystem>
+#include <string_view>
 
 #include "aux.h"
 
@@ -133,4 +134,14 @@ std::ofstream createLogFile() {
     }
 
     return log;
+}
+
+constexpr std::string_view toString(Method method) {
+    switch (method) {
+        case Method::Simulation: return "Simulation";
+        case Method::Surrogate:  return "Surrogate";
+        case Method::Hybrid:     return "Hybrid";
+    }
+
+    return "Unknown";
 }

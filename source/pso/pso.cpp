@@ -30,7 +30,6 @@ void Swarm::setRanges(double relay_range, double node_range) {
 }
 
 void Swarm::setWeights(double w, double c1, double c2) {
-    //weights = Weights(w, c1, c2, r1, r2);
     weights.w = w;
     weights.c1 = c1;
     weights.c2 = c2;
@@ -48,7 +47,6 @@ void Swarm::initRelays(const Dimensions& area, std::mt19937& rng) {
             v.y = 0;
         }
     }
-    // escrever em arquivo as posicoes inicieis de todas as particulas
 }
 
 bool Particle::compareBest(const double fitness) { // pq aqui PRECISA retornar referenica?
@@ -201,9 +199,13 @@ void logHeader(std::ofstream& log, const Swarm& swarm, const Scenario& scenario)
     log << "Relays: " << scenario.n_relays << '\n';
     log << "Iterations: " << iterations_max << '\n';
 
+    log << "Backend: " << toString(scenario.backend) << '\n';
+
     log << "Area: "
         << scenario.area.width << " x "
         << scenario.area.height << '\n';
+
+    log << "Sink: " << scenario.sink.x << ", " << scenario.sink.y << '\n';
 
     log << "Relay range: " << scenario.relay_range << '\n';
     log << "Node range: " << scenario.node_range << '\n';
@@ -215,4 +217,26 @@ void logHeader(std::ofstream& log, const Swarm& swarm, const Scenario& scenario)
     log << "c2: " << weights.c2 << '\n';
 
     log << '\n';
+
+    log << "Relay Nodes Positions: \n";
+    logRelayNodes(log, swarm);
+
+    log << "Nodes Positions: \n";
+    logNodes(log, scenario);
+}
+
+void logRelayNodes(std::ofstream& log, const Swarm& swarm) {
+    auto& particles = swarm.getParticles();
+    for (size_t i = 0; i < swarm.getN_particles(); ++i) {
+        log << "PARTICLE " << i+1 << ": \n";
+        for (const auto& pos: particles[i].getPositions()) {
+            log << pos.x << ", " << pos.y << '\n';
+        }
+    }
+}
+
+void logNodes(std::ofstream& log, const Scenario& scenario) {
+    for (const auto& node : scenario.nodes) {
+        log << node.x << ", " << node.y << '\n';
+    }
 }

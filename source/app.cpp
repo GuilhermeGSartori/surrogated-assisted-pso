@@ -50,13 +50,7 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
 
     // sortear valor random de tamanho de pacote e tempo para geração para cada nodo e escrever no arquivo de config
     pso(swarm, scenario, rng);
-
-    // pegar resultados e plottar e sei lá... e csv ==> acho que nao, vou jogar tudo no meu log e depois façi um script só pra plottar
-
-    // ideia é ambiente sem nas proporcoes de PA real, nodos Latin Hypercube para cobrir area e simular PA real..?
-    // quantidade por área e tamanho area
     
-
     return 0;
 }
 

@@ -121,6 +121,8 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario) ;
 int pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng);
 
 void logHeader(std::ofstream& log, const Swarm& swarm, const Scenario& scenario);
+void logRelayNodes(std::ofstream& log, const Swarm& swarm);
+void logNodes(std::ofstream& log, const Scenario& scenario);
 
 template <typename Container>
 bool isConnected(const Container& nodes, const Coordinates& sink, double relay_range);

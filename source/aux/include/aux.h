@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
+#include <string_view>
 
 template <typename T>
 class FixedSizeVector {
@@ -159,6 +160,8 @@ enum class Method {
     Surrogate,
     Hybrid
 };
+
+constexpr std::string_view toString(Method method);
 
 struct Scenario {
     std::size_t n_relays = 0;
