@@ -177,11 +177,15 @@ struct Scenario {
     std::vector<Coordinates> nodes;
 
     Method backend;
+
+    std::vector<int> packet_timeouts;
 };
 
 Method parseMethod(const std::string& method);
 
 Scenario parseScenario(const std::string& filename);
+
+std::ofstream createLogFile();
 
 template <typename Container>
 void LHS(Container& nodes, std::size_t n, const Dimensions& area, std::mt19937& rng);

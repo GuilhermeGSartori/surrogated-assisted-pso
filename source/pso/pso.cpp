@@ -1,5 +1,6 @@
 #include "pso.h"
 
+#include <fstream>
 #include <iostream>
 #include <vector>
 #include <limits>
@@ -126,6 +127,10 @@ int pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng) {
 
     int iterations = 0;
 
+    std::ofstream log = createLogFile();
+
+    logHeader(log, swarm, scenario);
+
     do
     {
         evaluateSolution(swarm, scenario);
@@ -184,4 +189,30 @@ bool isConnected(const Container& nodes, const Coordinates& sink, double relay_r
     }
 
     return true;
+}
+
+void logHeader(std::ofstream& log, const Swarm& swarm, const Scenario& scenario) {
+
+    log << "PSO EXECUTION\n";
+    log << "============================\n";
+
+    log << "Seed: " << scenario.seed << '\n';
+    log << "Particles: " << swarm.getN_particles() << '\n';
+    log << "Relays: " << scenario.n_relays << '\n';
+    log << "Iterations: " << iterations_max << '\n';
+
+    log << "Area: "
+        << scenario.area.width << " x "
+        << scenario.area.height << '\n';
+
+    log << "Relay range: " << scenario.relay_range << '\n';
+    log << "Node range: " << scenario.node_range << '\n';
+
+    Weights weights = swarm.getWeights();
+    
+    log << "w: " << weights.w << '\n';
+    log << "c1: " << weights.c1 << '\n';
+    log << "c2: " << weights.c2 << '\n';
+
+    log << '\n';
 }

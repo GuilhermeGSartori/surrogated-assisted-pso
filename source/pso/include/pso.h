@@ -91,8 +91,12 @@ public:
         return particles;
     }
 
-    std::size_t getN_relays() {
+    const std::size_t getN_relays() const {
         return n_relays;
+    }
+
+    const std::size_t getN_particles() const {
+        return n_particles;
     }
 
     const Solution& getGlobalBest() const {
@@ -100,6 +104,8 @@ public:
     }
 
     Weights getWeights() { return weights; }
+
+    const Weights getWeights() const { return weights; }
 
     void updateGlobalBest(const Solution& candidate);
 
@@ -113,6 +119,8 @@ public:
 void evaluateSolution(Swarm& swarm, const Scenario& scenario) ;
 
 int pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng);
+
+void logHeader(std::ofstream& log, const Swarm& swarm, const Scenario& scenario);
 
 template <typename Container>
 bool isConnected(const Container& nodes, const Coordinates& sink, double relay_range);

@@ -4,6 +4,10 @@
 #include <random>
 #include <algorithm>
 #include <numeric>
+#include <chrono>
+#include <iomanip>
+#include <filesystem>
+
 #include "aux.h"
 
 Method parseMethod(const std::string& method) {
@@ -108,4 +112,25 @@ void FixedSizeVector<T>::checkSameSize(const FixedSizeVector& other) const {
 double Coordinates::distanceSquared(const Coordinates& a, const Coordinates& b) {
     Coordinates d = a - b;
     return d.x*d.x + d.y*d.y;
+}
+
+std::ofstream createLogFile() {
+    const auto now = std::chrono::system_clock::now();
+    const std::time_t time = std::chrono::system_clock::to_time_t(now);
+
+    std::tm tm{};
+    localtime_r(&time, &tm);   // Linux
+
+    std::ostringstream filename;
+
+    filename << std::put_time(&tm, "%Y-%m-%d_%H-%M-%S")
+             << ".log";
+
+    std::ofstream log(filename.str());
+
+    if (!log.is_open()) {
+        throw std::runtime_error("Could not create log file");
+    }
+
+    return log;
 }

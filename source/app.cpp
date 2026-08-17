@@ -35,6 +35,13 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
 
     LHS(scenario.nodes, scenario.n_nodes, scenario.area, rng); // vai preencher as posicoes de nodo inicial => latin hyper cube para preencher as posicoes do swarm
     swarm.initRelays(scenario.area, rng); 
+
+    // baseado em numero de nodos, criar packet size max e packet timeout...
+    // Pacote acho que vai ser sempre igual.. temperatura, umidade, lumens... 6 bytes...? timestamp, posicao...
+    // tamanho do pacote definido claramente... tempo de geracao eu criar aqui....
+    // com funcao auxiliar tendo maximo e minimo e distribuir nesse range..
+
+
     // escrever as posicoes em todos os lugares e nodos em arquivo
 
     /// Escrever tudo q tem no scenario no arquivo com timestamp de nome
@@ -44,7 +51,7 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
     // sortear valor random de tamanho de pacote e tempo para geração para cada nodo e escrever no arquivo de config
     pso(swarm, scenario, rng);
 
-    // pegar resultados e plottar e sei lá... e csv
+    // pegar resultados e plottar e sei lá... e csv ==> acho que nao, vou jogar tudo no meu log e depois façi um script só pra plottar
 
     // ideia é ambiente sem nas proporcoes de PA real, nodos Latin Hypercube para cobrir area e simular PA real..?
     // quantidade por área e tamanho area
