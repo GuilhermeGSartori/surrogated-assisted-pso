@@ -1,12 +1,8 @@
 // to do:
+// -- PSO implementation -- Gerar dados do pacote, definir arquivo config, integrar com omnet
 // -- tests
-// -- Omnet integration
-// -- PSO implementation -- validar que tenho tudo q preciso
-//      -- salvar infos em arquivos... posicoes, velocidades iniciais, log, etc... salvar TUDO...
-//      -- tamanho do pacote, tempo de geracao de cada nodo...
-//      -- escrever TUDO...
-//      -- e colocar o conreduo em arquivo de config para omnet
 
+#include <fstream>
 #include <iostream>
 #include <string_view>
 #include <algorithm>
@@ -33,7 +29,7 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
 
     swarm.setWeights(w, c1, c2);
 
-    LHS(scenario.nodes, scenario.n_nodes, scenario.area, rng); // vai preencher as posicoes de nodo inicial => latin hyper cube para preencher as posicoes do swarm
+    LHS(scenario.nodes, scenario.n_nodes, scenario.area, rng);
     swarm.initRelays(scenario.area, rng); 
 
     // baseado em numero de nodos, criar packet size max e packet timeout...
@@ -41,16 +37,17 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
     // tamanho do pacote definido claramente... tempo de geracao eu criar aqui....
     // com funcao auxiliar tendo maximo e minimo e distribuir nesse range..
 
-
-    // escrever as posicoes em todos os lugares e nodos em arquivo
-
-    /// Escrever tudo q tem no scenario no arquivo com timestamp de nome
-
-    // o q preciso pra rodar? posicoes nodos, posicoes relays, w, c1, c2, sink, ranges, configm rede, velocidade inicial, ...?
-
+    // o q preciso pra rodar? configm rede
     // sortear valor random de tamanho de pacote e tempo para geração para cada nodo e escrever no arquivo de config
-    pso(swarm, scenario, rng);
-    
+
+    std::ofstream log = createLogFile();
+
+    const Solution& global_best = pso(swarm, scenario, rng, log);
+    log << "Final global best fitness: " << global_best.fitness << "\n";
+    log << "Final global best relays: ";
+    for (const auto& pos: global_best.relay_positions) {
+        log << pos.x << ", " << pos.y << '\n';
+    }    
     return 0;
 }
 

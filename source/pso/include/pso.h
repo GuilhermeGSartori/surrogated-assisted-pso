@@ -107,7 +107,7 @@ public:
 
     const Weights getWeights() const { return weights; }
 
-    void updateGlobalBest(const Solution& candidate);
+    bool updateGlobalBest(const Solution& candidate);
 
     void initRelays(const Dimensions& area, std::mt19937& rng);
 
@@ -116,9 +116,9 @@ public:
     void setWeights(double w, double c1, double c2);
 };
 
-void evaluateSolution(Swarm& swarm, const Scenario& scenario) ;
+void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log) ;
 
-int pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng);
+const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, std::ofstream& log);
 
 void logHeader(std::ofstream& log, const Swarm& swarm, const Scenario& scenario);
 void logRelayNodes(std::ofstream& log, const Swarm& swarm);

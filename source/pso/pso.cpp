@@ -18,10 +18,13 @@ Swarm::Swarm(std::size_t n_particles, std::size_t n_relays, Coordinates sink) : 
     }
 }
 
-void Swarm::updateGlobalBest(const Solution& candidate) {
+bool Swarm::updateGlobalBest(const Solution& candidate) {
     if (candidate.fitness > global_best.fitness) {
         global_best = candidate;
+        
+        return true;
     }
+    return false;
 }
 
 void Swarm::setRanges(double relay_range, double node_range) {
@@ -106,47 +109,74 @@ void Particle::updatePositions(const Dimensions& area) {
     }
 }
 
-void evaluateSolution(Swarm& swarm, const Scenario& scenario) {
+void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log) {
+    int particle = 1;
+
     for (auto& p: swarm.getParticles()) {
+        log << "-------------\n"
+            << "Particle: " << particle << ":\n"
+            << "Relays Coordinates:\n";
+
+        for (const auto& pos: p.getPositions()) {
+            log << pos.x << ", " << pos.y << '\n';
+        }
+        
         double fitness;
         if (scenario.backend == Method::Simulation) {
             // Simulador
+            // Escrever cada posicao em um arquivo de config e etc...
             fitness = 0;
         }
         else {
             fitness = 0;
         }
-        if (p.compareBest(fitness))
-            swarm.updateGlobalBest(p.getPersonalBest());
+        
+        log << "Resulting Fitness: " << fitness << "\n";
+
+        if (p.compareBest(fitness)) {
+            log << "New local best!\n";
+            if (swarm.updateGlobalBest(p.getPersonalBest()))
+                log << "New global best!\n";
+        }
     }
 }
 
-int pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng) {
+const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, std::ofstream& log) {
 
     int iterations = 0;
-
-    std::ofstream log = createLogFile();
 
     logHeader(log, swarm, scenario);
 
     do
     {
-        evaluateSolution(swarm, scenario);
+        log << "-- ITERATION " << iterations << " --\n";
+        evaluateSolution(swarm, scenario, log);
 
+        const Solution& global_best = swarm.getGlobalBest();
+
+        log << "Current global best fitness: " << global_best.fitness << "\n";
+        log << "Current global best relays: ";
+
+        for (const auto& pos: global_best.relay_positions) {
+            log << pos.x << ", " << pos.y << '\n';
+        }
+
+        int particle = 1;
         for (auto& p: swarm.getParticles()) {
             p.calculateVelocity(swarm.getWeights(), swarm.getGlobalBest(), rng);
+            const FixedSizeVector<Coordinates>& velocities = p.getVelocities();
+            log << "Particle " << particle << " new velocities: ";
+            for (const auto& pos: velocities) {
+                log << pos.x << ", " << pos.y << '\n';
+            }           
             p.updatePositions(scenario.area);
         }
     } while (++iterations < iterations_max);
 
-    evaluateSolution(swarm, scenario);  
+    log << "-- ITERATION " << iterations << " --\n";
+    evaluateSolution(swarm, scenario, log);
 
-    
-    // aqui só escreve as posicoes mesmo
-    // escreve em artigo de config? chama serviço? como vai ser o backend.. escreve em arquivo e invoca processo ou integração c++?
-    // chama por linha de comando? como faz? roda, espera, vê saida??? como vai ser integração
-    // evaluation backend ==> serviiço ou chamar simulacao
-
+    return swarm.getGlobalBest();
 }
 
 template <typename Container>
@@ -223,6 +253,8 @@ void logHeader(std::ofstream& log, const Swarm& swarm, const Scenario& scenario)
 
     log << "Nodes Positions: \n";
     logNodes(log, scenario);
+
+    log << "All particles start with velocity zero\n";
 }
 
 void logRelayNodes(std::ofstream& log, const Swarm& swarm) {
