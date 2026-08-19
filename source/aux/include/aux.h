@@ -1,5 +1,7 @@
 #pragma once
 
+#include <map>
+#include <unordered_map>
 #include <utility>
 #include <cstddef>
 #include <string>
@@ -163,15 +165,38 @@ enum class Method {
 
 constexpr std::string_view toString(Method method);
 
+enum class NodeType {
+    Node,
+    Relay
+};
+
+struct Network {
+    std::unordered_map<NodeType, unsigned int> interface;
+
+    std::unordered_map<NodeType, double> frequency;
+    std::unordered_map<NodeType, double> bandwidth;
+    std::unordered_map<NodeType, double> bitrate;
+    std::unordered_map<NodeType, double> power;
+
+    std::unordered_map<NodeType, unsigned int> propagation;
+    std::unordered_map<NodeType, unsigned int> traffic;
+
+    unsigned int packet_length = 0;
+    double interval = 0.0;
+
+    unsigned int seed = 0;
+
+    std::map<std::pair<NodeType, NodeType>, double> simulated_range;
+
+    // fixed in .ini: energy model (batery), traffic source, forwards, dest
+};
+
 struct Scenario {
     std::size_t n_relays = 0;
     unsigned int seed = 0;
     std::size_t n_nodes = 0;
 
     Dimensions area;
-
-    double node_range = 0.0;
-    double relay_range = 0.0;
 
     std::size_t n_clusters = 0;
 
@@ -182,6 +207,10 @@ struct Scenario {
     Method backend;
 
     std::vector<int> packet_timeouts;
+
+    unsigned int network_config;
+
+    Network network;
 };
 
 Method parseMethod(const std::string& method);
@@ -189,6 +218,12 @@ Method parseMethod(const std::string& method);
 Scenario parseScenario(const std::string& filename);
 
 std::ofstream createLogFile();
+
+void configNetwork(Scenario& scenario);
+
+std::vector<std::string> splitCSV(const std::string& line);
+
+Network parseNetworkConfig(unsigned int config_number, const std::filesystem::path& network_directory);
 
 double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario& scenario);
 

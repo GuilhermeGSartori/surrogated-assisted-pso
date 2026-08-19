@@ -239,8 +239,8 @@ void logHeader(std::ofstream& log, const Swarm& swarm, const Scenario& scenario)
 
     log << "Sink: " << scenario.sink.x << ", " << scenario.sink.y << '\n';
 
-    log << "Relay range: " << scenario.relay_range << '\n'; // ISSO E IsConnected está errado.. tenho q definir uma rede e ja era
-    log << "Node range: " << scenario.node_range << '\n'; 
+    log << "Simulated Relay range: " << swarm.getRelayRange() << '\n'; // ISSO E IsConnected está errado.. tenho q definir uma rede e ja era
+    log << "Simulated Node range: " << swarm.getNodeRange() << '\n'; // VOU TER OUTRAS INFOS CONFIGURADAS VIA INPUT DA REDE.. REDE CONFIGURAVEL.. E DAI DESCOBRE RANGE POR EXPERIMENTO E NAO ONPUT... MAS REDE INPUT
 
     Weights weights = swarm.getWeights();
     

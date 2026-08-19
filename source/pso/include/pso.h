@@ -113,6 +113,9 @@ public:
 
     void setRanges(double relay_range, double node_range);
     
+    const double getNodeRange() const { return node_range; }
+    const double getRelayRange() const { return relay_range; }
+
     void setWeights(double w, double c1, double c2);
 };
 

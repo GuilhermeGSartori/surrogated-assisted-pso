@@ -23,7 +23,15 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
     const double c2 = std::stod(argv[7]);
 
     Swarm swarm(n_particles, scenario.n_relays, scenario.sink);
-    swarm.setRanges(scenario.relay_range, scenario.node_range);
+
+    swarm.setRanges(
+        scenario.network.simulated_range.at({NodeType::Relay, NodeType::Relay}),
+        scenario.network.simulated_range.at({NodeType::Node, NodeType::Relay})
+    );
+    
+    //swarm.setRanges(scenario.network.simulated_range[NodeType::Relay], scenario.network.simulated_range[NodeType::Node]);
+    // aqui ja suficiente... seta os ranges do swarm e usa eles pra saber se conectado e gg
+    // so q em vez de valor vir do arquivo / cenário... vem da simulacao
 
     std::mt19937 rng(scenario.seed);
 
@@ -69,6 +77,10 @@ int main(int argc, char* argv[]) {
 
     Scenario scenario = parseScenario(argv[2]);
     scenario.backend = parseMethod(argv[3]);
+
+    configNetwork(scenario); // le arquivo e seta no proprio cenario e roda sim pra simular distancia
+                             // preciso usar isso para descobrir a distancia através de simulação
+                             // e também pra ter os dados pra configurar o arquivo de .ini
 
     return it->second(argc, argv, scenario);
 }
