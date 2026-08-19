@@ -190,5 +190,7 @@ Scenario parseScenario(const std::string& filename);
 
 std::ofstream createLogFile();
 
+double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario& scenario);
+
 template <typename Container>
 void LHS(Container& nodes, std::size_t n, const Dimensions& area, std::mt19937& rng);

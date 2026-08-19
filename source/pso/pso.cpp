@@ -123,9 +123,7 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
         
         double fitness;
         if (scenario.backend == Method::Simulation) {
-            // Simulador
-            // Escrever cada posicao em um arquivo de config e etc...
-            fitness = 0;
+            fitness = runSimulation(p.getPositions(), scenario);
         }
         else {
             fitness = 0;
@@ -138,6 +136,8 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
             if (swarm.updateGlobalBest(p.getPersonalBest()))
                 log << "New global best!\n";
         }
+
+        ++particle;
     }
 }
 
@@ -170,6 +170,8 @@ const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, s
                 log << pos.x << ", " << pos.y << '\n';
             }           
             p.updatePositions(scenario.area);
+
+            ++particle;
         }
     } while (++iterations < iterations_max);
 
@@ -237,8 +239,8 @@ void logHeader(std::ofstream& log, const Swarm& swarm, const Scenario& scenario)
 
     log << "Sink: " << scenario.sink.x << ", " << scenario.sink.y << '\n';
 
-    log << "Relay range: " << scenario.relay_range << '\n';
-    log << "Node range: " << scenario.node_range << '\n';
+    log << "Relay range: " << scenario.relay_range << '\n'; // ISSO E IsConnected está errado.. tenho q definir uma rede e ja era
+    log << "Node range: " << scenario.node_range << '\n'; 
 
     Weights weights = swarm.getWeights();
     

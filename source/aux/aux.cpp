@@ -145,3 +145,13 @@ constexpr std::string_view toString(Method method) {
 
     return "Unknown";
 }
+
+double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario& scenario) {
+    //writeOmnetConfig
+    int result = std::system("./wsn_sim -u Cmdenv -f omnetpp.ini -f pso_positions.ini");
+
+    if (result != 0)
+        throw std::runtime_error("OMNeT++ simulation failed");
+
+    //readFitness
+}
