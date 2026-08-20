@@ -16,6 +16,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(aux
     source/aux/aux.cpp
+    source/aux/network.cpp
 )
 
 target_include_directories(aux

@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include "pso.h"
 #include "aux.h"
+#include "network_files.h"
 
 using OptimizerFunction = int (*)(int, char*[], Scenario&);
 
