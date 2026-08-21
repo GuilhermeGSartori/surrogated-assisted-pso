@@ -151,43 +151,6 @@ constexpr std::string_view toString(Method method) {
     return "Unknown";
 }
 
-double readScalar(const std::string& filename, const std::string& scalarName) {
-    std::ifstream file(filename);
-
-    if (!file.is_open()) {
-        throw std::runtime_error(
-            "Could not open scalar file: " + filename
-        );
-    }
-
-    std::string line;
-
-    while (std::getline(file, line)) {
-        if (line.rfind("scalar", 0) != 0)
-            continue;
-
-        std::istringstream iss(line);
-
-        std::string type;
-        std::string module;
-        std::string name;
-        double value;
-
-        iss >> type
-            >> std::quoted(module)
-            >> std::quoted(name)
-            >> value;
-
-        if (name == scalarName) {
-            return value;
-        }
-    }
-
-    throw std::runtime_error(
-        "Scalar not found: " + scalarName
-    );
-}
-
 void configNetwork(Scenario& scenario) {
 
     scenario.network = parseNetworkConfig(scenario.network_config, "scenarios");

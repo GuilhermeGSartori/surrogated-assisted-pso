@@ -187,8 +187,6 @@ struct Scenario {
     Network network;
 };
 
-double readScalar(const std::string& filename, const std::string& scalarName);
-
 void configNetwork(Scenario& scenario);
 
 Method parseMethod(const std::string& method);
