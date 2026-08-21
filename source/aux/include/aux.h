@@ -187,13 +187,6 @@ struct Scenario {
     Network network;
 };
 
-struct DistanceResult {
-    double packets_sent;
-    double packets_received;
-};
-
-DistanceResult readDistanceExperimentResult();
-
 double readScalar(const std::string& filename, const std::string& scalarName);
 
 void configNetwork(Scenario& scenario);
