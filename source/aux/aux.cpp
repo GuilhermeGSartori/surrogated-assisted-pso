@@ -151,24 +151,96 @@ constexpr std::string_view toString(Method method) {
     return "Unknown";
 }
 
+double readScalar(const std::string& filename, const std::string& scalarName) {
+    std::ifstream file(filename);
+
+    if (!file.is_open()) {
+        throw std::runtime_error(
+            "Could not open scalar file: " + filename
+        );
+    }
+
+    std::string line;
+
+    while (std::getline(file, line)) {
+        if (line.rfind("scalar", 0) != 0)
+            continue;
+
+        std::istringstream iss(line);
+
+        std::string type;
+        std::string module;
+        std::string name;
+        double value;
+
+        iss >> type
+            >> std::quoted(module)
+            >> std::quoted(name)
+            >> value;
+
+        if (name == scalarName) {
+            return value;
+        }
+    }
+
+    throw std::runtime_error(
+        "Scalar not found: " + scalarName
+    );
+}
+
 void configNetwork(Scenario& scenario) {
 
     scenario.network = parseNetworkConfig(scenario.network_config, "scenarios");
+    double estimated_range = 0.0;
 
     for (double distance = 5.0; distance <= 300.0; distance += 5.0) {
-        writeDistanceExperimentIni(scenario.network, NodeType::Relay, NodeType::Relay, distance, "network/range_test.ini");
-        // run OMNeT++
+        constexpr int repetitions = 10;
+
+        double total_pdr = 0.0;
+
+        for (int i = 0; i < repetitions; ++i) {
+
+            writeDistanceExperimentIni(i, scenario.network, NodeType::Relay, NodeType::Relay, distance, "network/range_test.ini");
+
+            int result = std::system("./wsn_sim -u Cmdenv -f network/range_test.ini");
+
+            if (result != 0)
+                throw std::runtime_error("OMNeT++ simulation failed");
+
+            double received = readScalar("network/range_test.sca", "packetsReceived");
+
+            double sent = readScalar("network/range_test.sca", "packetsSent");
+
+            if (sent == 0) {
+                throw std::runtime_error(
+                    "Distance experiment sent zero packets"
+                );
+            }
+
+            const double pdr = static_cast<double>(received) / sent;
+
+            total_pdr += pdr;
+        }
+
+        const double average_pdr =
+            total_pdr / repetitions;
+
+        if (average_pdr >= 0.95) {
+            estimated_range = distance;
+        }
+        else {
+            break;
+        }
     }
 
-    // config .ini file --> aqui já escrever tudo, só vai faltar as posicoes
-    // run simulation to figure it out distance
+    // -> aqui / Só fazer config.ini do experimento na hora de rodar mesmo, escrever tudo dai..... o omnetpp.ini que vai ser FIXO
 
-    scenario.network.simulated_range[{NodeType::Relay, NodeType::Relay}] = 0.0;
-    scenario.network.simulated_range[{NodeType::Node, NodeType::Relay}] = 0.0;
+    scenario.network.simulated_range[{NodeType::Relay, NodeType::Relay}] = estimated_range;
+    //scenario.network.simulated_range[{NodeType::Node, NodeType::Relay}] = estimated_range;
 }
 
 double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario& scenario) {
-    //writeOmnetConfig so posicoes
+    //writeOmnetConfig so posicoes 
     int result = std::system("./wsn_sim -u Cmdenv -f omnetpp.ini -f pso_positions.ini");
 
     if (result != 0)

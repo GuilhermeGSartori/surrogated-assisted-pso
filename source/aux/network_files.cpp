@@ -56,7 +56,7 @@ std::string getTrafficName(unsigned int id) {
 }
 
 
-void writeDistanceExperimentIni(const Network& network, NodeType transmitter_type, NodeType receiver_type, double distance, const std::filesystem::path& output_file) {
+void writeDistanceExperimentIni(int i, const Network& network, NodeType transmitter_type, NodeType receiver_type, double distance, const std::filesystem::path& output_file) {
     if (distance <= 0.0) {
         throw std::runtime_error(
             "Distance must be greater than zero"
@@ -87,7 +87,7 @@ void writeDistanceExperimentIni(const Network& network, NodeType transmitter_typ
     ini << "sim-time-limit = 30s\n";
 
     ini << "seed-set = "
-        << network.seed
+        << network.seed + (i*100)
         << "\n\n";
 
 
@@ -238,6 +238,8 @@ void writeDistanceExperimentIni(const Network& network, NodeType transmitter_typ
     ini << "# Store scalars, avoid large vector result files\n";
     ini << "**.scalar-recording = true\n";
     ini << "**.vector-recording = false\n";
+
+    ini << "output-scalar-file = network/range_test.sca\n";
 }
 
 std::vector<std::string> splitCSV(const std::string& line) {
