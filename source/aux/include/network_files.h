@@ -41,7 +41,9 @@ std::vector<std::string> splitCSV(const std::string& line);
 
 Network parseNetworkConfig(unsigned int config_number, const std::filesystem::path& network_directory);
 
-void writeDistanceExperimentIni(int i, const Network& network, NodeType transmitter_type, NodeType receiver_type, double distance, const std::filesystem::path& output_file);
+void writeDistanceExperimentIni(const Network& network, NodeType transmitter_type, NodeType receiver_type, double distance, const std::filesystem::path& output_file);
+
+void writeSimulationIni(Network network, const std::filesystem::path& output_file);
 
 std::string getTrafficName(unsigned int id);
 

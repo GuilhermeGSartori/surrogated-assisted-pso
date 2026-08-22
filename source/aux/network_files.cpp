@@ -56,7 +56,7 @@ std::string getTrafficName(unsigned int id) {
 }
 
 
-void writeDistanceExperimentIni(int i, const Network& network, NodeType transmitter_type, NodeType receiver_type, double distance, const std::filesystem::path& output_file) {
+void writeDistanceExperimentIni(const Network& network, NodeType transmitter_type, NodeType receiver_type, double distance, const std::filesystem::path& output_file) {
     if (distance <= 0.0) {
         throw std::runtime_error(
             "Distance must be greater than zero"
@@ -64,6 +64,8 @@ void writeDistanceExperimentIni(int i, const Network& network, NodeType transmit
     }
 
     const unsigned int propagation = network.propagation;
+
+    static u_int8_t seed_counter = 1;
 
     std::ofstream ini(output_file);
 
@@ -87,7 +89,7 @@ void writeDistanceExperimentIni(int i, const Network& network, NodeType transmit
     ini << "sim-time-limit = 30s\n";
 
     ini << "seed-set = "
-        << network.seed + (i*100)
+        << network.seed + (seed_counter*100)
         << "\n\n";
 
 
@@ -240,6 +242,51 @@ void writeDistanceExperimentIni(int i, const Network& network, NodeType transmit
     ini << "**.vector-recording = false\n";
 
     ini << "output-scalar-file = network/range_test.sca\n";
+
+    seed_counter++;
+}
+
+void writeSimulationIni(Network network, const std::filesystem::path& output_file) {
+
+    const unsigned int propagation = network.propagation;
+
+    static u_int16_t seed_counter = 1;
+
+    std::ofstream ini(output_file);
+
+    if (!ini) {
+        throw std::runtime_error(
+            "Could not create OMNeT++ ini file: " +
+            output_file.string()
+        );
+    }
+
+    // ============================================================
+    // General simulation configuration
+    // ============================================================
+
+    ini << "[General]\n\n";
+
+    ini << "network = WSNSimulation\n";
+
+    ini << "sim-time-limit = 180s\n";
+
+    ini << "seed-set = "
+        << network.seed + (seed_counter*100)
+        << "\n\n";
+
+    // ============================================================
+    // Wireless medium
+    // ============================================================
+
+    ini << "# Wireless propagation model\n";
+
+    ini << "*.radioMedium.pathLoss.typename = \""
+        << getPropagationName(propagation)
+        << "\"\n\n";
+        
+
+    seed_counter++;
 }
 
 std::vector<std::string> splitCSV(const std::string& line) {

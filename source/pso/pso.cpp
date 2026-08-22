@@ -233,6 +233,8 @@ void logHeader(std::ofstream& log, const Swarm& swarm, const Scenario& scenario)
 
     log << "Backend: " << toString(scenario.backend) << '\n';
 
+    log << "Network Configuration: " << scenario.network_config << '\n';
+
     log << "Area: "
         << scenario.area.width << " x "
         << scenario.area.height << '\n';

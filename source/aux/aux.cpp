@@ -163,7 +163,9 @@ void configNetwork(Scenario& scenario) {
 
         for (int i = 0; i < repetitions; ++i) {
 
-            writeDistanceExperimentIni(i, scenario.network, NodeType::Relay, NodeType::Relay, distance, "network/range_test.ini");
+            writeDistanceExperimentIni(scenario.network, NodeType::Relay, NodeType::Relay, distance, "network/range_test.ini");
+
+            std::filesystem::remove("network/range_test.sca");
 
             int result = std::system("./wsn_sim -u Cmdenv -f network/range_test.ini");
 
@@ -196,6 +198,14 @@ void configNetwork(Scenario& scenario) {
         }
     }
 
+    writeSimulationIni(scenario.network, "network/omnetpp.ini");
+
+    // FALTA ENTAO ESCREVER O OMNETPP.INI
+
+    // e daí é rodar..... e é isso aí....
+    // cofigurar ned e ini direito
+    // compilar e rodar
+
     // -> aqui / Só fazer config.ini do experimento na hora de rodar mesmo, escrever tudo dai..... o omnetpp.ini que vai ser FIXO
 
     scenario.network.simulated_range[{NodeType::Relay, NodeType::Relay}] = estimated_range;
@@ -204,7 +214,7 @@ void configNetwork(Scenario& scenario) {
 
 double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario& scenario) {
     //writeOmnetConfig so posicoes 
-    int result = std::system("./wsn_sim -u Cmdenv -f omnetpp.ini -f pso_positions.ini");
+    int result = std::system("./wsn_sim -u Cmdenv -f network/omnetpp.ini -f network/pso_positions.ini");
 
     if (result != 0)
         throw std::runtime_error("OMNeT++ simulation failed");
