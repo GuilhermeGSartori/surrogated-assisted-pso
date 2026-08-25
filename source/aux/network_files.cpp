@@ -246,7 +246,7 @@ void writeDistanceExperimentIni(const Network& network, NodeType transmitter_typ
     seed_counter++;
 }
 
-void writeSimulationIni(Network network, const std::filesystem::path& output_file) {
+void writeSimulationIni(std::size_t num_nodes, std::size_t num_relays, Network network, const std::filesystem::path& output_file) {
 
     const unsigned int propagation = network.propagation;
 
@@ -276,6 +276,20 @@ void writeSimulationIni(Network network, const std::filesystem::path& output_fil
         << "\n\n";
 
     // ============================================================
+    // Network size
+    //
+    // These parameters must exist in WSNSimulation.ned.
+    // ============================================================
+
+    ini << "*.numNodes = "
+        << num_nodes
+        << "\n";
+
+    ini << "*.numRelays = "
+        << num_relays
+        << "\n\n";
+
+    // ============================================================
     // Wireless medium
     // ============================================================
 
@@ -284,9 +298,165 @@ void writeSimulationIni(Network network, const std::filesystem::path& output_fil
     ini << "*.radioMedium.pathLoss.typename = \""
         << getPropagationName(propagation)
         << "\"\n\n";
+ 
         
+    // ============================================================
+    // Node interface
+    // ============================================================
 
-    seed_counter++;
+    ini << "# Sensor node radio\n";
+
+    ini << "*.node[*].wlan[0].typename = \""
+        << getInterfaceName(network.interface.at(NodeType::Node))
+        << "\"\n";
+
+    ini << "*.node[*].wlan[0].radio.centerFrequency = "
+        << network.frequency.at(NodeType::Node)
+        << "Hz\n";
+
+    ini << "*.node[*].wlan[0].radio.bandwidth = "
+        << network.bandwidth.at(NodeType::Node)
+        << "Hz\n";
+
+    ini << "*.node[*].wlan[0].radio.*.bitrate = "
+        << network.bitrate.at(NodeType::Node)
+        << "bps\n";
+
+    ini << "*.node[*].wlan[0].mac.bitrate = "
+        << network.bitrate.at(NodeType::Node)
+        << "bps\n";
+
+    ini << "*.node[*].wlan[0].radio.transmitter.power = "
+        << network.power.at(NodeType::Node)
+        << "W\n\n";
+
+    // ============================================================
+    // Relay interface
+    // ============================================================
+
+    ini << "# Relay radio\n";
+
+    ini << "*.relay[*].wlan[0].typename = \""
+        << getInterfaceName(network.interface.at(NodeType::Relay))
+        << "\"\n";
+
+    ini << "*.relay[*].wlan[0].radio.centerFrequency = "
+        << network.frequency.at(NodeType::Relay)
+        << "Hz\n";
+
+    ini << "*.relay[*].wlan[0].radio.bandwidth = "
+        << network.bandwidth.at(NodeType::Relay)
+        << "Hz\n";
+
+    ini << "*.relay[*].wlan[0].radio.*.bitrate = "
+        << network.bitrate.at(NodeType::Relay)
+        << "bps\n";
+
+    ini << "*.relay[*].wlan[0].mac.bitrate = "
+        << network.bitrate.at(NodeType::Relay)
+        << "bps\n";
+
+    ini << "*.relay[*].wlan[0].radio.transmitter.power = "
+        << network.power.at(NodeType::Relay)
+        << "W\n\n";
+
+    // ============================================================
+    // Sink interface
+    // ============================================================
+
+    ini << "# Sink radio\n";
+
+    ini << "*.sink.wlan[0].typename = \""
+        << getInterfaceName(network.interface.at(NodeType::Relay))
+        << "\"\n";
+
+    ini << "*.sink.wlan[0].radio.centerFrequency = "
+        << network.frequency.at(NodeType::Relay)
+        << "Hz\n";
+
+    ini << "*.sink.wlan[0].radio.bandwidth = "
+        << network.bandwidth.at(NodeType::Relay)
+        << "Hz\n";
+
+    ini << "*.sink.wlan[0].radio.*.bitrate = "
+        << network.bitrate.at(NodeType::Relay)
+        << "bps\n";
+
+    ini << "*.sink.wlan[0].mac.bitrate = "
+        << network.bitrate.at(NodeType::Relay)
+        << "bps\n";
+    /*
+     * The receiver can transmit IEEE 802.15.4 ACKs, so its
+     * transmission power is configured as well.
+     */
+    ini << "*.sink.wlan[0].radio.transmitter.power = "
+        << network.power.at(NodeType::Relay)
+        << "W\n\n";
+
+    // ============================================================
+    // Traffic generator
+    // ============================================================
+
+    ini << "# Traffic\n";
+
+    ini << "*.node[*].numApps = 1\n";
+ 
+    ini << "*.node[*].app[0].typename = \""
+        << getTrafficName(network.traffic.at(NodeType::Node))
+        << "\"\n";
+
+    ini << "*.node[*].app[0].destAddresses = \"sink\"\n";
+    ini << "*.node[*].app[0].destPort = 5000\n";
+
+    ini << "*.node[*].app[0].messageLength = "
+        << network.packet_length
+        << "B\n";
+
+    ini << "*.node[*].app[0].sendInterval = "
+        << network.interval
+        << "s\n";
+
+    ini << "*.node[*].app[0].startTime = 1s\n\n";
+
+    ini << "*.relay[*].numApps = 0\n";
+
+    ini << "*.sink.numApps = 1\n";
+    ini << "*.sink.app[0].typename = \"UdpSink\"\n";
+    ini << "*.sink.app[0].localPort = 5000\n\n";
+
+
+    // ============================================================
+    // Routing
+    // ============================================================
+
+    ini << "# IPv4 routing\n";
+
+    // Sensor nodes generate traffic but must NOT be used as routers.
+    ini << "*.node[*].forwarding = false\n";
+
+    // Relays are the only intermediate forwarding nodes.
+    ini << "*.relay[*].forwarding = true\n";
+
+    // Sink is only a destination.
+    ini << "*.sink.forwarding = false\n\n";
+
+    // Let INET assign IP addresses and calculate static routes.
+    //
+    // IMPORTANT: errorRate is used instead of hopCount because this
+    // is a wireless network. A direct wireless link may exist
+    // topologically but have an unusable packet error rate.
+    ini << "*.configurator.config = xml(\""
+       "<config>"
+       "<interface hosts='**' "
+       "address='10.0.0.x' "
+       "netmask='255.255.255.0'/>"
+       "<autoroute metric='errorRate'/>"
+       "</config>"
+       "\")\n";
+
+    ini << "*.configurator.optimizeRoutes = false\n\n";
+
+    ++seed_counter;
 }
 
 std::vector<std::string> splitCSV(const std::string& line) {

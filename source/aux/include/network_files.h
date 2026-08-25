@@ -43,7 +43,7 @@ Network parseNetworkConfig(unsigned int config_number, const std::filesystem::pa
 
 void writeDistanceExperimentIni(const Network& network, NodeType transmitter_type, NodeType receiver_type, double distance, const std::filesystem::path& output_file);
 
-void writeSimulationIni(Network network, const std::filesystem::path& output_file);
+void writeSimulationIni(std::size_t num_nodes, std::size_t num_relays, Network network, const std::filesystem::path& output_file);
 
 std::string getTrafficName(unsigned int id);
 

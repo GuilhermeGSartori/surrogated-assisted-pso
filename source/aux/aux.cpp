@@ -198,7 +198,8 @@ void configNetwork(Scenario& scenario) {
         }
     }
 
-    writeSimulationIni(scenario.network, "network/omnetpp.ini");
+    writeSimulationIni(scenario.n_nodes, scenario.n_relays, scenario.network, "network/omnetpp.ini");
+    writeNodePositions(scenario.nodes, "network/sensor_nodes.ini");
 
     // FALTA ENTAO ESCREVER O OMNETPP.INI
 
@@ -209,12 +210,51 @@ void configNetwork(Scenario& scenario) {
     // -> aqui / Só fazer config.ini do experimento na hora de rodar mesmo, escrever tudo dai..... o omnetpp.ini que vai ser FIXO
 
     scenario.network.simulated_range[{NodeType::Relay, NodeType::Relay}] = estimated_range;
-    //scenario.network.simulated_range[{NodeType::Node, NodeType::Relay}] = estimated_range;
+    scenario.network.simulated_range[{NodeType::Node, NodeType::Relay}] = estimated_range/2;
+}
+
+void writeNodePositions(const std::vector<Coordinates>& nodes, const std::filesystem::path& output_file) {
+
+    std::ofstream ini(output_file);
+
+    if (!ini) {
+        throw std::runtime_error(
+            "Could not create OMNeT++ position file: " +
+            output_file.string()
+        );
+    }
+
+    ini << "[General]\n\n";
+
+    for (std::size_t i = 0; i < nodes.size(); ++i) {
+        ini << "*.node[" << i << "].mobility.initialX = " << nodes[i].x << "m\n";
+        ini << "*.node[" << i << "].mobility.initialY = " << nodes[i].y << "m\n";
+    }
+}
+
+void writeRelayPositions(const FixedSizeVector<Coordinates>& relays, const std::filesystem::path& output_file) {
+
+    std::ofstream ini(output_file);
+
+    if (!ini) {
+        throw std::runtime_error(
+            "Could not create OMNeT++ position file: " +
+            output_file.string()
+        );
+    }
+
+    ini << "[General]\n\n";
+
+    for (std::size_t i = 0; i < relays.size(); ++i) {
+        ini << "*.relay[" << i << "].mobility.initialX = " << relays[i].x << "m\n";
+        ini << "*.relay[" << i << "].mobility.initialY = " << relays[i].y << "m\n";
+    }
 }
 
 double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario& scenario) {
-    //writeOmnetConfig so posicoes 
-    int result = std::system("./wsn_sim -u Cmdenv -f network/omnetpp.ini -f network/pso_positions.ini");
+    writeRelayPositions(relays, "network/pso_positions.ini");
+
+    int result = std::system("./wsn_sim -u Cmdenv -f network/omnetpp.ini -f network/sensor_nodes.ini -f network/pso_positions.ini");
 
     if (result != 0)
         throw std::runtime_error("OMNeT++ simulation failed");

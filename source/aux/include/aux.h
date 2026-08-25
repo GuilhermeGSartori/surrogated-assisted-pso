@@ -189,6 +189,10 @@ struct Scenario {
 
 void configNetwork(Scenario& scenario);
 
+void writeNodePositions(const std::vector<Coordinates>& nodes, const std::filesystem::path& output_file);
+
+void writeRelayPositions(const FixedSizeVector<Coordinates>& relays, const std::filesystem::path& output_file);
+
 Method parseMethod(const std::string& method);
 
 Scenario parseScenario(const std::string& filename);
