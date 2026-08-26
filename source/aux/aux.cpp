@@ -20,9 +20,11 @@ Method parseMethod(const std::string& method) {
 
 }
 
-Scenario parseScenario(const std::string& filename)
-{
-    std::ifstream file(filename);
+Scenario parseScenario(const std::string& filename) {
+    const std::filesystem::path file_path =
+        "scenarios/" + filename + ".csv";
+        
+    std::ifstream file(file_path);
 
     if (!file.is_open()) {
         throw std::runtime_error("Could not open scenario file: " + filename);

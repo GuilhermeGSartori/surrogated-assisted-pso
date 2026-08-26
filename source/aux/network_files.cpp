@@ -541,9 +541,9 @@ Network parseNetworkConfig(unsigned int config_number, const std::filesystem::pa
 
     const std::vector<std::string> values = splitCSV(row);
 
-    if (values.size() != 17) {
+    if (values.size() != 16) {
         throw std::runtime_error(
-            "Invalid network configuration. Expected 17 fields, got " +
+            "Invalid network configuration. Expected 16 fields, got " +
             std::to_string(values.size()) +
             " in file: " +
             file_path.string()
@@ -605,13 +605,13 @@ Network parseNetworkConfig(unsigned int config_number, const std::filesystem::pa
     network.propagation = std::stoul(values[12]);
 
     network.packet_length =
-        std::stoul(values[14]);
+        std::stoul(values[13]);
 
     network.interval =
-        std::stod(values[15]);
+        std::stod(values[14]);
 
     network.seed =
-        std::stoul(values[16]);
+        std::stoul(values[15]);
 
     return network;
 }

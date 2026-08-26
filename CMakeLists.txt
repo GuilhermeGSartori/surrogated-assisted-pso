@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(surrogated-assisted-pso
+project(surrogated-assisted-optimizer
     VERSION 1.0
     LANGUAGES CXX
 )
@@ -48,16 +48,16 @@ target_link_libraries(pso
 # Application
 # --------------------
 
-add_executable(surrogated-assisted-pso
+add_executable(surrogated-assisted-optimizer
     source/app.cpp
 )
 
-target_include_directories(surrogated-assisted-pso
+target_include_directories(surrogated-assisted-optimizer
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/include
 )
 
-target_link_libraries(surrogated-assisted-pso
+target_link_libraries(surrogated-assisted-optimizer
     PRIVATE
         pso
 )

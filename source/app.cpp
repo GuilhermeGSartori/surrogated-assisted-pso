@@ -13,7 +13,7 @@
 
 int initPso(int argc, char* argv[], Scenario& scenario) {
     if (argc != 8) {
-        std::cerr << "Usage: ./optimizer pso <method> <scenario> <particles> <w> <c1> <c2>\n";
+        std::cerr << "Usage: ./surrogated-assisted-optimizer pso <scenario> <method> <particles> <w> <c1> <c2>\n";
         return 1;
     }
 
