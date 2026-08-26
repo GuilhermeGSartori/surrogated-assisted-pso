@@ -28,10 +28,6 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
         scenario.network.simulated_range.at({NodeType::Relay, NodeType::Relay}),
         scenario.network.simulated_range.at({NodeType::Node, NodeType::Relay})
     );
-    
-    //swarm.setRanges(scenario.network.simulated_range[NodeType::Relay], scenario.network.simulated_range[NodeType::Node]);
-    // aqui ja suficiente... seta os ranges do swarm e usa eles pra saber se conectado e gg
-    // so q em vez de valor vir do arquivo / cenário... vem da simulacao
 
     std::mt19937 rng(scenario.seed);
 
@@ -40,13 +36,7 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
     LHS(scenario.nodes, scenario.n_nodes, scenario.area, rng);
     swarm.initRelays(scenario.area, rng); 
 
-    // baseado em numero de nodos, criar packet size max e packet timeout...
-    // Pacote acho que vai ser sempre igual.. temperatura, umidade, lumens... 6 bytes...? timestamp, posicao...
-    // tamanho do pacote definido claramente... tempo de geracao eu criar aqui....
-    // com funcao auxiliar tendo maximo e minimo e distribuir nesse range..
-
-    // o q preciso pra rodar? configm rede
-    // sortear valor random de tamanho de pacote e tempo para geração para cada nodo e escrever no arquivo de config
+    // Area baseada em PA, tamnho de pacote baseado no tipo de dado q iria (pacote pequeno com alguns bytes)
 
     std::ofstream log = createLogFile();
 
@@ -78,9 +68,7 @@ int main(int argc, char* argv[]) {
     Scenario scenario = parseScenario(argv[2]);
     scenario.backend = parseMethod(argv[3]);
 
-    configNetwork(scenario); // le arquivo e seta no proprio cenario e roda sim pra simular distancia
-                             // preciso usar isso para descobrir a distancia através de simulação
-                             // e também pra ter os dados pra configurar o arquivo de .ini
+    configNetwork(scenario);
 
     return it->second(argc, argv, scenario);
 }

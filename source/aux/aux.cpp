@@ -199,21 +199,13 @@ void configNetwork(Scenario& scenario) {
     }
 
     writeSimulationIni(scenario.n_nodes, scenario.n_relays, scenario.network, "network/omnetpp.ini");
-    writeNodePositions(scenario.nodes, "network/sensor_nodes.ini");
-
-    // FALTA ENTAO ESCREVER O OMNETPP.INI
-
-    // e daí é rodar..... e é isso aí....
-    // cofigurar ned e ini direito
-    // compilar e rodar
-
-    // -> aqui / Só fazer config.ini do experimento na hora de rodar mesmo, escrever tudo dai..... o omnetpp.ini que vai ser FIXO
+    writeNodePositions(scenario.nodes, scenario.sink, "network/sensor_nodes.ini");
 
     scenario.network.simulated_range[{NodeType::Relay, NodeType::Relay}] = estimated_range;
     scenario.network.simulated_range[{NodeType::Node, NodeType::Relay}] = estimated_range/2;
 }
 
-void writeNodePositions(const std::vector<Coordinates>& nodes, const std::filesystem::path& output_file) {
+void writeNodePositions(const std::vector<Coordinates>& nodes, Coordinates sink, const std::filesystem::path& output_file) {
 
     std::ofstream ini(output_file);
 
@@ -230,6 +222,9 @@ void writeNodePositions(const std::vector<Coordinates>& nodes, const std::filesy
         ini << "*.node[" << i << "].mobility.initialX = " << nodes[i].x << "m\n";
         ini << "*.node[" << i << "].mobility.initialY = " << nodes[i].y << "m\n";
     }
+
+    ini << "**.sink.mobility.initialX = " << sink.x << "m\n";
+    ini << "**.sink.mobility.initialY = " << sink.y << "m\n";
 }
 
 void writeRelayPositions(const FixedSizeVector<Coordinates>& relays, const std::filesystem::path& output_file) {
@@ -259,5 +254,12 @@ double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario&
     if (result != 0)
         throw std::runtime_error("OMNeT++ simulation failed");
 
-    //readFitness
+    double received = readScalar("network/range_test.sca", "packetsReceived");
+    double sent = readScalar("network/range_test.sca", "packetsSent");
+
+    if (sent == 0) {
+        throw std::runtime_error("Simulation sent zero packets");
+    }
+
+    return static_cast<double>(received) / sent;
 }

@@ -272,7 +272,7 @@ void writeSimulationIni(std::size_t num_nodes, std::size_t num_relays, Network n
     ini << "sim-time-limit = 180s\n";
 
     ini << "seed-set = "
-        << network.seed + (seed_counter*100)
+        << network.seed + (seed_counter*10)
         << "\n\n";
 
     // ============================================================
@@ -288,6 +288,10 @@ void writeSimulationIni(std::size_t num_nodes, std::size_t num_relays, Network n
     ini << "*.numRelays = "
         << num_relays
         << "\n\n";
+
+    ini << "*.node[*].mobility.initialZ = 0m\n";
+    ini << "*.relay[*].mobility.initialZ = 0m\n";
+    ini << "*.sink.mobility.initialZ = 0m\n";
 
     // ============================================================
     // Wireless medium
@@ -424,6 +428,20 @@ void writeSimulationIni(std::size_t num_nodes, std::size_t num_relays, Network n
     ini << "*.sink.app[0].typename = \"UdpSink\"\n";
     ini << "*.sink.app[0].localPort = 5000\n\n";
 
+    // ============================================================
+    // Mobility
+    // ============================================================
+
+    ini << "# Static node positions\n";
+
+    ini << "*.node[*].mobility.typename = \"StationaryMobility\"\n";
+    ini << "*.node[*].mobility.initFromDisplayString = false\n";
+
+    ini << "*.relay[*].mobility.typename = \"StationaryMobility\"\n";
+    ini << "*.relay[*].mobility.initFromDisplayString = false\n";
+
+    ini << "*.sink.mobility.typename = \"StationaryMobility\"\n";
+    ini << "*.sink.mobility.initFromDisplayString = false\n\n";
 
     // ============================================================
     // Routing
@@ -455,6 +473,23 @@ void writeSimulationIni(std::size_t num_nodes, std::size_t num_relays, Network n
        "\")\n";
 
     ini << "*.configurator.optimizeRoutes = false\n\n";
+
+    // ============================================================
+    // Address resolution
+    // ============================================================
+
+    ini << "**.arp.typename = \"GlobalArp\"\n\n";
+
+
+    // ============================================================
+    // Results
+    // ============================================================
+
+    ini << "# Store scalars, avoid large vector result files\n";
+    ini << "**.scalar-recording = true\n";
+    ini << "**.vector-recording = false\n";
+
+    ini << "output-scalar-file = network/simulation_results.sca\n";
 
     ++seed_counter;
 }
