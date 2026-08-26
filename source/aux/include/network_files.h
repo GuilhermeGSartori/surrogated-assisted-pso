@@ -8,6 +8,7 @@
 #include <vector>
 #include <stdexcept>
 #include <string_view>
+#include <filesystem>
 
 enum class NodeType {
     Node,

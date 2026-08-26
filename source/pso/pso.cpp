@@ -1,5 +1,6 @@
 #include "pso.h"
 
+#include <queue>
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -192,7 +193,7 @@ bool isConnected(const Container& nodes, const Coordinates& sink, double relay_r
     double range_sq = relay_range*relay_range;
 
     for (std::size_t i = 0; i < n; ++i) {
-        if (distanceSquared(nodes[i], sink) <= range_sq) {
+        if (Coordinates::distanceSquared(nodes[i], sink) <= range_sq) {
             visited[i] = true;
             queue.push(i);
         }
@@ -205,7 +206,7 @@ bool isConnected(const Container& nodes, const Coordinates& sink, double relay_r
         for (std::size_t i = 0; i < n; ++i) {
             if (visited[i])
                 continue;
-            else if (distanceSquared(nodes[current], nodes[i]) <= range_sq) {
+            else if (Coordinates::distanceSquared(nodes[current], nodes[i]) <= range_sq) {
                 visited[i] = true;
                 queue.push(i);
             }

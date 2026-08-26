@@ -8,12 +8,20 @@
 #include <vector>
 #include <stdexcept>
 #include <string_view>
+#include <algorithm>
+
+#include "network_files.h"
 
 template <typename T>
 class FixedSizeVector {
 private:
     std::vector<T> vec;
-    void checkSameSize(const FixedSizeVector& other) const;
+    
+    void checkSameSize(const FixedSizeVector& other) const {
+    if (size() != other.size()) {
+        throw std::length_error("FixedSizeVector size mismatch");
+    }
+}
 
 public:
     explicit FixedSizeVector(std::size_t size)
@@ -56,17 +64,31 @@ public:
     auto end() const {
         return vec.end();
     }
+
+    // Copy constructor
+    FixedSizeVector(const FixedSizeVector&) = default;
+
+    // Move constructor
+    FixedSizeVector(FixedSizeVector&&) noexcept = default;
     
+    // Copy assignment
     FixedSizeVector& operator=(const FixedSizeVector& other)
     {
+        if (this == &other)
+            return *this;
+
         checkSameSize(other);
         std::copy(other.vec.begin(), other.vec.end(), vec.begin());
 
         return *this;
     }
         
+    // Move assignment
     FixedSizeVector& operator=(FixedSizeVector&& other)
     {
+        if (this == &other)
+            return *this;
+
         checkSameSize(other);
 
         for (std::size_t i = 0; i < vec.size(); ++i) {
@@ -120,10 +142,6 @@ public:
 
         return result;
     }
-
-    // Prevent changing size through assignment
-    FixedSizeVector& operator=(const FixedSizeVector&) = delete;
-    FixedSizeVector& operator=(FixedSizeVector&&) = delete;
 };
 
 struct Coordinates {
@@ -149,7 +167,7 @@ struct Coordinates {
         return {x * scalar, y * scalar};
     }
 
-    double distanceSquared(const Coordinates& a, const Coordinates& b);
+    static double distanceSquared(const Coordinates& a, const Coordinates& b);
 };
 
 struct Dimensions {
@@ -163,7 +181,15 @@ enum class Method {
     Hybrid
 };
 
-constexpr std::string_view toString(Method method);
+constexpr std::string_view toString(Method method) {
+    switch (method) {
+        case Method::Simulation: return "Simulation";
+        case Method::Surrogate:  return "Surrogate";
+        case Method::Hybrid:     return "Hybrid";
+    }
+
+    return "Unknown";
+}
 
 struct Scenario {
     std::size_t n_relays = 0;
@@ -202,4 +228,28 @@ std::ofstream createLogFile();
 double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario& scenario);
 
 template <typename Container>
-void LHS(Container& nodes, std::size_t n, const Dimensions& area, std::mt19937& rng);
+void LHS(Container& nodes, std::size_t n, const Dimensions& area, std::mt19937& rng) {
+
+    std::vector<std::size_t> x_strata(n);
+    std::vector<std::size_t> y_strata(n);
+
+    std::iota(x_strata.begin(), x_strata.end(), 0);
+    std::iota(y_strata.begin(), y_strata.end(), 0);
+
+    std::shuffle(x_strata.begin(), x_strata.end(), rng);
+    std::shuffle(y_strata.begin(), y_strata.end(), rng);
+
+    std::uniform_real_distribution<double> random(0.0, 1.0);
+
+    for (std::size_t i = 0; i < n; ++i) {
+
+        double x_normalized =
+            (x_strata[i] + random(rng)) / static_cast<double>(n);
+
+        double y_normalized =
+            (y_strata[i] + random(rng)) / static_cast<double>(n);
+
+        nodes[i].x = x_normalized * area.width;
+        nodes[i].y = y_normalized * area.height;
+    }
+}
