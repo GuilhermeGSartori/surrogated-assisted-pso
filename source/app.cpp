@@ -38,6 +38,8 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
 
     // Area baseada em PA, tamnho de pacote baseado no tipo de dado q iria (pacote pequeno com alguns bytes)
 
+    // TENHO QUE COLOCAR QUE RODEI SUDO APT INSTALL CMAKE NA VM!!!
+
     std::ofstream log = createLogFile();
 
     const Solution& global_best = pso(swarm, scenario, rng, log);
