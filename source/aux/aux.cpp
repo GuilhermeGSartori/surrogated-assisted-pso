@@ -126,7 +126,13 @@ void configNetwork(Scenario& scenario) {
 
             std::filesystem::remove("network/range_test.sca");
 
-            int result = std::system("opp_run -u Cmdenv -f network/range_test.ini");
+            int result = std::system(
+                                        "opp_run "
+                                        "-u Cmdenv "
+                                        "-n network:$INET_ROOT/src "
+                                        "-l $INET_ROOT/src/INET "
+                                        "-f network/range_test.ini"
+                                    );
 
             if (result != 0)
                 throw std::runtime_error("OMNeT++ simulation failed");

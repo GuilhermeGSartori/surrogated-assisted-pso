@@ -72,5 +72,6 @@ int main(int argc, char* argv[]) {
 
     configNetwork(scenario);
 
-    return it->second(argc, argv, scenario);
+    return 0;
+    //return it->second(argc, argv, scenario);
 }
