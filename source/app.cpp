@@ -34,6 +34,9 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
     swarm.setWeights(w, c1, c2);
 
     LHS(scenario.nodes, scenario.n_nodes, scenario.area, rng);
+
+    writeNodePositions(scenario.nodes, scenario.sink, "network/sensor_nodes.ini");
+    
     swarm.initRelays(scenario.area, rng); 
 
     // Area baseada em PA, tamnho de pacote baseado no tipo de dado q iria (pacote pequeno com alguns bytes)

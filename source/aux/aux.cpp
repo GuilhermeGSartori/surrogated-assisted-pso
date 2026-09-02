@@ -164,7 +164,6 @@ void configNetwork(Scenario& scenario) {
     }
 
     writeSimulationIni(scenario.n_nodes, scenario.n_relays, scenario.network, "network/omnetpp.ini");
-    writeNodePositions(scenario.nodes, scenario.sink, "network/sensor_nodes.ini");
 
     scenario.network.simulated_range[{NodeType::Relay, NodeType::Relay}] = estimated_range;
     scenario.network.simulated_range[{NodeType::Node, NodeType::Relay}] = estimated_range/2;
