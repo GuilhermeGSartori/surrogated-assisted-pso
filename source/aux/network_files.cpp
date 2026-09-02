@@ -241,7 +241,7 @@ void writeDistanceExperimentIni(const Network& network, NodeType transmitter_typ
     ini << "**.scalar-recording = true\n";
     ini << "**.vector-recording = false\n";
 
-    ini << "output-scalar-file = network/range_test.sca\n";
+    ini << "output-scalar-file = range_test.sca\n";
 
     seed_counter++;
 }
@@ -489,7 +489,7 @@ void writeSimulationIni(std::size_t num_nodes, std::size_t num_relays, Network n
     ini << "**.scalar-recording = true\n";
     ini << "**.vector-recording = false\n";
 
-    ini << "output-scalar-file = network/simulation_results.sca\n";
+    ini << "output-scalar-file = simulation_results.sca\n";
 
     ++seed_counter;
 }
