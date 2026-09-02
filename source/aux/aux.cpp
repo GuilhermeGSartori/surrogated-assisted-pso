@@ -74,6 +74,8 @@ Scenario parseScenario(const std::string& filename) {
     std::getline(ss, value, ',');
     scenario.network_config = std::stoul(value);
 
+    scenario.nodes.resize(scenario.n_nodes);
+
     return scenario;
 }
 
