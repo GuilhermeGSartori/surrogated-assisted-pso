@@ -140,9 +140,9 @@ void configNetwork(Scenario& scenario) {
             if (result != 0)
                 throw std::runtime_error("OMNeT++ simulation failed");
 
-            double received = readScalar("network/range_test.sca", "packetReceived:count");
+            double received = readScalar("network/range_test.sca", "RangeCalibration.rx.app[0] packetReceived:count");
 
-            double sent = readScalar("network/range_test.sca", "packetSent:count");
+            double sent = readScalar("network/range_test.sca", "RangeCalibration.tx.app[0] packetSent:count");
 
             if (sent == 0) {
                 throw std::runtime_error(
