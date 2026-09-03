@@ -1,3 +1,4 @@
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -156,6 +157,8 @@ void configNetwork(Scenario& scenario) {
 
         const double average_pdr =
             total_pdr / repetitions;
+
+        std::cout << "Average pdr: " << average_pdr << "\n";
 
         if (average_pdr >= 0.95) {
             estimated_range = distance;

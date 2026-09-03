@@ -176,11 +176,13 @@ void writeDistanceExperimentIni(const Network& network, NodeType transmitter_typ
     ini << "# Positions\n";
 
     ini << "*.tx.mobility.typename = \"StationaryMobility\"\n";
+    ini << "*.tx.mobility.initFromDisplayString = false\n";
     ini << "*.tx.mobility.initialX = 0m\n";
     ini << "*.tx.mobility.initialY = 0m\n";
     ini << "*.tx.mobility.initialZ = 0m\n\n";
 
     ini << "*.rx.mobility.typename = \"StationaryMobility\"\n";
+    ini << "*.rx.mobility.initFromDisplayString = false\n";
     ini << "*.rx.mobility.initialX = "
         << distance
         << "m\n";
