@@ -36,7 +36,7 @@ struct Network {
     // fixed in .ini: energy model (batery), traffic source, forwards, dest
 };
 
-double readScalar(const std::string& filename, const std::string& scalarName);
+double readScalar(const std::string& filename, const std::string& moduleName, const std::string& scalarName);
 
 std::vector<std::string> splitCSV(const std::string& line);
 

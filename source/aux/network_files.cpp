@@ -618,7 +618,7 @@ Network parseNetworkConfig(unsigned int config_number, const std::filesystem::pa
     return network;
 }
 
-double readScalar(const std::string& filename, const std::string& scalarName) {
+double readScalar(const std::string& filename, const std::string& moduleName, const std::string& scalarName) {
     std::ifstream file(filename);
 
     if (!file.is_open()) {
@@ -645,7 +645,7 @@ double readScalar(const std::string& filename, const std::string& scalarName) {
             >> std::quoted(name)
             >> value;
 
-        if (name == scalarName) {
+        if (name == scalarName && module == moduleName) {
             return value;
         }
     }
