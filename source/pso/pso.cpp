@@ -7,6 +7,7 @@
 #include <limits>
 #include <random>
 #include <algorithm>
+#include <chrono>
 
 
 Swarm::Swarm(std::size_t n_particles, std::size_t n_relays, Coordinates sink) : n_particles(n_particles), n_relays(n_relays), global_best(n_relays) {
@@ -123,12 +124,19 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
         }
         
         double fitness;
+
+        auto start = std::chrono::steady_clock::now();
         if (scenario.backend == Method::Simulation) {
             fitness = runSimulation(p.getPositions(), scenario);
         }
         else {
             fitness = 0;
         }
+        auto end = std::chrono::steady_clock::now();
+
+        std::chrono::duration<double> elapsed = end - start;
+    
+        log << "Evaluation Time: " << elapsed.count() << " seconds\n";
         
         log << "Resulting Fitness: " << fitness << "\n";
 
