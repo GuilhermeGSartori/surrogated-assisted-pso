@@ -86,7 +86,7 @@ void writeDistanceExperimentIni(const Network& network, NodeType transmitter_typ
     ini << "network = RangeCalibration\n";
 
     // Enough time to send several packets.
-    ini << "sim-time-limit = 30s\n";
+    ini << "sim-time-limit = 15s\n";
 
     ini << "seed-set = "
         << network.seed + (seed_counter*100)
@@ -271,7 +271,7 @@ void writeSimulationIni(std::size_t num_nodes, std::size_t num_relays, Network n
 
     ini << "network = WSNSimulation\n";
 
-    ini << "sim-time-limit = 180s\n";
+    ini << "sim-time-limit = 30s\n";
 
     ini << "seed-set = "
         << network.seed + (seed_counter*10)
