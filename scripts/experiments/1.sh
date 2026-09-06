@@ -48,20 +48,21 @@ cd ../..
 cmake -S  . -B build
 cmake --build build
 
-cd "$RUN_DIR"
+cd build
 
 echo
 
 echo "=== Running optimizer ==="
 
-../../build/surrogated-assisted-optimizer \
-    pso 1 0 5 0.7 1.5 1.5
+surrogated-assisted-optimizer pso 1 0 5 0.7 1.5 1.5
 
 echo
 
 echo "=== Optimizer finished ==="
 
 echo "=== Plotting nodes ==="
+
+cd "$RUN_DIR"
 
 python3 ../plot_nodes.py "$OUTPUT_PLOT"
 
