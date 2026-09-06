@@ -135,6 +135,7 @@ void configNetwork(Scenario& scenario) {
                                         "-n network:$INET_ROOT/src "
                                         "-l $INET_ROOT/src/INET "
                                         "-f network/range_test.ini"
+                                        "> /dev/null"
                                     );
 
             if (result != 0)
@@ -216,15 +217,26 @@ void writeRelayPositions(const FixedSizeVector<Coordinates>& relays, const std::
 }
 
 double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario& scenario) {
-    writeRelayPositions(relays, "network/pso_positions.ini");
+    writeRelayPositions(relays, "network/relay_positions.ini");
 
-    int result = std::system("./wsn_sim -u Cmdenv -f network/omnetpp.ini -f network/sensor_nodes.ini -f network/pso_positions.ini");
+    int result = std::system(
+                                "opp_run "
+                                "-u Cmdenv "
+                                "-n network:$INET_ROOT/src "
+                                "-l $INET_ROOT/src/INET "
+                                "-f network/omnetpp.ini"
+                                "-f network/sensor_nodes.ini"
+                                "-f network/relay_positions.ini"
+                                //"> /dev/null"
+                            );
+
+    //int result = std::system("./wsn_sim -u Cmdenv -f network/omnetpp.ini -f network/sensor_nodes.ini -f network/pso_positions.ini");
 
     if (result != 0)
         throw std::runtime_error("OMNeT++ simulation failed");
 
-    double received = readScalar("network/range_test.sca", "aa", "packetsReceived");
-    double sent = readScalar("network/range_test.sca", "aa", "packetsSent");
+    double received = readScalar("network/range_test.sca", "RangeCalibration.rx.app[0]", "packetReceived:count");
+    double sent = readScalar("network/range_test.sca", "RangeCalibration.tx.app[0]", "packetSent:count");
 
     if (sent == 0) {
         throw std::runtime_error("Simulation sent zero packets");
