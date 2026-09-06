@@ -422,7 +422,7 @@ void writeSimulationIni(std::size_t num_nodes, std::size_t num_relays, Network n
         << network.interval
         << "s\n";
 
-    ini << "*.node[*].app[0].startTime = 1s\n\n";
+    ini << "*.node[*].app[0].startTime = uniform(0s, 1s)\n\n";
 
     ini << "*.relay[*].numApps = 0\n";
 
@@ -459,6 +459,8 @@ void writeSimulationIni(std::size_t num_nodes, std::size_t num_relays, Network n
 
     // Sink is only a destination.
     ini << "*.sink.forwarding = false\n\n";
+
+    ini << "**.ipv4.routingTable.netmaskRoutes = \"\"\n";
 
     // Let INET assign IP addresses and calculate static routes.
     //
