@@ -235,8 +235,16 @@ double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario&
     if (result != 0)
         throw std::runtime_error("OMNeT++ simulation failed");
 
-    double received = readScalar("network/range_test.sca", "RangeCalibration.rx.app[0]", "packetReceived:count");
-    double sent = readScalar("network/range_test.sca", "RangeCalibration.tx.app[0]", "packetSent:count");
+    double sent = 0.0;
+
+    for (std::size_t i = 0; i < scenario.n_nodes; ++i) {
+
+        const std::string module = "WSNSimulation.node[" + std::to_string(i) + "].app[0]";
+
+        sent += readScalar("network/simulation_results.sca", module, "packetSent:count");
+    }
+
+    double received = readScalar("network/simulation_results.sca", "WSNSimulation.sink.app[0]", "packetReceived:count");
 
     if (sent == 0) {
         throw std::runtime_error("Simulation sent zero packets");
