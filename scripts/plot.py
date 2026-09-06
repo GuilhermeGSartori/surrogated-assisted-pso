@@ -17,11 +17,6 @@ def parse_log(filename):
     reading_nodes = False
     reading_relays = False
 
-    # Supports:
-    # 10, 20
-    # 10.5, 20.7
-    # -10.5, 3.2
-    # 1.2e+03, 4.5e-02
     coordinate_pattern = re.compile(
         r"^\s*"
         r"([-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?)"
@@ -36,10 +31,7 @@ def parse_log(filename):
 
             line = line.strip()
 
-            # ====================================================
             # Area
-            # ====================================================
-
             if line.startswith("Area:"):
 
                 match = re.search(
@@ -53,11 +45,7 @@ def parse_log(filename):
 
                 continue
 
-
-            # ====================================================
-            # Sensor nodes section
-            # ====================================================
-
+            # Sensor nodes start
             if line == "Nodes Positions:":
 
                 reading_nodes = True
@@ -65,18 +53,7 @@ def parse_log(filename):
 
                 continue
 
-
-            if reading_nodes and line.startswith("All particles start"):
-
-                reading_nodes = False
-
-                continue
-
-
-            # ====================================================
-            # Final global best relays section
-            # ====================================================
-
+            # Relay positions start
             if line == "Final global best relays:":
 
                 reading_nodes = False
@@ -84,11 +61,7 @@ def parse_log(filename):
 
                 continue
 
-
-            # ====================================================
-            # Coordinate parsing
-            # ====================================================
-
+            # Coordinates
             match = coordinate_pattern.match(line)
 
             if match:
@@ -103,7 +76,6 @@ def parse_log(filename):
 
                 elif reading_relays:
                     relays.append(position)
-
 
     return area_width, area_height, nodes, relays
 

@@ -57,8 +57,8 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
     logNodes(final_log, scenario);
 
     log << "Final global best fitness: " << global_best.fitness << "\n";
-    log << "Final global best relays: ";
-    final_log << "Final global best relays: ";
+    log << "Final global best relays:\n";
+    final_log << "Final global best relays:\n";
     for (const auto& pos: global_best.relay_positions) {
         log << pos.x << ", " << pos.y << '\n';
         final_log << pos.x << ", " << pos.y << '\n';
