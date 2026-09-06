@@ -46,7 +46,7 @@ echo "=== Building project ==="
 cd ../..
 
 cmake -S  . -B build
-cmake --build build
+cmake --build build --clean-first -j
 
 cd build
 
