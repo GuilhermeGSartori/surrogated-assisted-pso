@@ -41,6 +41,7 @@ void Swarm::setWeights(double w, double c1, double c2) {
 }
 
 void Swarm::initRelays(const Dimensions& area, std::mt19937& rng) {
+    std::cout << "Before init relays\n";
 
     for (auto& p: particles) {
         do {
@@ -52,6 +53,8 @@ void Swarm::initRelays(const Dimensions& area, std::mt19937& rng) {
             v.y = 0;
         }
     }
+
+    std::cout << "After init relays\n";
 }
 
 void Swarm::logFirstRelay(std::ofstream& log) {
