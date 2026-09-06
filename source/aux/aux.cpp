@@ -135,7 +135,7 @@ void configNetwork(Scenario& scenario) {
                                         "-n network:$INET_ROOT/src "
                                         "-l $INET_ROOT/src/INET "
                                         "-f network/range_test.ini"
-                                        "> /dev/null"
+                                        //"> /dev/null"
                                     );
 
             if (result != 0)
@@ -224,8 +224,8 @@ double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario&
                                 "-u Cmdenv "
                                 "-n network:$INET_ROOT/src "
                                 "-l $INET_ROOT/src/INET "
-                                "-f network/omnetpp.ini"
-                                "-f network/sensor_nodes.ini"
+                                "-f network/omnetpp.ini "
+                                "-f network/sensor_nodes.ini "
                                 "-f network/relay_positions.ini"
                                 //"> /dev/null"
                             );
