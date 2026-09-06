@@ -86,7 +86,7 @@ void writeDistanceExperimentIni(const Network& network, NodeType transmitter_typ
     ini << "network = RangeCalibration\n";
 
     // Enough time to send several packets.
-    ini << "sim-time-limit = 15s\n";
+    ini << "sim-time-limit = 30s\n";
 
     ini << "seed-set = "
         << network.seed + (seed_counter*100)

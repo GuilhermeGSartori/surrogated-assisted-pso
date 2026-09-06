@@ -125,6 +125,8 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
     int particle = 1;
 
     for (auto& p: swarm.getParticles()) {
+        std::cout << ">>>> Particle: " << particle << "\n";
+        
         log << "-------------\n"
             << "Particle: " << particle << ":\n"
             << "Relays Coordinates:\n";
@@ -168,7 +170,7 @@ const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, s
 
     do
     {
-        std::cout << "Iteration: " << iterations << "\n";
+        std::cout << ">> Iteration: " << iterations+1 << "\n";
         log << "-- ITERATION " << iterations << " --\n";
         evaluateSolution(swarm, scenario, log);
 
