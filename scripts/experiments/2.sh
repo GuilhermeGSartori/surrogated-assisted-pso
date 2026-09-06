@@ -54,7 +54,7 @@ echo
 
 echo "=== Running optimizer ==="
 
-./surrogated-assisted-optimizer pso 1 0 5 0.7 1.5 1.5
+./surrogated-assisted-optimizer pso 2 0 5 0.7 1.5 1.5
 
 echo
 
