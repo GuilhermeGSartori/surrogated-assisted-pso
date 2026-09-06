@@ -30,8 +30,6 @@ fi
 # Experiment
 # ============================================================
 
-PROJECT_ROOT="$(git rev-parse --show-toplevel)"
-
 RUN_DIR="$(pwd)"
 
 SCRIPT_NAME="$(basename "$0")"
@@ -45,14 +43,18 @@ mkdir -p "$OUTPUT_DIR"
 
 echo "=== Building project ==="
 
-cmake -S "$PROJECT_ROOT" -B "$PROJECT_ROOT/build"
-cmake --build "$PROJECT_ROOT/build"
+cd ../..
+
+cmake -S  . -B build
+cmake --build build
+
+cd "$RUN_DIR"
 
 echo
 
 echo "=== Running optimizer ==="
 
-"$PROJECT_ROOT/build/surrogated-assisted-pso" \
+../../build/surrogated-assisted-pso \
     pso 1 0 5 0.7 1.5 1.5
 
 echo
