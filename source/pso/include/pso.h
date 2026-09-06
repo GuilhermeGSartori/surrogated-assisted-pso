@@ -6,7 +6,7 @@
 #include <random>
 #include "aux.h"
 
-#define iterations_max 100
+#define iterations_max 20
 
 struct Weights {
     double w = 0.0;
