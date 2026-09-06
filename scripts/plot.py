@@ -3,7 +3,7 @@ import re
 import matplotlib.pyplot as plt
 
 
-LOG_FILE = "../build/logs/final_log.log"
+LOG_FILE = "../../build/logs/final_log.log"
 
 
 def parse_log(filename):
