@@ -9,13 +9,15 @@ LOG_FILE = "../../build/logs/final_log.log"
 def parse_log(filename):
 
     nodes = []
-    relays = []
+    first_relays = []
+    final_relays = []
 
     area_width = None
     area_height = None
 
     reading_nodes = False
-    reading_relays = False
+    reading_first_relays = False
+    reading_final_relays = False
 
     coordinate_pattern = re.compile(
         r"^\s*"
@@ -31,7 +33,10 @@ def parse_log(filename):
 
             line = line.strip()
 
+            # ====================================================
             # Area
+            # ====================================================
+
             if line.startswith("Area:"):
 
                 match = re.search(
@@ -45,23 +50,50 @@ def parse_log(filename):
 
                 continue
 
-            # Sensor nodes start
+
+            # ====================================================
+            # Sensor nodes
+            # ====================================================
+
             if line == "Nodes Positions:":
 
                 reading_nodes = True
-                reading_relays = False
+                reading_first_relays = False
+                reading_final_relays = False
 
                 continue
 
-            # Relay positions start
+
+            # ====================================================
+            # Initial relay positions
+            # ====================================================
+
+            if line == "First Relays:":
+
+                reading_nodes = False
+                reading_first_relays = True
+                reading_final_relays = False
+
+                continue
+
+
+            # ====================================================
+            # Final global best relay positions
+            # ====================================================
+
             if line == "Final global best relays:":
 
                 reading_nodes = False
-                reading_relays = True
+                reading_first_relays = False
+                reading_final_relays = True
 
                 continue
 
-            # Coordinates
+
+            # ====================================================
+            # Coordinate parsing
+            # ====================================================
+
             match = coordinate_pattern.match(line)
 
             if match:
@@ -74,25 +106,39 @@ def parse_log(filename):
                 if reading_nodes:
                     nodes.append(position)
 
-                elif reading_relays:
-                    relays.append(position)
+                elif reading_first_relays:
+                    first_relays.append(position)
 
-    return area_width, area_height, nodes, relays
+                elif reading_final_relays:
+                    final_relays.append(position)
+
+
+    return (
+        area_width,
+        area_height,
+        nodes,
+        first_relays,
+        final_relays
+    )
 
 
 def plot_nodes(
     area_width,
     area_height,
     nodes,
-    relays,
+    first_relays,
+    final_relays,
     output_file
 ):
 
     node_x = [node[0] for node in nodes]
     node_y = [node[1] for node in nodes]
 
-    relay_x = [relay[0] for relay in relays]
-    relay_y = [relay[1] for relay in relays]
+    first_relay_x = [relay[0] for relay in first_relays]
+    first_relay_y = [relay[1] for relay in first_relays]
+
+    final_relay_x = [relay[0] for relay in final_relays]
+    final_relay_y = [relay[1] for relay in final_relays]
 
 
     plt.figure(figsize=(8, 8))
@@ -112,12 +158,27 @@ def plot_nodes(
 
 
     # ============================================================
-    # Final global best relays
+    # Initial relay positions
     # ============================================================
 
     plt.scatter(
-        relay_x,
-        relay_y,
+        first_relay_x,
+        first_relay_y,
+        color="green",
+        marker="x",
+        s=100,
+        linewidths=2,
+        label="Initial Relays"
+    )
+
+
+    # ============================================================
+    # Final global best relay positions
+    # ============================================================
+
+    plt.scatter(
+        final_relay_x,
+        final_relay_y,
         color="red",
         marker="x",
         s=100,
@@ -136,7 +197,9 @@ def plot_nodes(
     plt.xlabel("X")
     plt.ylabel("Y")
 
-    plt.title("Sensor Nodes and Final Global Best Relays")
+    plt.title(
+        "Sensor Nodes, Initial Relays and Final Global Best Relays"
+    )
 
     plt.grid(True)
     plt.legend()
@@ -160,7 +223,7 @@ def main():
     if len(sys.argv) != 2:
 
         print(
-            "Usage: python3 plot_nodes.py <output_file>"
+            "Usage: python3 plot.py <output_file>"
         )
 
         sys.exit(1)
@@ -169,9 +232,13 @@ def main():
     output_file = sys.argv[1]
 
 
-    area_width, area_height, nodes, relays = parse_log(
-        LOG_FILE
-    )
+    (
+        area_width,
+        area_height,
+        nodes,
+        first_relays,
+        final_relays
+    ) = parse_log(LOG_FILE)
 
 
     if area_width is None or area_height is None:
@@ -188,7 +255,14 @@ def main():
         )
 
 
-    if not relays:
+    if not first_relays:
+
+        raise RuntimeError(
+            "No initial relay positions found in log."
+        )
+
+
+    if not final_relays:
 
         raise RuntimeError(
             "No final global best relay positions found in log."
@@ -197,14 +271,16 @@ def main():
 
     print(f"Area: {area_width} x {area_height}")
     print(f"Sensor nodes found: {len(nodes)}")
-    print(f"Final relays found: {len(relays)}")
+    print(f"Initial relays found: {len(first_relays)}")
+    print(f"Final relays found: {len(final_relays)}")
 
 
     plot_nodes(
         area_width,
         area_height,
         nodes,
-        relays,
+        first_relays,
+        final_relays,
         output_file
     )
 

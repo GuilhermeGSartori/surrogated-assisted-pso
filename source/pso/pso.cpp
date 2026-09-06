@@ -54,6 +54,13 @@ void Swarm::initRelays(const Dimensions& area, std::mt19937& rng) {
     }
 }
 
+void Swarm::logFirstRelay(std::ofstream& log) {
+
+    for(const auto& c : particles[0].getPositions()) {
+        log << c.x << ", " << c.y << '\n';
+    }
+}
+
 bool Particle::compareBest(const double fitness) { // pq aqui PRECISA retornar referenica?
 
     if (fitness > personal_best.fitness) {
@@ -158,6 +165,7 @@ const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, s
 
     do
     {
+        std::cout << "Iteration: " << iterations << "\n";
         log << "-- ITERATION " << iterations << " --\n";
         evaluateSolution(swarm, scenario, log);
 

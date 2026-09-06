@@ -118,8 +118,8 @@ void configNetwork(Scenario& scenario) {
     scenario.network = parseNetworkConfig(scenario.network_config, "scenarios");
     double estimated_range = 0.0;
 
-    for (double distance = 5.0; distance <= 300.0; distance += 5.0) {
-        constexpr int repetitions = 10;
+    for (double distance = 10.0; distance <= 300.0; distance += 10.0) {
+        constexpr int repetitions = 5;
 
         double total_pdr = 0.0;
 
@@ -134,8 +134,8 @@ void configNetwork(Scenario& scenario) {
                                         "-u Cmdenv "
                                         "-n network:$INET_ROOT/src "
                                         "-l $INET_ROOT/src/INET "
-                                        "-f network/range_test.ini"
-                                        //"> /dev/null"
+                                        "-f network/range_test.ini "
+                                        "> /dev/null"
                                     );
 
             if (result != 0)
@@ -226,8 +226,8 @@ double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario&
                                 "-l $INET_ROOT/src/INET "
                                 "-f network/omnetpp.ini "
                                 "-f network/sensor_nodes.ini "
-                                "-f network/relay_positions.ini"
-                                //"> /dev/null"
+                                "-f network/relay_positions.ini "
+                                "> /dev/null"
                             );
 
     //int result = std::system("./wsn_sim -u Cmdenv -f network/omnetpp.ini -f network/sensor_nodes.ini -f network/pso_positions.ini");

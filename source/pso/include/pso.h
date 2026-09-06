@@ -112,6 +112,8 @@ public:
     void initRelays(const Dimensions& area, std::mt19937& rng);
 
     void setRanges(double relay_range, double node_range);
+
+    void Swarm::logFirstRelay(std::ofstream& log);
     
     const double getNodeRange() const { return node_range; }
     const double getRelayRange() const { return relay_range; }

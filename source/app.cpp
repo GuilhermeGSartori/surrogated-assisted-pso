@@ -39,15 +39,7 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
 
     swarm.initRelays(scenario.area, rng); 
 
-    // Area baseada em PA, tamnho de pacote baseado no tipo de dado q iria (pacote pequeno com alguns bytes)
-
-    // TENHO QUE COLOCAR QUE RODEI SUDO APT INSTALL CMAKE NA VM!!!
-
-    std::ofstream log = createLogFile();
-
     std::ofstream final_log("logs/final_log.log");
-
-    const Solution& global_best = pso(swarm, scenario, rng, log);
 
     final_log << "Area: "
         << scenario.area.width << " x "
@@ -56,9 +48,17 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
     final_log << "Nodes Positions: \n";
     logNodes(final_log, scenario);
 
+    final_log << "First Relays:\n";
+    swarm.logFirstRelay(final_log);
+
+    std::ofstream log = createLogFile();
+
+    const Solution& global_best = pso(swarm, scenario, rng, log);
+
     log << "Final global best fitness: " << global_best.fitness << "\n";
     log << "Final global best relays:\n";
     final_log << "Final global best relays:\n";
+    
     for (const auto& pos: global_best.relay_positions) {
         log << pos.x << ", " << pos.y << '\n';
         final_log << pos.x << ", " << pos.y << '\n';
