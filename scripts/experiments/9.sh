@@ -52,18 +52,20 @@ cd build
 
 echo
 
-echo "=== Running optimizer ==="
+echo "=== Generating training dataset ==="
 
-./surrogated-assisted-optimizer pso 8 0 4 0.8 1.2 1.8
+./surrogated-assisted-optimizer training 8
 
 echo
 
-echo "=== Optimizer finished ==="
-
-echo "=== Plotting nodes ==="
+echo "=== Dataset generation finished ==="
 
 cd "$RUN_DIR"
 
-python3 ../plot.py "$OUTPUT_PLOT"
+echo "=== Training Random Forest ==="
 
-echo "Plot saved to: $OUTPUT_PLOT"
+python3 ../../surrogate_model/trainer.py
+
+echo
+
+echo "=== Random Forest training finished ==="

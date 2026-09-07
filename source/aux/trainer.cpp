@@ -1,6 +1,7 @@
 #include <random>
 #include <algorithm>
 #include <fstream>
+#include <iostream>
 
 #include "trainer.h"
 
@@ -127,6 +128,8 @@ void generateDataset(Scenario& scenario) {
     writeNodesHeader(nodes_file);
 
     for (int i = 0; i < 100; ++i) {
+        std::cout << ">> Seed: " << i << "\n";
+
         std::mt19937 rng(scenario.seed*i);
         LHS(scenario.nodes, scenario.n_nodes, scenario.area, rng);
         writeNodePositions(scenario.nodes, scenario.sink, "network/sensor_nodes.ini");
@@ -141,6 +144,8 @@ void generateDataset(Scenario& scenario) {
         std::uniform_real_distribution<double> noise(-5.0, 5.0);
         
         for (int j = 0; j < 20; ++j) {
+            std::cout << ":>>>> Simulation: " << j << "\n"; 
+
             double fitness = runSimulation(relays, scenario);
 
             writeDatasetRow(dataset, i, j, scenario, relays, fitness);
