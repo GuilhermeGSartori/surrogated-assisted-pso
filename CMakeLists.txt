@@ -18,6 +18,7 @@ add_library(aux
     source/aux/aux.cpp
     source/aux/network_files.cpp
     source/aux/trainer.cpp
+    source/aux/surrogate_client.cpp
 )
 
 target_include_directories(aux
