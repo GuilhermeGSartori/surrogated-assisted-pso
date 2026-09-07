@@ -9,6 +9,7 @@
 #include <stdexcept>
 #include <string_view>
 #include <algorithm>
+#include <queue>
 
 #include "network_files.h"
 
