@@ -183,6 +183,7 @@ const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, s
             log << pos.x << ", " << pos.y << '\n';
         }
 
+        // preciso tambem armazenar esses cenarios em dataset
         int particle = 1;
         for (auto& p: swarm.getParticles()) {
             p.calculateVelocity(swarm.getWeights(), swarm.getGlobalBest(), rng);

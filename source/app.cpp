@@ -1,7 +1,3 @@
-// to do:
-// -- PSO implementation -- Gerar dados do pacote, definir arquivo config, integrar com omnet
-// -- tests
-
 #include <fstream>
 #include <iostream>
 #include <string_view>
@@ -74,7 +70,11 @@ int main(int argc, char* argv[]) {
         if (mode == "training") {
             Scenario scenario = parseScenario(argv[2]);
             generateDataset(scenario);
+
+            return 0;
         }
+
+        return 1;
     }
     else if (argc < 4) {
         std::cerr << "Missing optimizer mode, scenario or method\n";
