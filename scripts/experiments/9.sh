@@ -64,6 +64,8 @@ cd "$RUN_DIR"
 
 echo "=== Training Random Forest ==="
 
+source ../../.venv/bin/activate
+
 python3 ../../surrogate_model/trainer.py
 
 echo
