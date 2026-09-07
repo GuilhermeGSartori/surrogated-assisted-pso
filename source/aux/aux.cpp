@@ -216,6 +216,46 @@ void writeRelayPositions(const FixedSizeVector<Coordinates>& relays, const std::
     }
 }
 
+template <typename Container>
+bool isConnected(const Container& nodes, const Coordinates& sink, double relay_range) {
+
+    std::size_t n = nodes.size();
+
+    std::vector<bool> visited(n, false);
+    std::queue<std::size_t> queue;
+
+    double range_sq = relay_range*relay_range;
+
+    for (std::size_t i = 0; i < n; ++i) {
+        if (Coordinates::distanceSquared(nodes[i], sink) <= range_sq) {
+            visited[i] = true;
+            queue.push(i);
+        }
+    }
+
+    while (!queue.empty()) {
+        const std::size_t current = queue.front();
+        queue.pop();
+
+        for (std::size_t i = 0; i < n; ++i) {
+            if (visited[i])
+                continue;
+            else if (Coordinates::distanceSquared(nodes[current], nodes[i]) <= range_sq) {
+                visited[i] = true;
+                queue.push(i);
+            }
+        }
+
+    }
+
+    for (bool connected : visited) {
+        if (!connected) 
+            return false;
+    }
+
+    return true;
+}
+
 double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario& scenario) {
     writeRelayPositions(relays, "network/relay_positions.ini");
 

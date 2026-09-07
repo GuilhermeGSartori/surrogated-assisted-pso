@@ -10,6 +10,7 @@
 #include <random>
 #include "pso.h"
 #include "app.h"
+#include "trainer.h"
 
 int initPso(int argc, char* argv[], Scenario& scenario) {
     if (argc != 8) {
@@ -68,24 +69,32 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
 
 int main(int argc, char* argv[]) {
 
-    if (argc < 4) {
+    if (argc == 3) {
+        std::string_view mode = argv[1];
+        if (mode == "training") {
+            Scenario scenario = parseScenario(argv[2]);
+            generateDataset(scenario);
+        }
+    }
+    else if (argc < 4) {
         std::cerr << "Missing optimizer mode, scenario or method\n";
         return 1;
     }
+    else {
+        std::string_view mode = argv[1];
 
-    std::string_view mode = argv[1];
+        auto it = optimizers.find(mode);
 
-    auto it = optimizers.find(mode);
+        if (it == optimizers.end()) {
+            std::cerr << "Unknown optimizer: " << mode << '\n';
+            return 1;
+        }
 
-    if (it == optimizers.end()) {
-        std::cerr << "Unknown optimizer: " << mode << '\n';
-        return 1;
+        Scenario scenario = parseScenario(argv[2]);
+        scenario.backend = parseMethod(argv[3]);
+
+        configNetwork(scenario);
+
+        return it->second(argc, argv, scenario);
     }
-
-    Scenario scenario = parseScenario(argv[2]);
-    scenario.backend = parseMethod(argv[3]);
-
-    configNetwork(scenario);
-
-    return it->second(argc, argv, scenario);
 }

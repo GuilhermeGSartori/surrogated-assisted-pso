@@ -253,3 +253,6 @@ void LHS(Container& nodes, std::size_t n, const Dimensions& area, std::mt19937& 
         nodes[i].y = y_normalized * area.height;
     }
 }
+
+template <typename Container>
+bool isConnected(const Container& nodes, const Coordinates& sink, double relay_range);
