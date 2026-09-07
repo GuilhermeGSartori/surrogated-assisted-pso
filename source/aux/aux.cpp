@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <filesystem>
 #include <string_view>
+#include <queue>
 
 #include "aux.h"
 
