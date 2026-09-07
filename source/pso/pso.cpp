@@ -1,4 +1,5 @@
 #include "pso.h"
+#include "surrogate_client.h"
 
 #include <queue>
 #include <fstream>
@@ -142,7 +143,12 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
             fitness = runSimulation(p.getPositions(), scenario);
         }
         else {
-            fitness = 0;
+            std::string packet = generatePacket(p.getPositions(), scenario);
+            packet += appendNodes(scenario.nodes, packet, scenario.n_clusters);
+            fitness = sendPacket(packet);
+            if (fitness == -1.0) {
+                std::cout << "Error\n";
+            }
         }
         auto end = std::chrono::steady_clock::now();
 

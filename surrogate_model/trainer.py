@@ -11,7 +11,7 @@ from sklearn.metrics import mean_absolute_error, r2_score
 # ============================================================
 
 data = pd.read_csv("../../surrogate_model/data/dataset.csv")
-nodes = pd.read_csv("../../surrogate_model/data/data/nodes.csv")
+nodes = pd.read_csv("../../surrogate_model/data/nodes.csv")
 
 
 # ============================================================
@@ -92,7 +92,9 @@ X = data.drop(
     columns=[
         "fitness",
         "scenario_id",
-        "sample_id"
+        "sample_id",
+        "network_seed",
+        "n_relays"
     ]
 )
 
@@ -133,3 +135,5 @@ predictions = model.predict(X_test)
 
 print("MAE:", mean_absolute_error(y_test, predictions))
 print("R²:", r2_score(y_test, predictions))
+
+## tenho que salvar o modelo em algum lugar...

@@ -127,7 +127,7 @@ void generateDataset(Scenario& scenario) {
     writeDatasetHeader(dataset, scenario.n_relays);
     writeNodesHeader(nodes_file);
 
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 400; ++i) {
         std::cout << ">> Seed: " << i << "\n";
 
         std::mt19937 rng(scenario.seed*i);
@@ -141,7 +141,7 @@ void generateDataset(Scenario& scenario) {
 
         FixedSizeVector<Coordinates> initial_relays = relays;
 
-        std::uniform_real_distribution<double> noise(-5.0, 5.0);
+        std::uniform_real_distribution<double> noise(-50.0, 50.0);
         
         for (int j = 0; j < 20; ++j) {
             std::cout << ":>>>> Simulation: " << j << "\n"; 
