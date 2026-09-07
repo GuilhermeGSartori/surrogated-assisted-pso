@@ -2,7 +2,7 @@
 
 #include <string>
 
-std::string appendNodes(const std::vector<Coordinates>& nodes, std::string& packet, int n_clusters) {
+void appendNodes(const std::vector<Coordinates>& nodes, std::string& packet, int n_clusters) {
 
     packet += "*,";
     for (const auto& c : nodes) {

@@ -144,7 +144,7 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
         }
         else {
             std::string packet = generatePacket(p.getPositions(), scenario);
-            packet += appendNodes(scenario.nodes, packet, scenario.n_clusters);
+            appendNodes(scenario.nodes, packet, scenario.n_clusters);
             fitness = sendPacket(packet);
             if (fitness == -1.0) {
                 std::cout << "Error\n";
