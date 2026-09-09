@@ -1,6 +1,11 @@
 #include "aux.h"
 
+#include <iostream>
 #include <string>
+#include <cstring>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
 
 void appendNodes(const std::vector<Coordinates>& nodes, std::string& packet, int n_clusters) {
 
@@ -47,5 +52,49 @@ std::string generatePacket(const FixedSizeVector<Coordinates>& relays, const Sce
 }
 
 double sendPacket(std::string packet) {
-    return 0.0;
+    int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
+
+    if (clientSocket < 0) {
+        perror("socket");
+        return -1.0;
+    }
+
+    sockaddr_in serverAddress{};
+    serverAddress.sin_family = AF_INET;
+    serverAddress.sin_port = htons(8080);
+
+    inet_pton(AF_INET, "127.0.0.1", &serverAddress.sin_addr);
+
+
+    if (connect(clientSocket, reinterpret_cast<sockaddr*>(&serverAddress), sizeof(serverAddress)) < 0) {
+        perror("connect");
+        close(clientSocket);
+        return -1.0;
+    }
+    connect(clientSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress));
+
+    ssize_t sent = send(clientSocket, packet.data(), packet.size(), 0);
+
+    if (sent < 0) {
+        perror("send");
+        close(clientSocket);
+        return -1.0;
+    }
+
+    // Wait for response
+    char buffer[1024];
+
+    ssize_t received = recv(clientSocket, buffer,  sizeof(buffer) - 1, 0);
+
+    if (received <= 0) {
+        perror("recv");
+        close(clientSocket);
+        return -1.0;
+    }
+
+    buffer[received] = '\0';
+
+    close(clientSocket);
+
+    return std::stod(buffer);
 }

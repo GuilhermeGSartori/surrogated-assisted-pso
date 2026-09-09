@@ -1,4 +1,5 @@
 import pandas as pd
+import joblib
 
 from sklearn.cluster import KMeans
 from sklearn.ensemble import RandomForestRegressor
@@ -136,4 +137,10 @@ predictions = model.predict(X_test)
 print("MAE:", mean_absolute_error(y_test, predictions))
 print("R²:", r2_score(y_test, predictions))
 
-## tenho que salvar o modelo em algum lugar...
+joblib.dump(
+    {
+        "model": model,
+        "features": X.columns.tolist()
+    },
+    "../../surrogate_model/data/rf_model.joblib"
+)

@@ -142,13 +142,16 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
         if (scenario.backend == Method::Simulation) {
             fitness = runSimulation(p.getPositions(), scenario);
         }
-        else {
+        else if (scenario.backend == Method::Surrogate){
             std::string packet = generatePacket(p.getPositions(), scenario);
             appendNodes(scenario.nodes, packet, scenario.n_clusters);
             fitness = sendPacket(packet);
             if (fitness == -1.0) {
                 std::cout << "Error\n";
             }
+        }
+        else {
+            fitness = 0.0;
         }
         auto end = std::chrono::steady_clock::now();
 
