@@ -16,6 +16,8 @@ Method parseMethod(const std::string& method) {
 
     if (method == "0")
         return Method::Simulation;
+    else if (method == "1")
+    	return Method::Surrogate;
 
     return Method::Simulation;
 

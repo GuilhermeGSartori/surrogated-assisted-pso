@@ -143,9 +143,18 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
             fitness = runSimulation(p.getPositions(), scenario);
         }
         else if (scenario.backend == Method::Surrogate){
+            //std::cout << "Before connection\n";
             std::string packet = generatePacket(p.getPositions(), scenario);
+            //std::cout << "Generated\n";
+            
+            //std::cout << "packet size: " << packet.size() << '\n';
+            //std::cout << "packet capacity: " << packet.capacity() << '\n';
+            //std::cout << "nodes size: " << scenario.nodes.size() << '\n';
+            
             appendNodes(scenario.nodes, packet, scenario.n_clusters);
+            //std::cout << "Appended\n";
             fitness = sendPacket(packet);
+            //std::cout << "After connection\n";
             if (fitness == -1.0) {
                 std::cout << "Error\n";
             }
@@ -209,6 +218,11 @@ const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, s
 
     log << "-- ITERATION " << iterations << " --\n";
     evaluateSolution(swarm, scenario, log);
+    
+    if (scenario.backend == Method::Surrogate) {
+    	double fitness = runSimulation(swarm.getGlobalBest().relay_positions, scenario);
+    	std::cout << "Simulation of the best surrogate solution results: " << fitness << "\n";
+    }
 
     return swarm.getGlobalBest();
 }

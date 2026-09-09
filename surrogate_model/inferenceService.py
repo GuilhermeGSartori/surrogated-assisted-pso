@@ -11,6 +11,8 @@ from sklearn.cluster import KMeans
 # Configuration
 # ============================================================
 
+print("Starting!")
+
 HOST = "127.0.0.1"
 PORT = 8080
 

@@ -56,7 +56,7 @@ echo
 
 echo "=== Running optimizer with simulation ==="
 
-./surrogated-assisted-optimizer pso 8 0 4 0.8 1.2 1.8
+#./surrogated-assisted-optimizer pso 8 0 4 0.8 1.2 1.8
 
 echo
 
@@ -64,18 +64,17 @@ echo "=== Optimizer with simulation finished ==="
 
 echo "=== Plotting simulation nodes ==="
 
-cd "$RUN_DIR"
+#cd "$RUN_DIR"
 
-python3 ../plot.py "$OUTPUT_PLOT"
+#python3 ../plot.py "$OUTPUT_PLOT"
 
-echo "Plot saved to: $OUTPUT_PLOT"
+#echo "Plot saved to: $OUTPUT_PLOT"
 
 echo "=== Starting surrogate server ==="
 
 cd "$RUN_DIR"
 
-../../.venv/bin/python ../../surrogate_model/inference_service.py \
-    > "$RUN_DIR/${SCRIPT_BASE}_surrogate/server.log" 2>&1 &
+python3 ../../surrogate_model/inferenceService.py &
 
 SERVER_PID=$!
 

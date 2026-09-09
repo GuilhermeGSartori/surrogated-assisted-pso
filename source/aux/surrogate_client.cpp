@@ -9,11 +9,17 @@
 
 void appendNodes(const std::vector<Coordinates>& nodes, std::string& packet, int n_clusters) {
 
+    //std::cout << "ENTER packet size: " << packet.size() << '\n';
+    //std::cout << "ENTER packet capacity: " << packet.capacity() << '\n';
+    //std::cout << "ENTER nodes size: " << nodes.size() << '\n';
+    
     packet += "*,";
     for (const auto& c : nodes) {
-        packet += std::to_string(c.x) + "," + packet += std::to_string(c.y) + ",";
+        packet += std::to_string(c.x) + ",";
+        packet += std::to_string(c.y) + ",";
     }
     packet += std::to_string(n_clusters);
+    packet += '\n';
 }
 
 std::string generatePacket(const FixedSizeVector<Coordinates>& relays, const Scenario& scenario) {
@@ -51,7 +57,7 @@ std::string generatePacket(const FixedSizeVector<Coordinates>& relays, const Sce
     return packet;
 }
 
-double sendPacket(std::string packet) {
+double sendPacket(const std::string& packet) {
     int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
 
     if (clientSocket < 0) {
@@ -71,7 +77,6 @@ double sendPacket(std::string packet) {
         close(clientSocket);
         return -1.0;
     }
-    connect(clientSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress));
 
     ssize_t sent = send(clientSocket, packet.data(), packet.size(), 0);
 
@@ -84,8 +89,10 @@ double sendPacket(std::string packet) {
     // Wait for response
     char buffer[1024];
 
+    //std::cout << "Waiting for response!\n";
     ssize_t received = recv(clientSocket, buffer,  sizeof(buffer) - 1, 0);
-
+    //std::cout << "Done!\n";
+ 
     if (received <= 0) {
         perror("recv");
         close(clientSocket);

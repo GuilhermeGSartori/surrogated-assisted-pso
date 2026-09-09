@@ -63,3 +63,13 @@ target_link_libraries(surrogated-assisted-optimizer
     PRIVATE
         pso
 )
+
+target_compile_options(surrogated-assisted-optimizer PRIVATE
+	-g
+	-fsanitize=address
+	-fno-omit-frame-pointer
+)
+
+target_link_options(surrogated-assisted-optimizer PRIVATE
+	-fsanitize=address
+)
