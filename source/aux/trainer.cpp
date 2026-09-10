@@ -38,6 +38,7 @@ void writeDatasetHeader(std::ofstream& file, std::size_t n_relays) {
         << "packet_length,"
         << "interval,"
         << "network_seed,"
+        << "simulated_range,"
         << "fitness\n";
 }
 
@@ -102,6 +103,8 @@ void writeDatasetRow(std::ofstream& file, std::size_t scenario_id, std::size_t s
         << network.packet_length << ','
         << network.interval << ','
         << network.seed << ','
+
+        << network.simulated_range.at({NodeType::Relay, NodeType::Relay}) << ','
 
         << fitness
         << '\n';

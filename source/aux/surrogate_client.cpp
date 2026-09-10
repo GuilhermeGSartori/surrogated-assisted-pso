@@ -52,7 +52,8 @@ std::string generatePacket(const FixedSizeVector<Coordinates>& relays, const Sce
 
     std::to_string(network.propagation) + "," +
     std::to_string(network.packet_length) + "," +
-    std::to_string(network.interval);
+    std::to_string(network.interval) + "," +
+    std::to_string(network.simulated_range.at({NodeType::Relay, NodeType::Relay}));
     
     return packet;
 }
