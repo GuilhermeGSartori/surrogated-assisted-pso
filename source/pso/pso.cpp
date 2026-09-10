@@ -162,9 +162,9 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
             	fitness = 0.0;
             
             //std::cout << "Relay connected: " << connected << "\n";
-            std::cout << "Surrogate fitness: " << fitness << "\n";
-            double sim_fitness = runSimulation(p.getPositions(), scenario);
-            std::cout << "Simulation fitness: " << sim_fitness << "\n";
+            //std::cout << "Surrogate fitness: " << fitness << "\n";
+            //double sim_fitness = runSimulation(p.getPositions(), scenario);
+            //std::cout << "Simulation fitness: " << sim_fitness << "\n";
             //std::cout << "After connection\n";
             if (fitness == -1.0) {
                 std::cout << "Error\n";

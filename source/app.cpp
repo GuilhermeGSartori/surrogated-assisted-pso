@@ -61,6 +61,7 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
     std::cout << "Final Evaluation Time: " << elapsed.count() << " seconds\n";
 
     log << "Final global best fitness: " << global_best.fitness << "\n";
+    std::cout << "Final global best fitness: " << global_best.fitness << "\n";
     log << "Final global best relays:\n";
     final_log << "Final global best relays:\n";
     
