@@ -18,6 +18,8 @@ Method parseMethod(const std::string& method) {
         return Method::Simulation;
     else if (method == "1")
     	return Method::Surrogate;
+    else if (method == "2")
+    	return Method::Hybrid;
 
     return Method::Simulation;
 

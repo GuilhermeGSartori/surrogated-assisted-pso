@@ -124,6 +124,7 @@ void Particle::updatePositions(const Dimensions& area) {
 
 void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log) {
     int particle = 1;
+    static int count = 1;
 
     for (auto& p: swarm.getParticles()) {
         std::cout << ">>>> Particle: " << particle << "\n";
@@ -153,11 +154,44 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
             
             appendNodes(scenario.nodes, packet, scenario.n_clusters);
             //std::cout << "Appended\n";
-            fitness = sendPacket(packet);
+            bool connected = isConnected(p.getPositions(), scenario.sink, scenario.network.simulated_range.at({NodeType::Relay, NodeType::Relay}));
+            
+            if (connected)
+            	fitness = sendPacket(packet);
+            else
+            	fitness = 0.0;
+            
+            //std::cout << "Relay connected: " << connected << "\n";
+            std::cout << "Surrogate fitness: " << fitness << "\n";
+            double sim_fitness = runSimulation(p.getPositions(), scenario);
+            std::cout << "Simulation fitness: " << sim_fitness << "\n";
             //std::cout << "After connection\n";
             if (fitness == -1.0) {
                 std::cout << "Error\n";
             }
+        }
+        else if (scenario.backend == Method::Hybrid) {
+            if (count == sim_proportion) {
+            	std::cout << "SIMULATION!!\n";
+                fitness = runSimulation(p.getPositions(), scenario);
+            }
+            else {
+            	std::string packet = generatePacket(p.getPositions(), scenario);
+            
+            	appendNodes(scenario.nodes, packet, scenario.n_clusters);
+            	bool connected = isConnected(p.getPositions(), scenario.sink, scenario.network.simulated_range.at({NodeType::Relay, NodeType::Relay}));
+            
+            	if (connected)
+            	    fitness = sendPacket(packet);
+            	else
+            	    fitness = 0.0;
+            
+                if (fitness == -1.0) {
+                    std::cout << "Error\n";
+                }
+            }
+            
+            std::cout << "fitness: " << fitness << "\n";
         }
         else {
             fitness = 0.0;
@@ -178,6 +212,10 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
 
         ++particle;
     }
+    if (count == sim_proportion)
+    	count = 1;
+    else
+    	++count;
 }
 
 const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, std::ofstream& log) {
@@ -219,7 +257,7 @@ const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, s
     log << "-- ITERATION " << iterations << " --\n";
     evaluateSolution(swarm, scenario, log);
     
-    if (scenario.backend == Method::Surrogate) {
+    if (scenario.backend == Method::Surrogate || scenario.backend == Method::Hybrid) {
     	double fitness = runSimulation(swarm.getGlobalBest().relay_positions, scenario);
     	std::cout << "Simulation of the best surrogate solution results: " << fitness << "\n";
     }

@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <numeric>
 #include <random>
+#include <chrono>
+
 #include "pso.h"
 #include "app.h"
 #include "trainer.h"
@@ -50,7 +52,13 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
 
     std::ofstream log = createLogFile();
 
+    auto start = std::chrono::steady_clock::now();
     const Solution& global_best = pso(swarm, scenario, rng, log);
+    auto end = std::chrono::steady_clock::now();
+
+    std::chrono::duration<double> elapsed = end - start;
+    
+    std::cout << "Final Evaluation Time: " << elapsed.count() << " seconds\n";
 
     log << "Final global best fitness: " << global_best.fitness << "\n";
     log << "Final global best relays:\n";
