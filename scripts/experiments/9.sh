@@ -54,7 +54,11 @@ echo
 
 echo "=== Generating training dataset ==="
 
-./surrogated-assisted-optimizer training 8
+#./surrogated-assisted-optimizer training 8
+
+## para treinar acho que é rodar varios desses seguidos mas entre cada um deles ter um script que append
+## os csv resultantes em um lugar só... mas tem q ver toda questoa de cenario e tals...
+## ou vai ter q ser dentro do cpp mesmo
 
 echo
 
