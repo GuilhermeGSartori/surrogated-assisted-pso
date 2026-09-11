@@ -4,10 +4,14 @@ import joblib
 
 from scipy.stats import spearmanr
 
-from sklearn.cluster import KMeans
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GroupShuffleSplit
 from sklearn.metrics import mean_absolute_error, r2_score
+
+from feature_engineering import (
+    build_clusters,
+    build_relative_features
+)
 
 
 # ============================================================
@@ -27,8 +31,41 @@ RANGE_COLUMN = "simulated_range"
 # Load data
 # ============================================================
 
-data = pd.read_csv(DATASET_PATH)
-nodes = pd.read_csv(NODES_PATH)
+data = pd.read_csv(
+    DATASET_PATH
+)
+
+nodes = pd.read_csv(
+    NODES_PATH
+)
+
+
+# ============================================================
+# Optional connected-only filtering
+#
+# If dataset.csv contains a "connected" column, only feasible
+# samples are used.
+#
+# If your generator already guarantees that every row is
+# connected, this block simply does nothing.
+# ============================================================
+
+if "connected" in data.columns:
+
+    total_before = len(
+        data
+    )
+
+    data = data[
+        data["connected"].astype(int) == 1
+    ].copy()
+
+    print(
+        "Connected samples:",
+        len(data),
+        "/",
+        total_before
+    )
 
 
 # ============================================================
@@ -36,460 +73,100 @@ nodes = pd.read_csv(NODES_PATH)
 # ============================================================
 
 if RANGE_COLUMN not in data.columns:
+
     raise ValueError(
-        f"Column '{RANGE_COLUMN}' not found in dataset.csv"
+        f"Column '{RANGE_COLUMN}' "
+        f"not found in dataset.csv"
     )
 
 
-# Fixed relay count for this RF
-relay_counts = data["n_relays"].unique()
+relay_counts = data[
+    "n_relays"
+].unique()
+
 
 if len(relay_counts) != 1:
+
     raise ValueError(
-        "RF v2 currently expects a fixed number of relays. "
+        "RF currently expects a fixed number "
+        "of relays. "
         f"Found: {relay_counts}"
     )
 
-N_RELAYS = int(relay_counts[0])
+
+N_RELAYS = int(
+    relay_counts[0]
+)
 
 
-# Fixed cluster count for this RF
-cluster_counts = nodes["n_clusters"].unique()
+cluster_counts = nodes[
+    "n_clusters"
+].unique()
+
 
 if len(cluster_counts) != 1:
+
     raise ValueError(
-        "RF v2 currently expects a fixed number of clusters. "
+        "RF currently expects a fixed number "
+        "of clusters. "
         f"Found: {cluster_counts}"
     )
 
-N_CLUSTERS = int(cluster_counts[0])
+
+N_CLUSTERS = int(
+    cluster_counts[0]
+)
 
 
-print("Relays:", N_RELAYS)
-print("Clusters:", N_CLUSTERS)
+print(
+    "Relays:",
+    N_RELAYS
+)
 
-
-# ============================================================
-# Utility
-# ============================================================
-
-def distance(a, b):
-    return np.linalg.norm(a - b)
-
-
-# ============================================================
-# Build cluster representation for each scenario
-# ============================================================
-
-def build_scenario_clusters(nodes_df):
-
-    scenario_clusters = {}
-
-    for scenario_id, group in nodes_df.groupby("scenario_id"):
-
-        n_clusters = int(
-            group["n_clusters"].iloc[0]
-        )
-
-        node_positions = group[
-            ["x", "y"]
-        ].to_numpy(dtype=float)
-
-
-        # ----------------------------------------------------
-        # KMeans
-        # ----------------------------------------------------
-
-        kmeans = KMeans(
-            n_clusters=n_clusters,
-            random_state=42,
-            n_init=10
-        )
-
-        labels = kmeans.fit_predict(
-            node_positions
-        )
-
-        centroids = kmeans.cluster_centers_
-
-
-        # ----------------------------------------------------
-        # Describe each cluster
-        #
-        # IMPORTANT:
-        # NO CANONICAL REORDERING.
-        #
-        # Cluster 0 stays KMeans cluster 0,
-        # cluster 1 stays KMeans cluster 1, etc.
-        # ----------------------------------------------------
-
-        clusters = []
-
-        for cluster_id in range(n_clusters):
-
-            members = node_positions[
-                labels == cluster_id
-            ]
-
-            centroid = centroids[
-                cluster_id
-            ]
-
-            distances_to_centroid = (
-                np.linalg.norm(
-                    members - centroid,
-                    axis=1
-                )
-            )
-
-
-            clusters.append({
-
-                "centroid":
-                    centroid,
-
-                "size":
-                    len(members),
-
-                "mean_radius":
-                    distances_to_centroid.mean(),
-
-                "max_radius":
-                    distances_to_centroid.max(),
-
-                "std_radius":
-                    distances_to_centroid.std()
-            })
-
-
-        scenario_clusters[
-            scenario_id
-        ] = clusters
-
-
-    return scenario_clusters
-
-
-scenario_clusters = build_scenario_clusters(
-    nodes
+print(
+    "Clusters:",
+    N_CLUSTERS
 )
 
 
 # ============================================================
-# Build RF v2 features
+# Build cluster representation once per sensor scenario
 # ============================================================
 
-def build_relative_features(
-    row,
-    clusters
+scenario_clusters = {}
+
+
+for scenario_id, group in nodes.groupby(
+    "scenario_id"
 ):
 
-    features = {}
-
-
-    # ========================================================
-    # Scenario geometry
-    # ========================================================
-
-    width = float(
-        row["area_width"]
-    )
-
-    height = float(
-        row["area_height"]
+    n_clusters = int(
+        group[
+            "n_clusters"
+        ].iloc[0]
     )
 
 
-    if width <= 0.0 or height <= 0.0:
-        raise ValueError(
-            "Area dimensions must be greater than zero"
-        )
-
-
-    area = width * height
-
-    area_diagonal = np.sqrt(
-        width ** 2 +
-        height ** 2
-    )
-
-
-    sink = np.array(
+    node_positions = group[
         [
-            row["sink_x"],
-            row["sink_y"]
-        ],
+            "x",
+            "y"
+        ]
+    ].to_numpy(
         dtype=float
     )
 
 
-    # ========================================================
-    # Relay positions
-    #
-    # IMPORTANT:
-    # NO CANONICAL ORDERING.
-    #
-    # relay_0 stays relay_0
-    # relay_1 stays relay_1
-    # etc.
-    # ========================================================
-
-    relays = []
-
-    for i in range(N_RELAYS):
-
-        relay = np.array(
-            [
-                row[f"relay_{i}_x"],
-                row[f"relay_{i}_y"]
-            ],
-            dtype=float
-        )
-
-        relays.append(
-            relay
-        )
-
-
-    # ========================================================
-    # Clusters
-    #
-    # Also preserve their original KMeans order.
-    # No sorting by sink distance, X coordinate, radius, etc.
-    # ========================================================
-
-    ordered_clusters = clusters
-
-
-    # ========================================================
-    # Simulated relay communication range
-    # ========================================================
-
-    simulated_range = float(
-        row[RANGE_COLUMN]
+    scenario_clusters[
+        scenario_id
+    ] = build_clusters(
+        node_positions,
+        n_clusters
     )
-
-
-    if simulated_range <= 0.0:
-        raise ValueError(
-            "simulated_range must be greater than zero"
-        )
-
-
-    # ========================================================
-    # General scenario features
-    # ========================================================
-
-    features["area"] = area
-
-    features["aspect_ratio"] = (
-        width / height
-    )
-
-
-    total_nodes = sum(
-        cluster["size"]
-        for cluster in ordered_clusters
-    )
-
-
-    features["node_density"] = (
-        total_nodes / area
-    )
-
-
-    # ========================================================
-    # Network configuration
-    # ========================================================
-
-    features["relay_power"] = (
-        row["relay_power"]
-    )
-
-    features["node_power"] = (
-        row["node_power"]
-    )
-
-    features["relay_traffic"] = (
-        row["relay_traffic"]
-    )
-
-    features["node_traffic"] = (
-        row["node_traffic"]
-    )
-
-    features["propagation"] = (
-        row["propagation"]
-    )
-
-    features["packet_length"] = (
-        row["packet_length"]
-    )
-
-    features["interval"] = (
-        row["interval"]
-    )
-
-
-    # Calibrated relay-to-relay communication range
-    features["simulated_range"] = (
-        simulated_range
-    )
-
-
-    # ========================================================
-    # Relay <-> Relay
-    #
-    # relay_i and relay_j retain their ORIGINAL identities.
-    #
-    # Normalized by calibrated relay-to-relay range.
-    # ========================================================
-
-    for i in range(N_RELAYS):
-
-        for j in range(
-            i + 1,
-            N_RELAYS
-        ):
-
-            d = distance(
-                relays[i],
-                relays[j]
-            )
-
-
-            features[
-                f"relay_{i}_{j}_relative_distance"
-            ] = (
-                d /
-                simulated_range
-            )
-
-
-    # ========================================================
-    # Relay <-> Sink
-    #
-    # Normalized by deployment-area diagonal.
-    # ========================================================
-
-    for i, relay in enumerate(
-        relays
-    ):
-
-        d = distance(
-            relay,
-            sink
-        )
-
-
-        features[
-            f"relay_{i}_sink_relative_distance"
-        ] = (
-            d /
-            area_diagonal
-        )
-
-
-    # ========================================================
-    # Cluster features
-    # ========================================================
-
-    for cluster_idx, cluster in enumerate(
-        ordered_clusters
-    ):
-
-        centroid = cluster[
-            "centroid"
-        ]
-
-
-        # ----------------------------------------------------
-        # Relative cluster population
-        # ----------------------------------------------------
-
-        features[
-            f"cluster_{cluster_idx}_population"
-        ] = (
-            cluster["size"] /
-            total_nodes
-        )
-
-
-        # ----------------------------------------------------
-        # Cluster spatial spread
-        # ----------------------------------------------------
-
-        features[
-            f"cluster_{cluster_idx}_mean_radius"
-        ] = (
-            cluster["mean_radius"] /
-            area_diagonal
-        )
-
-
-        features[
-            f"cluster_{cluster_idx}_max_radius"
-        ] = (
-            cluster["max_radius"] /
-            area_diagonal
-        )
-
-
-        features[
-            f"cluster_{cluster_idx}_std_radius"
-        ] = (
-            cluster["std_radius"] /
-            area_diagonal
-        )
-
-
-        # ----------------------------------------------------
-        # Cluster <-> Sink
-        # ----------------------------------------------------
-
-        d_sink = distance(
-            centroid,
-            sink
-        )
-
-
-        features[
-            f"cluster_{cluster_idx}_sink_relative_distance"
-        ] = (
-            d_sink /
-            area_diagonal
-        )
-
-
-        # ----------------------------------------------------
-        # Cluster <-> Relay
-        #
-        # Again, relay indices stay fixed.
-        # ----------------------------------------------------
-
-        for relay_idx, relay in enumerate(
-            relays
-        ):
-
-            d_relay = distance(
-                centroid,
-                relay
-            )
-
-
-            features[
-                f"cluster_{cluster_idx}_relay_{relay_idx}_relative_distance"
-            ] = (
-                d_relay /
-                area_diagonal
-            )
-
-
-    return features
 
 
 # ============================================================
-# Generate engineered dataset
+# Generate engineered feature rows
 # ============================================================
 
 feature_rows = []
@@ -503,30 +180,124 @@ for _, row in data.iterrows():
 
 
     if scenario_id not in scenario_clusters:
+
         raise ValueError(
             f"No node information found "
             f"for scenario {scenario_id}"
         )
 
 
-    features = build_relative_features(
-        row,
-        scenario_clusters[
-            scenario_id
-        ]
+    # --------------------------------------------------------
+    # Sink
+    # --------------------------------------------------------
+
+    sink = np.array(
+        [
+            row["sink_x"],
+            row["sink_y"]
+        ],
+        dtype=float
     )
 
 
-    # Metadata used for grouped splitting
+    # --------------------------------------------------------
+    # Relay positions
+    #
+    # Keep original IDs here.
+    # build_relative_features() removes identity dependence by
+    # sorting RELATIONSHIPS, not relay objects.
+    # --------------------------------------------------------
+
+    relays = []
+
+
+    for relay_idx in range(
+        N_RELAYS
+    ):
+
+        relays.append(
+            np.array(
+                [
+                    row[
+                        f"relay_{relay_idx}_x"
+                    ],
+
+                    row[
+                        f"relay_{relay_idx}_y"
+                    ]
+                ],
+                dtype=float
+            )
+        )
+
+
+    # --------------------------------------------------------
+    # Feature engineering
+    # --------------------------------------------------------
+
+    features = build_relative_features(
+
+        area_width=
+            row["area_width"],
+
+        area_height=
+            row["area_height"],
+
+        sink=
+            sink,
+
+        relays=
+            relays,
+
+        relay_power=
+            row["relay_power"],
+
+        relay_traffic=
+            row["relay_traffic"],
+
+        node_power=
+            row["node_power"],
+
+        node_traffic=
+            row["node_traffic"],
+
+        propagation=
+            row["propagation"],
+
+        packet_length=
+            row["packet_length"],
+
+        interval=
+            row["interval"],
+
+        simulated_range=
+            row[RANGE_COLUMN],
+
+        clusters=
+            scenario_clusters[
+                scenario_id
+            ]
+    )
+
+
+    # --------------------------------------------------------
+    # Metadata
+    # --------------------------------------------------------
+
     features[
         "scenario_id"
     ] = scenario_id
 
 
+    # --------------------------------------------------------
     # Target
+    # --------------------------------------------------------
+
     features[
         "fitness"
-    ] = row["fitness"]
+    ] = row[
+        "fitness"
+    ]
 
 
     feature_rows.append(
@@ -534,14 +305,14 @@ for _, row in data.iterrows():
     )
 
 
+# ============================================================
+# Create engineered dataset
+# ============================================================
+
 feature_data = pd.DataFrame(
     feature_rows
 )
 
-
-# ============================================================
-# Save engineered dataset
-# ============================================================
 
 feature_data.to_csv(
     FEATURES_PATH,
@@ -555,17 +326,21 @@ print(
     feature_data.shape
 )
 
+
 print()
 print(
     "Engineered features:"
 )
 
+
 for column in feature_data.columns:
-    print(column)
+    print(
+        column
+    )
 
 
 # ============================================================
-# Prepare X / y
+# X / y
 # ============================================================
 
 groups = feature_data[
@@ -587,7 +362,7 @@ y = feature_data[
 
 
 # ============================================================
-# Check for bad feature values
+# Validate engineered dataset
 # ============================================================
 
 if X.isnull().any().any():
@@ -603,7 +378,9 @@ if X.isnull().any().any():
 
 
 if np.isinf(
-    X.to_numpy(dtype=float)
+    X.to_numpy(
+        dtype=float
+    )
 ).any():
 
     raise ValueError(
@@ -614,7 +391,7 @@ if np.isinf(
 # ============================================================
 # Grouped train/test split
 #
-# Entire scenarios stay either in training or testing.
+# Entire WSN scenarios remain either in train or test.
 # ============================================================
 
 splitter = GroupShuffleSplit(
@@ -715,10 +492,12 @@ mae = mean_absolute_error(
     predictions
 )
 
+
 r2 = r2_score(
     y_test,
     predictions
 )
+
 
 spearman, spearman_p = spearmanr(
     y_test,
@@ -727,9 +506,17 @@ spearman, spearman_p = spearmanr(
 
 
 print()
-print("==============================")
-print("RF V2 RESULTS")
-print("==============================")
+print(
+    "=============================="
+)
+
+print(
+    "RF V2.1 RESULTS"
+)
+
+print(
+    "=============================="
+)
 
 print(
     "MAE:",
@@ -753,21 +540,21 @@ print(
 
 
 # ============================================================
-# High-fitness ranking metrics
-#
-# Useful because PSO cares especially about ranking the
-# best candidate solutions correctly.
+# High-fitness ranking
 # ============================================================
 
 top_25_threshold = y_test.quantile(
     0.75
 )
 
+
 top_25_mask = (
-    y_test >= top_25_threshold
+    y_test >=
+    top_25_threshold
 )
 
-top_25_spearman, _ = spearmanr(
+
+top_25_spearman, top_25_p = spearmanr(
     y_test[top_25_mask],
     predictions[top_25_mask]
 )
@@ -777,11 +564,14 @@ top_10_threshold = y_test.quantile(
     0.90
 )
 
+
 top_10_mask = (
-    y_test >= top_10_threshold
+    y_test >=
+    top_10_threshold
 )
 
-top_10_spearman, _ = spearmanr(
+
+top_10_spearman, top_10_p = spearmanr(
     y_test[top_10_mask],
     predictions[top_10_mask]
 )
@@ -793,8 +583,18 @@ print(
 )
 
 print(
+    "Top 25% p-value:",
+    top_25_p
+)
+
+print(
     "Top 10% Spearman:",
     top_10_spearman
+)
+
+print(
+    "Top 10% p-value:",
+    top_10_p
 )
 
 
@@ -819,12 +619,23 @@ importance = importance.sort_values(
 
 
 print()
-print("==============================")
-print("FEATURE IMPORTANCE")
-print("==============================")
+print(
+    "=============================="
+)
 
 print(
-    importance.head(20).to_string(
+    "FEATURE IMPORTANCE"
+)
+
+print(
+    "=============================="
+)
+
+
+print(
+    importance.head(
+        25
+    ).to_string(
         index=False
     )
 )
@@ -849,7 +660,10 @@ joblib.dump(
             N_CLUSTERS,
 
         "range_column":
-            RANGE_COLUMN
+            RANGE_COLUMN,
+
+        "feature_version":
+            "v2.1_sorted_relationships"
     },
     MODEL_PATH
 )
