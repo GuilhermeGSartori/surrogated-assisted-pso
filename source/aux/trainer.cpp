@@ -144,23 +144,45 @@ void generateDataset(Scenario& scenario) {
 
         FixedSizeVector<Coordinates> initial_relays = relays;
 
-        std::uniform_real_distribution<double> noise(-50.0, 50.0);
+        std::uniform_real_distribution<double> noise(-80.0, 80.0);
         
         for (int j = 0; j < 20; ++j) {
             std::cout << ":>>>> Simulation: " << j << "\n"; 
+            
+            if (j == 0) {
+            	relays = initial_relays;
+            }
+            else {
+            	bool connected = false;
+            	
+            	constexpr int MAX_ATTEMPTS = 1000;
+            	
+            	for (int attempt = 0; attempt < MAX_ATTEMPTS; ++attempt) {
+            	    relays = initial_relays;
+            	    
+            	    for (auto& relay : relays) {
+                	relay += Coordinates{noise(rng), noise(rng)};
+            
+                	relay.x = std::clamp(relay.x, 0.0, scenario.area.width);
+                	relay.y = std::clamp(relay.y, 0.0, scenario.area.height);
+            	    }
+            	    
+            	    connected = isConnected(relays, scenario.sink, range);
+            	    
+            	    if (connected)
+            	    	break;
+            	}
+            	
+            	if (!connected) {
+            	    throw std::runtime_error ("Could not generate a connected relay sample");
+            	}
+            }
 
             double fitness = runSimulation(relays, scenario);
 
             writeDatasetRow(dataset, i, j, scenario, relays, fitness);
             
-            relays = initial_relays;
-
-            for (auto& relay : relays) {
-                relay += Coordinates{noise(rng), noise(rng)};
-            
-                relay.x = std::clamp(relay.x, 0.0, scenario.area.width);
-                relay.y = std::clamp(relay.y, 0.0, scenario.area.height);
-            }
+            //relays = initial_relays;
         }
 
     }
