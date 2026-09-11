@@ -29,7 +29,6 @@ saved = joblib.load(MODEL_PATH)
 model = saved["model"]
 feature_names = saved["features"]
 
-# These were saved by trainer.py
 N_RELAYS = saved["n_relays"]
 N_CLUSTERS = saved["n_clusters"]
 
@@ -50,10 +49,17 @@ def distance(a, b):
 # ============================================================
 # Build cluster representation
 #
-# MUST match trainer.py
+# MUST match trainer.py exactly.
+#
+# IMPORTANT:
+# No canonical cluster ordering.
+# KMeans cluster IDs are preserved exactly as generated.
 # ============================================================
 
-def build_clusters(node_positions, n_clusters):
+def build_clusters(
+    node_positions,
+    n_clusters
+):
 
     kmeans = KMeans(
         n_clusters=n_clusters,
@@ -69,7 +75,9 @@ def build_clusters(node_positions, n_clusters):
 
     clusters = []
 
-    for cluster_id in range(n_clusters):
+    for cluster_id in range(
+        n_clusters
+    ):
 
         members = node_positions[
             labels == cluster_id
@@ -85,9 +93,12 @@ def build_clusters(node_positions, n_clusters):
         )
 
         clusters.append({
-            "centroid": centroid,
 
-            "size": len(members),
+            "centroid":
+                centroid,
+
+            "size":
+                len(members),
 
             "mean_radius":
                 distances_to_centroid.mean(),
@@ -105,7 +116,11 @@ def build_clusters(node_positions, n_clusters):
 # ============================================================
 # Build engineered RF features
 #
-# MUST match trainer.py
+# MUST match trainer.py exactly.
+#
+# IMPORTANT:
+# No canonical relay ordering.
+# No canonical cluster ordering.
 # ============================================================
 
 def build_relative_features(
@@ -131,15 +146,27 @@ def build_relative_features(
     # Scenario geometry
     # ========================================================
 
-    width = float(area_width)
-    height = float(area_height)
+    width = float(
+        area_width
+    )
+
+    height = float(
+        area_height
+    )
+
 
     if width <= 0.0 or height <= 0.0:
+
         raise ValueError(
             "Area dimensions must be greater than zero"
         )
 
-    area = width * height
+
+    area = (
+        width *
+        height
+    )
+
 
     area_diagonal = np.sqrt(
         width ** 2 +
@@ -148,95 +175,40 @@ def build_relative_features(
 
 
     # ========================================================
-    # Canonical relay ordering
+    # IMPORTANT:
     #
-    # Same ordering as trainer:
+    # DO NOT reorder relays.
     #
-    # 1. distance to sink
-    # 2. total distance to all relays
+    # relays[0] remains relay_0 from C++
+    # relays[1] remains relay_1 from C++
+    # etc.
     # ========================================================
-
-    relay_info = []
-
-    for relay in relays:
-
-        sink_distance = distance(
-            relay,
-            sink
-        )
-
-        total_relay_distance = sum(
-            distance(
-                relay,
-                other
-            )
-            for other in relays
-        )
-
-        relay_info.append({
-            "position":
-                relay,
-
-            "sink_distance":
-                sink_distance,
-
-            "total_relay_distance":
-                total_relay_distance
-        })
-
-
-    relay_info.sort(
-        key=lambda r: (
-            r["sink_distance"],
-            r["total_relay_distance"]
-        )
-    )
-
-
-    relays = [
-        r["position"]
-        for r in relay_info
-    ]
 
 
     # ========================================================
-    # Canonical cluster ordering
+    # IMPORTANT:
     #
-    # Same ordering as trainer:
+    # DO NOT reorder clusters.
     #
-    # 1. distance to sink
-    # 2. mean cluster radius
+    # cluster 0 remains KMeans cluster 0
+    # cluster 1 remains KMeans cluster 1
+    # etc.
     # ========================================================
 
-    ordered_clusters = []
-
-    for cluster in clusters:
-
-        cluster_copy = cluster.copy()
-
-        cluster_copy["sink_distance"] = distance(
-            cluster["centroid"],
-            sink
-        )
-
-        ordered_clusters.append(
-            cluster_copy
-        )
-
-
-    ordered_clusters.sort(
-        key=lambda c: (
-            c["sink_distance"],
-            c["mean_radius"]
-        )
-    )
+    ordered_clusters = clusters
 
 
     # ========================================================
     # Validate simulated communication range
     # ========================================================
 
+    simulated_range = float(
+        simulated_range
+    )
+
+
     if simulated_range <= 0.0:
+
         raise ValueError(
             "simulated_range must be greater than zero"
         )
@@ -246,10 +218,14 @@ def build_relative_features(
     # General scenario features
     # ========================================================
 
-    features["area"] = area
+    features["area"] = (
+        area
+    )
+
 
     features["aspect_ratio"] = (
-        width / height
+        width /
+        height
     )
 
 
@@ -260,7 +236,8 @@ def build_relative_features(
 
 
     features["node_density"] = (
-        total_nodes / area
+        total_nodes /
+        area
     )
 
 
@@ -304,10 +281,14 @@ def build_relative_features(
     # ========================================================
     # Relay <-> Relay
     #
-    # Normalized using calibrated relay-to-relay range
+    # Relay identity stays fixed.
+    #
+    # Normalized using calibrated relay-to-relay range.
     # ========================================================
 
-    for i in range(N_RELAYS):
+    for i in range(
+        N_RELAYS
+    ):
 
         for j in range(
             i + 1,
@@ -318,6 +299,7 @@ def build_relative_features(
                 relays[i],
                 relays[j]
             )
+
 
             features[
                 f"relay_{i}_{j}_relative_distance"
@@ -330,7 +312,7 @@ def build_relative_features(
     # ========================================================
     # Relay <-> Sink
     #
-    # Normalized by area diagonal
+    # Normalized by area diagonal.
     # ========================================================
 
     for i, relay in enumerate(
@@ -341,6 +323,7 @@ def build_relative_features(
             relay,
             sink
         )
+
 
         features[
             f"relay_{i}_sink_relative_distance"
@@ -364,7 +347,7 @@ def build_relative_features(
 
 
         # ----------------------------------------------------
-        # Population
+        # Relative cluster population
         # ----------------------------------------------------
 
         features[
@@ -412,6 +395,7 @@ def build_relative_features(
             sink
         )
 
+
         features[
             f"cluster_{cluster_idx}_sink_relative_distance"
         ] = (
@@ -422,6 +406,8 @@ def build_relative_features(
 
         # ----------------------------------------------------
         # Cluster <-> Relay
+        #
+        # Relay IDs remain fixed.
         # ----------------------------------------------------
 
         for relay_idx, relay in enumerate(
@@ -432,6 +418,7 @@ def build_relative_features(
                 centroid,
                 relay
             )
+
 
             features[
                 f"cluster_{cluster_idx}_relay_{relay_idx}_relative_distance"
@@ -448,7 +435,9 @@ def build_relative_features(
 # Prepare RF features from C++ packet
 # ============================================================
 
-def prepare_features(message):
+def prepare_features(
+    message
+):
 
     # Packet:
     #
@@ -489,6 +478,7 @@ def prepare_features(message):
 
 
     if "*," not in message:
+
         raise ValueError(
             "Packet does not contain '*,' separator"
         )
@@ -514,14 +504,22 @@ def prepare_features(message):
     ]
 
 
-    # Current packet has:
+    # 4:
+    # width, height, sink x, sink y
     #
-    # 4 scenario values
-    # 2 * N_RELAYS relay coordinates
-    # 6 relay network values
-    # 6 node network values
-    # 4 final network values
+    # 2 * relays:
+    # relay coordinates
     #
+    # 6:
+    # relay network configuration
+    #
+    # 6:
+    # node network configuration
+    #
+    # 4:
+    # propagation, packet length,
+    # interval, simulated range
+
     expected_raw_values = (
         4 +
         (2 * N_RELAYS) +
@@ -547,10 +545,17 @@ def prepare_features(message):
     # Area
     # ========================================================
 
-    area_width = raw_values[index]
+    area_width = raw_values[
+        index
+    ]
+
     index += 1
 
-    area_height = raw_values[index]
+
+    area_height = raw_values[
+        index
+    ]
+
     index += 1
 
 
@@ -558,10 +563,17 @@ def prepare_features(message):
     # Sink
     # ========================================================
 
-    sink_x = raw_values[index]
+    sink_x = raw_values[
+        index
+    ]
+
     index += 1
 
-    sink_y = raw_values[index]
+
+    sink_y = raw_values[
+        index
+    ]
+
     index += 1
 
 
@@ -576,17 +588,31 @@ def prepare_features(message):
 
     # ========================================================
     # Relays
+    #
+    # IMPORTANT:
+    # Preserve packet order exactly.
     # ========================================================
 
     relays = []
 
-    for _ in range(N_RELAYS):
 
-        relay_x = raw_values[index]
+    for relay_idx in range(
+        N_RELAYS
+    ):
+
+        relay_x = raw_values[
+            index
+        ]
+
         index += 1
 
-        relay_y = raw_values[index]
+
+        relay_y = raw_values[
+            index
+        ]
+
         index += 1
+
 
         relays.append(
             np.array(
@@ -603,22 +629,49 @@ def prepare_features(message):
     # Relay network configuration
     # ========================================================
 
-    relay_interface = raw_values[index]
+    # Currently still transmitted by C++,
+    # but not used by RF v2.
+
+    relay_interface = raw_values[
+        index
+    ]
+
     index += 1
 
-    relay_frequency = raw_values[index]
+
+    relay_frequency = raw_values[
+        index
+    ]
+
     index += 1
 
-    relay_bandwidth = raw_values[index]
+
+    relay_bandwidth = raw_values[
+        index
+    ]
+
     index += 1
 
-    relay_bitrate = raw_values[index]
+
+    relay_bitrate = raw_values[
+        index
+    ]
+
     index += 1
 
-    relay_power = raw_values[index]
+
+    # Used by RF
+    relay_power = raw_values[
+        index
+    ]
+
     index += 1
 
-    relay_traffic = raw_values[index]
+
+    relay_traffic = raw_values[
+        index
+    ]
+
     index += 1
 
 
@@ -626,22 +679,49 @@ def prepare_features(message):
     # Node network configuration
     # ========================================================
 
-    node_interface = raw_values[index]
+    # Currently still transmitted by C++,
+    # but not used by RF v2.
+
+    node_interface = raw_values[
+        index
+    ]
+
     index += 1
 
-    node_frequency = raw_values[index]
+
+    node_frequency = raw_values[
+        index
+    ]
+
     index += 1
 
-    node_bandwidth = raw_values[index]
+
+    node_bandwidth = raw_values[
+        index
+    ]
+
     index += 1
 
-    node_bitrate = raw_values[index]
+
+    node_bitrate = raw_values[
+        index
+    ]
+
     index += 1
 
-    node_power = raw_values[index]
+
+    # Used by RF
+    node_power = raw_values[
+        index
+    ]
+
     index += 1
 
-    node_traffic = raw_values[index]
+
+    node_traffic = raw_values[
+        index
+    ]
+
     index += 1
 
 
@@ -649,16 +729,31 @@ def prepare_features(message):
     # Remaining network configuration
     # ========================================================
 
-    propagation = raw_values[index]
+    propagation = raw_values[
+        index
+    ]
+
     index += 1
 
-    packet_length = raw_values[index]
+
+    packet_length = raw_values[
+        index
+    ]
+
     index += 1
 
-    interval = raw_values[index]
+
+    interval = raw_values[
+        index
+    ]
+
     index += 1
 
-    simulated_range = raw_values[index]
+
+    simulated_range = raw_values[
+        index
+    ]
+
     index += 1
 
 
@@ -666,16 +761,19 @@ def prepare_features(message):
     # Parse sensor nodes
     # ========================================================
 
-    node_values = node_part.split(",")
+    node_values = node_part.split(
+        ","
+    )
 
 
     if len(node_values) < 3:
+
         raise ValueError(
             "Invalid node section"
         )
 
 
-    # Last field is number of clusters
+    # Last value = number of clusters
     n_clusters = int(
         node_values[-1]
     )
@@ -714,7 +812,9 @@ def prepare_features(message):
         )
 
 
-    if n_clusters > len(node_positions):
+    if n_clusters > len(
+        node_positions
+    ):
 
         raise ValueError(
             "n_clusters cannot be greater than "
@@ -734,7 +834,9 @@ def prepare_features(message):
     # ========================================================
     # KMeans + cluster statistics
     #
-    # EXACTLY the same preprocessing used by trainer.py
+    # EXACTLY same preprocessing as trainer.
+    #
+    # NO sorting afterwards.
     # ========================================================
 
     clusters = build_clusters(
@@ -792,8 +894,6 @@ def prepare_features(message):
 
     # ========================================================
     # Validate feature names
-    #
-    # This is much safer than checking only feature count.
     # ========================================================
 
     generated_names = set(
@@ -817,6 +917,7 @@ def prepare_features(message):
             expected_names
         )
 
+
         raise ValueError(
             "Feature name mismatch. "
             f"Missing: {sorted(missing)} "
@@ -825,7 +926,7 @@ def prepare_features(message):
 
 
     # ========================================================
-    # Build RF input using EXACT training feature order
+    # Build RF input in EXACT training feature order
     # ========================================================
 
     ordered_values = [
@@ -835,7 +936,9 @@ def prepare_features(message):
 
 
     X = pd.DataFrame(
-        [ordered_values],
+        [
+            ordered_values
+        ],
         columns=feature_names
     )
 
@@ -852,7 +955,9 @@ def prepare_features(message):
 
 
     if np.isinf(
-        X.to_numpy(dtype=float)
+        X.to_numpy(
+            dtype=float
+        )
     ).any():
 
         raise ValueError(
@@ -867,15 +972,19 @@ def prepare_features(message):
 # Receive one complete packet
 # ============================================================
 
-def receive_packet(conn):
+def receive_packet(
+    conn
+):
 
     buffer = ""
+
 
     while True:
 
         data = conn.recv(
             4096
         )
+
 
         if not data:
             break
@@ -884,7 +993,7 @@ def receive_packet(conn):
         buffer += data.decode()
 
 
-        # C++ terminates every packet with '\n'
+        # C++ terminates packet with newline
         if "\n" in buffer:
             break
 
@@ -893,7 +1002,6 @@ def receive_packet(conn):
         return None
 
 
-    # Only use first complete packet
     message = buffer.split(
         "\n",
         1
