@@ -199,9 +199,25 @@ void generateDataset(TrainingScenario& scenario) {
         scenario.nodes.resize(scenario.n_nodes);
         LHS(scenario.nodes, scenario.n_nodes, scenario.area, rng);
         writeNodePositions(scenario.nodes, scenario.sink, "network/sensor_nodes.ini");
+        //std::cout << "area width: " << scenario.area.width << "\n";
+        //std::cout << "area height: " << scenario.area.height << "\n";
+        //std::cout << "sink x: " << scenario.sink.x << "\n";
+        //std::cout << "sink x: " << scenario.sink.y << "\n";
+        //std::cout << "power: " << scenario.network.power[NodeType::Relay] << "\n";
+        int retries = 0;
+        constexpr int MAX_RETRIES = 1000;
         do {
             LHS(relays, scenario.n_relays, scenario.area, rng);
-        } while (!isConnected(relays, scenario.sink, range));
+            ++retries;
+        } while (!isConnected(relays, scenario.sink, range) && retries < MAX_RETRIES);
+	if (retries == 1000) {
+	    while (!isConnected(relays, scenario.sink, range)) {
+	        for (auto& relay : relays) {
+	            relay.x = scenario.sink.x + 0.9 * (relay.x - scenario.sink.x);
+	            relay.y = scenario.sink.y + 0.9 * (relay.y - scenario.sink.y);
+	        }
+	    }
+	}
 
         std::cout << "Found initial relay positions!\n";
 
@@ -239,7 +255,12 @@ void generateDataset(TrainingScenario& scenario) {
             	}
             	
             	if (!connected) {
-            	    throw std::runtime_error ("Could not generate a connected relay sample");
+            	    while (!isConnected(relays, scenario.sink, range)) {
+	                for (auto& relay : relays) {
+	            	    relay.x = scenario.sink.x + 0.9 * (relay.x - scenario.sink.x);
+	                    relay.y = scenario.sink.y + 0.9 * (relay.y - scenario.sink.y);
+	                }
+	            }
             	}
             }
 

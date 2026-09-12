@@ -42,20 +42,33 @@ void Swarm::setWeights(double w, double c1, double c2) {
 }
 
 void Swarm::initRelays(const Dimensions& area, std::mt19937& rng) {
-    std::cout << "Before init relays\n";
 
+    constexpr int MAX_RETRIES = 1000;
     for (auto& p: particles) {
+    
+        int retries = 0;    
         do {
             LHS(p.getPositions(), n_relays, area, rng);
-        } while (!isConnected(p.getPositions(), sink, relay_range));
+            ++retries;
+        } while (!isConnected(p.getPositions(), sink, relay_range) && retries < MAX_RETRIES);
+	if (retries == 1000) {
+	    while (!isConnected(p.getPositions(), sink, relay_range)) {
+	        for (auto& relay : p.getPositions()) {
+	            relay.x = sink.x + 0.9 * (relay.x - sink.x);
+	            relay.y = sink.y + 0.9 * (relay.y - sink.y);
+	        }
+	    }
+	}
+	
+        /*do {
+            LHS(p.getPositions(), n_relays, area, rng);
+        } while (!isConnected(p.getPositions(), sink, relay_range));*/
 
         for (auto& v: p.getVelocities()) {
             v.x = 0;
             v.y = 0;
         }
     }
-
-    std::cout << "After init relays\n";
 }
 
 void Swarm::logFirstRelay(std::ofstream& log) {
@@ -65,7 +78,7 @@ void Swarm::logFirstRelay(std::ofstream& log) {
     }
 }
 
-bool Particle::compareBest(const double fitness) { // pq aqui PRECISA retornar referenica?
+bool Particle::compareBest(const double fitness) {
 
     if (fitness > personal_best.fitness) {
         personal_best.relay_positions = relay_positions;
