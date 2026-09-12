@@ -13,14 +13,14 @@
 
 double getPower(int id) {
     switch (id) {
-        case 0: // Low
-            return 0.0001;   // 0.1 mW = -10 dBm
+        case 0: // Low: -5 dBm
+            return 0.000316;  // 0.316 mW
 
-        case 1: // Medium
-            return 0.001;    // 1 mW = 0 dBm
+        case 1: // Medium: 0 dBm
+            return 0.001;     // 1.0 mW
 
-        case 2: // High / INET baseline
-            return 0.00224;  // 2.24 mW ≈ +3.5 dBm
+        case 2: // High: INET baseline, ~+3.5 dBm
+            return 0.00224;   // 2.24 mW
 
         default:
             throw std::runtime_error(

@@ -182,8 +182,8 @@ void configNetwork(Scenario& scenario) {
     scenario.network = parseNetworkConfig(scenario.network_config, "scenarios");
     double estimated_range = 0.0;
 
-    for (double distance = 10.0; distance <= 300.0; distance += 10.0) {
-        constexpr int repetitions = 3;
+    for (double distance = 5.0; distance <= 300.0; distance += 5.0) {
+        constexpr int repetitions = 2;
 
         double total_pdr = 0.0;
 

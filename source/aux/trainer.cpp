@@ -132,7 +132,7 @@ void generateDataset(TrainingScenario& scenario) {
 
     for (int i = 0; i < num_of_powers; ++i) {
         scenario.network.power[NodeType::Relay] = getPower(i);
-        for (double distance = 10.0; distance <= 300.0; distance += 10.0) {
+        for (double distance = 5.0; distance <= 300.0; distance += 5.0) {
             writeDistanceExperimentIni(scenario.network, NodeType::Relay, NodeType::Relay, distance, "network/range_test.ini");
             std::filesystem::remove("network/range_test.sca");
             int result = std::system(
@@ -202,6 +202,8 @@ void generateDataset(TrainingScenario& scenario) {
         do {
             LHS(relays, scenario.n_relays, scenario.area, rng);
         } while (!isConnected(relays, scenario.sink, range));
+
+        std::cout << "Found initial relay positions!\n";
 
         writeNodesScenario(nodes_file, i, scenario);
 
