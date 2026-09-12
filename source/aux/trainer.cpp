@@ -163,7 +163,7 @@ void generateDataset(TrainingScenario& scenario) {
         
     }
 
-    for (int i = 0; i < 800; ++i) {
+    for (int i = 0; i < 1000; ++i) {
         std::cout << ">> Seed: " << i << "\n";
         std::mt19937 rng(scenario.seed*i);
         
