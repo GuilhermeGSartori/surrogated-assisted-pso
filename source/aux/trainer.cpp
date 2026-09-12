@@ -110,13 +110,9 @@ void writeDatasetRow(std::ofstream& file, std::size_t scenario_id, std::size_t s
         << '\n';
 }
 
-void generateDataset(Scenario& scenario) {
+void generateDataset(TrainingScenario& scenario) {
 
     FixedSizeVector<Coordinates> relays(scenario.n_relays);
-
-    configNetwork(scenario);
-
-    double range = scenario.network.simulated_range.at({NodeType::Relay, NodeType::Relay});
 
     std::ofstream dataset("../surrogate_model/data/dataset.csv");
     std::ofstream nodes_file("../surrogate_model/data/nodes.csv");
@@ -130,10 +126,77 @@ void generateDataset(Scenario& scenario) {
     writeDatasetHeader(dataset, scenario.n_relays);
     writeNodesHeader(nodes_file);
 
-    for (int i = 0; i < 400; ++i) {
-        std::cout << ">> Seed: " << i << "\n";
+    scenario.network = parseNetworkConfig(scenario.network_config, "scenarios");
 
+    std::vector<double> simulated_ranges(num_of_powers);
+
+    for (int i = 0; i < num_of_powers; ++i) {
+        scenario.network.power[NodeType::Relay] = getPower(i);
+        for (double distance = 10.0; distance <= 300.0; distance += 10.0) {
+            writeDistanceExperimentIni(scenario.network, NodeType::Relay, NodeType::Relay, distance, "network/range_test.ini");
+            std::filesystem::remove("network/range_test.sca");
+            int result = std::system(
+                                        "opp_run "
+                                        "-u Cmdenv "
+                                        "-n network:$INET_ROOT/src "
+                                        "-l $INET_ROOT/src/INET "
+                                        "-f network/range_test.ini "
+                                        "> /dev/null"
+                                    );
+            if (result != 0)
+                throw std::runtime_error("OMNeT++ simulation failed");
+            double received = readScalar("network/range_test.sca", "RangeCalibration.rx.app[0]", "packetReceived:count");
+            double sent = readScalar("network/range_test.sca", "RangeCalibration.tx.app[0]", "packetSent:count");
+            if (sent == 0) {
+                throw std::runtime_error(
+                    "Distance experiment sent zero packets"
+                );
+            }
+            const double pdr = static_cast<double>(received) / sent;
+            if (pdr >= 0.95) {
+                simulated_ranges[i] = distance;
+            }   
+            else {
+                break;
+            }
+        }
+        
+    }
+
+    for (int i = 0; i < 800; ++i) {
+        std::cout << ">> Seed: " << i << "\n";
         std::mt19937 rng(scenario.seed*i);
+        
+        std::uniform_real_distribution<double> area_width_dist(scenario.area_min.width, scenario.area_max.width);
+        std::uniform_real_distribution<double> area_height_dist(scenario.area_min.height, scenario.area_max.height);
+        std::uniform_int_distribution<int> node_dist(scenario.n_nodes_min,scenario.n_nodes_max);
+        std::uniform_int_distribution<int> power_relay_dist(0, 2);
+        std::uniform_int_distribution<int> power_node_dist(0, 2);
+        //std::uniform_int_distribution<unsigned int> propagation_dist(0, 1);
+
+        scenario.area.height = area_height_dist(rng);
+        scenario.area.width = area_width_dist(rng);
+        scenario.n_nodes = node_dist(rng);
+
+        //scenario.network.propagation = propagation_dist(rng);
+
+        int selected_relay_power = power_relay_dist(rng);
+        int selected_node_power = power_node_dist(rng);
+        scenario.network.power[NodeType::Relay] = getPower(selected_relay_power);
+        scenario.network.power[NodeType::Node] = getPower(selected_node_power);
+
+        scenario.network.simulated_range[{NodeType::Relay, NodeType::Relay}] = simulated_ranges[selected_relay_power];
+
+        std::uniform_real_distribution<double> sink_x_dist(0.0, scenario.area.width);
+        std::uniform_real_distribution<double> sink_y_dist(0.0, scenario.area.height);
+
+        scenario.sink.x = sink_x_dist(rng);
+        scenario.sink.y = sink_y_dist(rng);
+   
+        writeSimulationIni(scenario.n_nodes, scenario.n_relays, scenario.network, "network/omnetpp.ini");
+        double range = scenario.network.simulated_range.at({NodeType::Relay, NodeType::Relay});
+
+        scenario.nodes.resize(scenario.n_nodes);
         LHS(scenario.nodes, scenario.n_nodes, scenario.area, rng);
         writeNodePositions(scenario.nodes, scenario.sink, "network/sensor_nodes.ini");
         do {
@@ -146,7 +209,7 @@ void generateDataset(Scenario& scenario) {
 
         std::uniform_real_distribution<double> noise(-80.0, 80.0);
         
-        for (int j = 0; j < 20; ++j) {
+        for (int j = 0; j < 10; ++j) {
             std::cout << ":>>>> Simulation: " << j << "\n"; 
             
             if (j == 0) {
@@ -181,8 +244,6 @@ void generateDataset(Scenario& scenario) {
             double fitness = runSimulation(relays, scenario);
 
             writeDatasetRow(dataset, i, j, scenario, relays, fitness);
-            
-            //relays = initial_relays;
         }
 
     }

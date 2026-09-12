@@ -210,12 +210,18 @@ struct Scenario {
 
     Method backend;
 
-    std::vector<int> packet_timeouts;
-
     unsigned int network_config;
 
     Network network;
 };
+
+struct TrainingScenario : public Scenario {
+    std::size_t n_nodes_min = 0;
+    std::size_t n_nodes_max = 0;
+    Dimensions area_min;
+    Dimensions area_max;
+};
+
 
 void configNetwork(Scenario& scenario);
 
@@ -226,6 +232,7 @@ void writeRelayPositions(const FixedSizeVector<Coordinates>& relays, const std::
 Method parseMethod(const std::string& method);
 
 Scenario parseScenario(const std::string& filename);
+TrainingScenario parseTrainingScenario(const std::string& filename);
 
 std::ofstream createLogFile();
 

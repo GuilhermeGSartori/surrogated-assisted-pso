@@ -144,13 +144,7 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
             fitness = runSimulation(p.getPositions(), scenario);
         }
         else if (scenario.backend == Method::Surrogate){
-            //std::cout << "Before connection\n";
             std::string packet = generatePacket(p.getPositions(), scenario);
-            //std::cout << "Generated\n";
-            
-            //std::cout << "packet size: " << packet.size() << '\n';
-            //std::cout << "packet capacity: " << packet.capacity() << '\n';
-            //std::cout << "nodes size: " << scenario.nodes.size() << '\n';
             
             appendNodes(scenario.nodes, packet, scenario.n_clusters);
             //std::cout << "Appended\n";
@@ -161,11 +155,6 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
             else
             	fitness = 0.0;
             
-            //std::cout << "Relay connected: " << connected << "\n";
-            //std::cout << "Surrogate fitness: " << fitness << "\n";
-            //double sim_fitness = runSimulation(p.getPositions(), scenario);
-            //std::cout << "Simulation fitness: " << sim_fitness << "\n";
-            //std::cout << "After connection\n";
             if (fitness == -1.0) {
                 std::cout << "Error\n";
             }
@@ -239,7 +228,6 @@ const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, s
             log << pos.x << ", " << pos.y << '\n';
         }
 
-        // preciso tambem armazenar esses cenarios em dataset
         int particle = 1;
         for (auto& p: swarm.getParticles()) {
             p.calculateVelocity(swarm.getWeights(), swarm.getGlobalBest(), rng);
@@ -286,7 +274,6 @@ void logHeader(std::ofstream& log, const Swarm& swarm, const Scenario& scenario)
     log << "Sink: " << scenario.sink.x << ", " << scenario.sink.y << '\n';
 
     log << "Simulated Relay range: " << swarm.getRelayRange() << '\n'; 
-    //log << "Simulated Node range: " << swarm.getNodeRange() << '\n';
 
     Weights weights = swarm.getWeights();
     

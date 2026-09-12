@@ -10,6 +10,8 @@
 #include <string_view>
 #include <filesystem>
 
+#define num_of_powers 3
+
 enum class NodeType {
     Node,
     Relay
@@ -45,6 +47,8 @@ Network parseNetworkConfig(unsigned int config_number, const std::filesystem::pa
 void writeDistanceExperimentIni(const Network& network, NodeType transmitter_type, NodeType receiver_type, double distance, const std::filesystem::path& output_file);
 
 void writeSimulationIni(std::size_t num_nodes, std::size_t num_relays, Network network, const std::filesystem::path& output_file);
+
+double getPower(int id);
 
 std::string getTrafficName(unsigned int id);
 

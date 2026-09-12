@@ -11,6 +11,25 @@
 
 #include "network_files.h"
 
+double getPower(int id) {
+    switch (id) {
+        case 0: // Low
+            return 0.0001;   // 0.1 mW = -10 dBm
+
+        case 1: // Medium
+            return 0.001;    // 1 mW = 0 dBm
+
+        case 2: // High / INET baseline
+            return 0.00224;  // 2.24 mW ≈ +3.5 dBm
+
+        default:
+            throw std::runtime_error(
+                "Unknown power ID: " +
+                std::to_string(id)
+            );
+    }
+}
+
 std::string getInterfaceName(unsigned int id) {
     switch (id) {
         case 0:
@@ -511,9 +530,9 @@ std::vector<std::string> splitCSV(const std::string& line) {
 }
 
 Network parseNetworkConfig(unsigned int config_number, const std::filesystem::path& network_directory) {
-    const std::filesystem::path file_path =
-        network_directory /
-        ("network_" + std::to_string(config_number) + ".csv");
+
+    
+    const std::filesystem::path file_path = network_directory / ("network_" + std::to_string(config_number) + ".csv");
 
     std::ifstream file(file_path);
 

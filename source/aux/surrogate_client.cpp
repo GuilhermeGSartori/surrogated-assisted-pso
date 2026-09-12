@@ -8,10 +8,6 @@
 #include <sys/socket.h>
 
 void appendNodes(const std::vector<Coordinates>& nodes, std::string& packet, int n_clusters) {
-
-    //std::cout << "ENTER packet size: " << packet.size() << '\n';
-    //std::cout << "ENTER packet capacity: " << packet.capacity() << '\n';
-    //std::cout << "ENTER nodes size: " << nodes.size() << '\n';
     
     packet += "*,";
     for (const auto& c : nodes) {
@@ -89,10 +85,7 @@ double sendPacket(const std::string& packet) {
 
     // Wait for response
     char buffer[1024];
-
-    //std::cout << "Waiting for response!\n";
     ssize_t received = recv(clientSocket, buffer,  sizeof(buffer) - 1, 0);
-    //std::cout << "Done!\n";
  
     if (received <= 0) {
         perror("recv");

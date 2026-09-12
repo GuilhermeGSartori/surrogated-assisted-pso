@@ -77,7 +77,7 @@ int main(int argc, char* argv[]) {
     if (argc == 3) {
         std::string_view mode = argv[1];
         if (mode == "training") {
-            Scenario scenario = parseScenario(argv[2]);
+            TrainingScenario scenario = parseTrainingScenario(argv[2]);
             generateDataset(scenario);
 
             return 0;

@@ -25,6 +25,66 @@ Method parseMethod(const std::string& method) {
 
 }
 
+TrainingScenario parseTrainingScenario(const std::string& filename) {
+    const std::filesystem::path file_path =
+        "scenarios/" + filename + ".csv";
+        
+    std::ifstream file(file_path);
+
+    if (!file.is_open()) {
+        throw std::runtime_error("Could not open scenario file: " + filename);
+    }
+
+    std::string line;
+
+    // Skip header
+    if (!std::getline(file, line)) {
+        throw std::runtime_error("Scenario file is empty");
+    }
+
+    // Read scenario data
+    if (!std::getline(file, line)) {
+        throw std::runtime_error("Scenario file has no scenario data");
+    }
+
+    std::stringstream ss(line);
+    std::string value;
+
+    TrainingScenario scenario{};
+
+    std::getline(ss, value, ',');
+    scenario.n_relays = std::stoul(value);
+
+    std::getline(ss, value, ',');
+    scenario.n_clusters = std::stoul(value);
+
+    std::getline(ss, value, ',');
+    scenario.seed = std::stoul(value);
+
+    std::getline(ss, value, ',');
+    scenario.n_nodes_min = std::stoul(value);
+
+    std::getline(ss, value, ',');
+    scenario.n_nodes_max = std::stoul(value);
+
+    std::getline(ss, value, ',');
+    scenario.area_min.width = std::stoul(value);
+
+    std::getline(ss, value, ',');
+    scenario.area_max.width = std::stoul(value);
+
+    std::getline(ss, value, ',');
+    scenario.area_min.height = std::stoul(value);
+
+    std::getline(ss, value, ',');
+    scenario.area_max.height = std::stoul(value);
+
+    std::getline(ss, value, ',');
+    scenario.network_config = std::stoul(value);
+
+    return scenario;
+}
+
 Scenario parseScenario(const std::string& filename) {
     const std::filesystem::path file_path =
         "scenarios/" + filename + ".csv";
@@ -233,8 +293,6 @@ double runSimulation(const FixedSizeVector<Coordinates>& relays, const Scenario&
                                 "-f network/relay_positions.ini "
                                 "> /dev/null"
                             );
-
-    //int result = std::system("./wsn_sim -u Cmdenv -f network/omnetpp.ini -f network/sensor_nodes.ini -f network/pso_positions.ini");
 
     if (result != 0)
         throw std::runtime_error("OMNeT++ simulation failed");
