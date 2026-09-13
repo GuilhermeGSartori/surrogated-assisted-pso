@@ -75,10 +75,10 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
     return 0;
 }
 
-int initRandom(int argc, char* argv[], Scenario& scenario) {
+int initLHSHeuristic(int argc, char* argv[], Scenario& scenario) {
 
     if (argc != 5) {
-        std::cerr << "Usage: ./surrogated-assisted-optimizer random <scenario> <method> <n_iterations>\n";
+        std::cerr << "Usage: ./surrogated-assisted-optimizer lhs <scenario> <method> <n_iterations>\n";
         return 1;
     }
 
@@ -146,6 +146,105 @@ int initRandom(int argc, char* argv[], Scenario& scenario) {
             else
             	fitness = 0.0;
             
+            if (fitness == -1.0) {
+                std::cout << "Error\n";
+            }
+        }
+
+        if (fitness > best_fitness) {
+            best_fitness = fitness;
+            best_relays = relays;
+            log << "ITERATION: " << i << "\n";
+            log << "new best fitness: " << best_fitness << "\n";
+        }
+    }
+    auto end = std::chrono::steady_clock::now();
+
+    std::chrono::duration<double> elapsed = end - start;
+    
+    std::cout << "Final Evaluation Time: " << elapsed.count() << " seconds\n";
+    
+    log << "Final Evaluation Time: " << elapsed.count() << " seconds\n";
+
+    double final_fitness = runSimulation(best_relays, scenario);
+    log << "Final global best fitness: " << final_fitness << "\n";
+    std::cout << "Final global best fitness: " << final_fitness << "\n";
+    log << "Final global best relays:\n";
+    final_log << "Final global best relays:\n";
+    
+    for (const auto& pos: best_relays) {
+        log << pos.x << ", " << pos.y << '\n';
+        final_log << pos.x << ", " << pos.y << '\n';
+    }    
+    return 0;
+}
+
+int initNaive(int argc, char* argv[], Scenario& scenario) {
+
+    if (argc != 5) {
+        std::cerr << "Usage: ./surrogated-assisted-optimizer naive <scenario> <method> <n_iterations>\n";
+        return 1;
+    }
+
+    const double range = scenario.network.simulated_range.at({NodeType::Relay, NodeType::Relay});
+
+    const unsigned int n_iterations = static_cast<unsigned int>(std::stoul(argv[4]));
+
+    std::mt19937 rng(scenario.seed);
+
+    LHS(scenario.nodes, scenario.n_nodes, scenario.area, rng);
+
+    writeNodePositions(scenario.nodes, scenario.sink, "network/sensor_nodes.ini");
+
+    FixedSizeVector<Coordinates> relays(scenario.n_relays);
+    FixedSizeVector<Coordinates> best_relays(scenario.n_relays);
+
+    double best_fitness = -std::numeric_limits<double>::infinity();
+
+    std::ofstream log = createLogFile();
+    std::ofstream final_log("logs/final_log.log");
+
+    final_log << "Area: "
+        << scenario.area.width << " x "
+        << scenario.area.height << '\n';
+
+    final_log << "Nodes Positions: \n";
+    logNodes(final_log, scenario);
+
+    std::uniform_real_distribution<double> x_dist(0.0, scenario.area.width);
+    std::uniform_real_distribution<double> y_dist(0.0, scenario.area.height);
+    constexpr unsigned int MAX_RETRIES = 100000;
+
+    auto start = std::chrono::steady_clock::now();
+    for (unsigned int i = 0; i < n_iterations; ++i) {
+
+        unsigned int retries = 0;
+
+        do {
+            for (auto& relay : relays) {
+                relay.x = x_dist(rng);
+                relay.y = y_dist(rng);
+            }
+
+            ++retries;
+
+        } while (!isConnected(relays, scenario.sink, range) &&  retries < MAX_RETRIES);
+
+        if (!isConnected(relays, scenario.sink, range)) {
+            std::cerr << "Could not generate connected random solution\n";
+            return 1;
+        }
+        
+        double fitness = 0.0;
+        if (scenario.backend == Method::Simulation) {
+            fitness = runSimulation(relays, scenario);
+        }
+        else if (scenario.backend == Method::Surrogate) {
+            std::string packet = generatePacket(relays, scenario);
+            
+            appendNodes(scenario.nodes, packet, scenario.n_clusters);
+            fitness = sendPacket(packet);
+
             if (fitness == -1.0) {
                 std::cout << "Error\n";
             }
