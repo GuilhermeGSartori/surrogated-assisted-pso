@@ -68,6 +68,8 @@ echo "=== Plotting simulation nodes ==="
 
 cd "$RUN_DIR"
 
+source ../../.venv/bin/activate
+
 python3 ../plot.py "$OUTPUT_PLOT"
 
 echo "Plot saved to: $OUTPUT_PLOT"

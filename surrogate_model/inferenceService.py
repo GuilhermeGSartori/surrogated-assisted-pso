@@ -725,9 +725,9 @@ with socket.socket(
                 )[0]
 
 
-                print(
-                    f"Prediction: {prediction}"
-                )
+                #print(
+                #    f"Prediction: {prediction}"
+                #)
 
 
                 # ============================================

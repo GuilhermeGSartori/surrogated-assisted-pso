@@ -59,6 +59,8 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
     std::chrono::duration<double> elapsed = end - start;
     
     std::cout << "Final Evaluation Time: " << elapsed.count() << " seconds\n";
+    
+    log << "Final Evaluation Time: " << elapsed.count() << " seconds\n";
 
     log << "Final global best fitness: " << global_best.fitness << "\n";
     std::cout << "Final global best fitness: " << global_best.fitness << "\n";

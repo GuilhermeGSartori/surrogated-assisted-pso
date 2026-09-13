@@ -32,15 +32,6 @@ fi
 
 RUN_DIR="$(pwd)"
 
-SCRIPT_NAME="$(basename "$0")"
-SCRIPT_BASE="${SCRIPT_NAME%.*}"
-
-OUTPUT_DIR="$RUN_DIR/$SCRIPT_BASE"
-OUTPUT_PLOT="$OUTPUT_DIR/$SCRIPT_BASE.png"
-
-mkdir -p "$OUTPUT_DIR"
-
-
 echo "=== Building project ==="
 
 cd ../..

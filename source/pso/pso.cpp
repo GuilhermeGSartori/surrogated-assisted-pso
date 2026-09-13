@@ -140,7 +140,7 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
     static int count = 1;
 
     for (auto& p: swarm.getParticles()) {
-        std::cout << ">>>> Particle: " << particle << "\n";
+        //std::cout << ">>>> Particle: " << particle << "\n";
         
         log << "-------------\n"
             << "Particle: " << particle << ":\n"
@@ -174,7 +174,7 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
         }
         else if (scenario.backend == Method::Hybrid) {
             if (count == sim_proportion) {
-            	std::cout << "SIMULATION!!\n";
+            	//std::cout << "SIMULATION!!\n";
                 fitness = runSimulation(p.getPositions(), scenario);
             }
             else {
@@ -193,7 +193,7 @@ void evaluateSolution(Swarm& swarm, const Scenario& scenario, std::ofstream& log
                 }
             }
             
-            std::cout << "fitness: " << fitness << "\n";
+           //std::cout << "fitness: " << fitness << "\n";
         }
         else {
             fitness = 0.0;
@@ -228,7 +228,7 @@ const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, s
 
     do
     {
-        std::cout << ">> Iteration: " << iterations+1 << "\n";
+        //std::cout << ">> Iteration: " << iterations+1 << "\n";
         log << "-- ITERATION " << iterations << " --\n";
         evaluateSolution(swarm, scenario, log);
 
@@ -261,6 +261,7 @@ const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, s
     if (scenario.backend == Method::Surrogate || scenario.backend == Method::Hybrid) {
     	double fitness = runSimulation(swarm.getGlobalBest().relay_positions, scenario);
     	std::cout << "Simulation of the best surrogate solution results: " << fitness << "\n";
+    	log << "Simulation of the best surrogate solution results: " << fitness << "\n";
     }
 
     return swarm.getGlobalBest();
