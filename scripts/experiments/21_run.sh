@@ -56,7 +56,7 @@ echo
 
 echo "=== Running optimizer with simulation ==="
 
-./surrogated-assisted-optimizer lhs 11 0 200
+./surrogated-assisted-optimizer naive 2 0 200
 
 echo
 
@@ -99,7 +99,7 @@ cd ../../build
 
 echo "=== Running optimizer surrogate ==="
 
-./surrogated-assisted-optimizer lhs 11 1 200
+./surrogated-assisted-optimizer naive 2 1 200
 
 echo
 
