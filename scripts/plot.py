@@ -134,9 +134,6 @@ def plot_nodes(
     node_x = [node[0] for node in nodes]
     node_y = [node[1] for node in nodes]
 
-    first_relay_x = [relay[0] for relay in first_relays]
-    first_relay_y = [relay[1] for relay in first_relays]
-
     final_relay_x = [relay[0] for relay in final_relays]
     final_relay_y = [relay[1] for relay in final_relays]
 
@@ -161,15 +158,19 @@ def plot_nodes(
     # Initial relay positions
     # ============================================================
 
-    plt.scatter(
-        first_relay_x,
-        first_relay_y,
-        color="green",
-        marker="x",
-        s=100,
-        linewidths=2,
-        label="Initial Relays"
-    )
+    if first_relays:
+        first_relay_x = [relay[0] for relay in first_relays]
+        first_relay_y = [relay[1] for relay in first_relays]
+
+        plt.scatter(
+            first_relay_x,
+            first_relay_y,
+            color="green",
+            marker="x",
+            s=100,
+            linewidths=2,
+            label="Initial Relays"
+        )
 
 
     # ============================================================
@@ -256,11 +257,10 @@ def main():
 
 
     if not first_relays:
-
-        raise RuntimeError(
-            "No initial relay positions found in log."
-        )
-
+        print(
+            "No initial relay positions found. "
+            "Plotting without them."
+    )
 
     if not final_relays:
 

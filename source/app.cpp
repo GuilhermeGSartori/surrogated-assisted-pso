@@ -74,6 +74,97 @@ int initPso(int argc, char* argv[], Scenario& scenario) {
     return 0;
 }
 
+int initRandom(int argc, char* argv[], Scenario& scenario) {
+
+    if (argc != 5) {
+        std::cerr << "Usage: ./surrogated-assisted-optimizer random <scenario> <method> <n_iterations>\n";
+        return 1;
+    }
+
+    const double range = scenario.network.simulated_range.at({NodeType::Relay, NodeType::Relay});
+
+    const unsigned int n_iterations = static_cast<unsigned int>(std::stoul(argv[4]));
+
+    std::mt19937 rng(scenario.seed);
+
+    LHS(scenario.nodes, scenario.n_nodes, scenario.area, rng);
+
+    writeNodePositions(scenario.nodes, scenario.sink, "network/sensor_nodes.ini");
+
+    FixedSizeVector<Coordinates> relays(scenario.n_relays);
+    FixedSizeVector<Coordinates> best_relays(scenario.n_relays);
+
+    constexpr int MAX_RETRIES = 1000;
+    double best_fitness = -std::numeric_limits<double>::infinity();
+
+    std::ofstream log = createLogFile();
+    std::ofstream final_log("logs/final_log.log");
+
+    final_log << "Area: "
+        << scenario.area.width << " x "
+        << scenario.area.height << '\n';
+
+    final_log << "Nodes Positions: \n";
+    logNodes(final_log, scenario);
+
+    auto start = std::chrono::steady_clock::now();
+    for (unsigned int i = 0; i < n_iterations; ++i) {
+
+        int retries = 0;
+
+        do {
+            LHS(relays, scenario.n_relays, scenario.area, rng);
+
+            ++retries;
+
+        } while (!isConnected(relays, scenario.sink, range) && retries < MAX_RETRIES);
+
+        if (!isConnected(relays, scenario.sink, range)) {
+
+            while (!isConnected(relays, scenario.sink, range)) {
+                for (auto& relay : relays) {
+                    relay.x = scenario.sink.x + 0.9 * (relay.x - scenario.sink.x);
+
+                    relay.y = scenario.sink.y + 0.9 * (relay.y - scenario.sink.y);
+                }
+            }
+        }
+
+        double fitness = 0.0;
+        if (scenario.backend == Method::Simulation) {
+            fitness = runSimulation(relays, scenario);
+        }
+        else if (scenario.backend == Method::Surrogate) {
+            return 1;
+        }
+
+        if (fitness > best_fitness) {
+            best_fitness = fitness;
+            best_relays = relays;
+            log << "ITERATION: " << i << "\n";
+            log << "new best fitness: " << best_fitness << "\n";
+        }
+    }
+    auto end = std::chrono::steady_clock::now();
+
+    std::chrono::duration<double> elapsed = end - start;
+    
+    std::cout << "Final Evaluation Time: " << elapsed.count() << " seconds\n";
+    
+    log << "Final Evaluation Time: " << elapsed.count() << " seconds\n";
+
+    log << "Final global best fitness: " << best_fitness << "\n";
+    std::cout << "Final global best fitness: " << best_fitness << "\n";
+    log << "Final global best relays:\n";
+    final_log << "Final global best relays:\n";
+    
+    for (const auto& pos: best_relays) {
+        log << pos.x << ", " << pos.y << '\n';
+        final_log << pos.x << ", " << pos.y << '\n';
+    }    
+    return 0;
+}
+
 int main(int argc, char* argv[]) {
 
     if (argc == 3) {
