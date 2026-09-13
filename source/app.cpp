@@ -9,6 +9,7 @@
 #include "pso.h"
 #include "app.h"
 #include "trainer.h"
+#include "surrogate_client.h"
 
 int initPso(int argc, char* argv[], Scenario& scenario) {
     if (argc != 8) {
@@ -135,7 +136,19 @@ int initRandom(int argc, char* argv[], Scenario& scenario) {
             fitness = runSimulation(relays, scenario);
         }
         else if (scenario.backend == Method::Surrogate) {
-            return 1;
+            std::string packet = generatePacket(relays, scenario);
+            
+            appendNodes(scenario.nodes, packet, scenario.n_clusters);
+            bool connected = isConnected(relays, scenario.sink, scenario.network.simulated_range.at({NodeType::Relay, NodeType::Relay}));
+            
+            if (connected)
+            	fitness = sendPacket(packet);
+            else
+            	fitness = 0.0;
+            
+            if (fitness == -1.0) {
+                std::cout << "Error\n";
+            }
         }
 
         if (fitness > best_fitness) {
