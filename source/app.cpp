@@ -166,8 +166,9 @@ int initRandom(int argc, char* argv[], Scenario& scenario) {
     
     log << "Final Evaluation Time: " << elapsed.count() << " seconds\n";
 
-    log << "Final global best fitness: " << best_fitness << "\n";
-    std::cout << "Final global best fitness: " << best_fitness << "\n";
+    double final_fitness = runSimulation(best_relays, scenario);
+    log << "Final global best fitness: " << final_fitness << "\n";
+    std::cout << "Final global best fitness: " << final_fitness << "\n";
     log << "Final global best relays:\n";
     final_log << "Final global best relays:\n";
     
