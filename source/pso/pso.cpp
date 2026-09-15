@@ -250,6 +250,8 @@ const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, s
                 log << pos.x << ", " << pos.y << '\n';
             }           
             p.updatePositions(scenario.area);
+            
+            repairConnectivity(p.getPositions(), scenario.sink, scenario.network.simulated_range.at({NodeType::Relay, NodeType::Relay}));
 
             ++particle;
         }

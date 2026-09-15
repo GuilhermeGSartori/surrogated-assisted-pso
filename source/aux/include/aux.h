@@ -304,3 +304,19 @@ bool isConnected(const Container& nodes, const Coordinates& sink, double relay_r
 
     return true;
 }
+
+template <typename Container>
+bool repairConnectivity(Container& relays, const Coordinates& sink, double range) {
+    bool repaired = false;
+    
+    while (!isConnected(relays, sink, range)) {
+    	repaired = true;
+    	
+    	for (auto& relay : relays) {
+ 	    relay.x = sink.x + 0.9 * (relay.x - sink.x);
+ 	    relay.y = sink.y + 0.9 * (relay.y - sink.y);
+ 	}   	
+    }
+    
+    return repaired;
+}
