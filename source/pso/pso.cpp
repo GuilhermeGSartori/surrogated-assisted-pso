@@ -43,22 +43,31 @@ void Swarm::setWeights(double w, double c1, double c2) {
 
 void Swarm::initRelays(const Dimensions& area, std::mt19937& rng) {
 
-    constexpr int MAX_RETRIES = 1000;
+    //constexpr int MAX_RETRIES = 1000;
+    std::uniform_real_distribution<double> x_dist(0.0, area.width);
+    std::uniform_real_distribution<double> y_dist(0.0, area.height);
     for (auto& p: particles) {
+
+        do {
+            for (auto& relay : p.getPositions()) {
+                relay.x = x_dist(rng);
+                relay.y = y_dist(rng);
+            }
+        } while (!isConnected(p.getPositions(), sink, relay_range));
     
-        int retries = 0;    
+        /*int retries = 0;    
         do {
             LHS(p.getPositions(), n_relays, area, rng);
             ++retries;
         } while (!isConnected(p.getPositions(), sink, relay_range) && retries < MAX_RETRIES);
-	if (retries == 1000) {
-	    while (!isConnected(p.getPositions(), sink, relay_range)) {
-	        for (auto& relay : p.getPositions()) {
-	            relay.x = sink.x + 0.9 * (relay.x - sink.x);
-	            relay.y = sink.y + 0.9 * (relay.y - sink.y);
+	    if (retries == 1000) {
+	        while (!isConnected(p.getPositions(), sink, relay_range)) {
+	            for (auto& relay : p.getPositions()) {
+	                relay.x = sink.x + 0.9 * (relay.x - sink.x);
+	                relay.y = sink.y + 0.9 * (relay.y - sink.y);
+	            }
 	        }
-	    }
-	}
+	    }*/
 	
         /*do {
             LHS(p.getPositions(), n_relays, area, rng);
