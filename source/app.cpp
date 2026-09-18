@@ -12,6 +12,9 @@
 #include "surrogate_client.h"
 
 int initPso(int argc, char* argv[], Scenario& scenario) {
+
+    std::cout << "PSO!\n";
+    
     if (argc != 8) {
         std::cerr << "Usage: ./surrogated-assisted-optimizer pso <scenario> <method> <particles> <w> <c1> <c2>\n";
         return 1;
@@ -181,6 +184,8 @@ int initLHSHeuristic(int argc, char* argv[], Scenario& scenario) {
 
 int initNaive(int argc, char* argv[], Scenario& scenario) {
 
+    std::cout << "Naive!\n";
+
     if (argc != 5) {
         std::cerr << "Usage: ./surrogated-assisted-optimizer naive <scenario> <method> <n_iterations>\n";
         return 1;
@@ -306,6 +311,11 @@ int main(int argc, char* argv[]) {
         }
 
         Scenario scenario = parseScenario(argv[2]);
+
+        std::cout << ">>>\n"
+        std::cout << "Scenario seed: " << scenario.seed << "\n";
+        std::cout << "Scenario area: " << scenario.area.height << "\n";
+        std::cout << "Num relays: " << scenario.n_relays << "\n";
         scenario.backend = parseMethod(argv[3]);
 
         configNetwork(scenario);
