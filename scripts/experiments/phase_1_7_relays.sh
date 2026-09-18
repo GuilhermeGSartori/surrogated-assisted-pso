@@ -63,6 +63,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-1.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/1 0 400
@@ -85,6 +86,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-2.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/2 0 400
@@ -107,6 +109,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-3.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/3 0 400
@@ -129,6 +132,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-4.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/4 0 400
@@ -152,6 +156,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-5.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/5 0 400
@@ -174,6 +179,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-6.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/6 0 400
@@ -196,6 +202,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-7.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/7 0 400
@@ -218,6 +225,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-8.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/8 0 400
@@ -240,6 +248,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-9.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/9 0 400
@@ -262,6 +271,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-10.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/10 0 400
@@ -285,6 +295,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-11.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/11 0 400
@@ -307,6 +318,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-12.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/12 0 400
@@ -329,6 +341,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-13.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/13 0 400
@@ -351,6 +364,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-14.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/14 0 400
@@ -374,6 +388,7 @@ OUTPUT_PLOT="$OUTPUT_DIR/7_relays-15.png"
 
 python3 ../plot.py "$OUTPUT_PLOT"
 
+cd ../..
 cd build
 
 ./surrogated-assisted-optimizer naive 7_relays/15 0 400
