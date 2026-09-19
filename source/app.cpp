@@ -312,7 +312,7 @@ int main(int argc, char* argv[]) {
 
         Scenario scenario = parseScenario(argv[2]);
 
-        std::cout << ">>>\n"
+        std::cout << ">>>\n";
         std::cout << "Scenario seed: " << scenario.seed << "\n";
         std::cout << "Scenario area: " << scenario.area.height << "\n";
         std::cout << "Num relays: " << scenario.n_relays << "\n";
