@@ -24,19 +24,15 @@ def natural_key(path):
 
 def extract_float(pattern, text, default=None):
     match = re.search(pattern, text, re.IGNORECASE)
-
     if match:
         return float(match.group(1))
-
     return default
 
 
 def extract_int(pattern, text, default=None):
     match = re.search(pattern, text, re.IGNORECASE)
-
     if match:
         return int(match.group(1))
-
     return default
 
 
@@ -63,32 +59,6 @@ def get_metadata(text):
         "width": width,
         "height": height,
     }
-
-
-def scenario_key(metadata):
-    return (
-        metadata["seed"],
-        metadata["relays"],
-        metadata["width"],
-        metadata["height"],
-    )
-
-
-def detect_method(text):
-    """
-    Detect whether the log belongs to PSO or Naive.
-    """
-
-    if (
-        re.search(r"PSO EXECUTION", text, re.IGNORECASE)
-        or re.search(r"Particles:\s*\d+", text, re.IGNORECASE)
-    ):
-        return "PSO"
-
-    if re.search(r"new best fitness:", text, re.IGNORECASE):
-        return "Naive"
-
-    return None
 
 
 # ------------------------------------------------------------
@@ -121,7 +91,7 @@ def parse_pso(path):
             current_iteration = int(iteration_match.group(1))
             continue
 
-        # Every Resulting Fitness = one actual fitness evaluation
+        # Every Resulting Fitness = one expensive fitness evaluation
         fitness_match = re.search(
             r"Resulting Fitness:\s*([-+0-9.eE]+)",
             line,
@@ -135,13 +105,11 @@ def parse_pso(path):
 
         # The previous Resulting Fitness became the new global best
         if re.search(r"New global best!", line, re.IGNORECASE):
-
-            if last_fitness is not None:
-                events.append({
-                    "iteration": current_iteration,
-                    "evaluation": evaluation_count,
-                    "fitness": last_fitness,
-                })
+            events.append({
+                "iteration": current_iteration,
+                "evaluation": evaluation_count,
+                "fitness": last_fitness,
+            })
 
     final_fitness = extract_float(
         r"Final global best fitness:\s*([-+0-9.eE]+)",
@@ -168,7 +136,7 @@ def parse_pso(path):
 # Naive parser
 # ------------------------------------------------------------
 
-def parse_naive(path, total_evaluations=400):
+def parse_naive(path):
     text = path.read_text(errors="replace")
     lines = text.splitlines()
 
@@ -181,9 +149,6 @@ def parse_naive(path, total_evaluations=400):
 
         # Example:
         # ITERATION: 107
-        #
-        # Important:
-        # Naive only logs the iteration when a new best is found.
         iteration_match = re.search(
             r"ITERATION:\s*(\d+)",
             line,
@@ -203,10 +168,9 @@ def parse_naive(path, total_evaluations=400):
         )
 
         if best_match and current_iteration is not None:
-
             fitness = float(best_match.group(1))
 
-            # ITERATION 0 = fitness evaluation 1
+            # Iteration 0 corresponds to evaluation 1
             evaluation = current_iteration + 1
 
             events.append({
@@ -225,16 +189,16 @@ def parse_naive(path, total_evaluations=400):
         text
     )
 
+    # Naive always performs 400 fitness evaluations.
+    # It only logs iterations where a new best is found.
+    total_evaluations = 400
+
     return {
         "method": "Naive",
         "path": path,
         "metadata": metadata,
         "events": events,
-
-        # Naive actually performs all 400 evaluations.
-        # It simply does not log every one of them.
         "total_evaluations": total_evaluations,
-
         "final_fitness": final_fitness,
         "final_time": final_time,
     }
@@ -248,10 +212,8 @@ def best_at_evaluation(events, evaluation):
     best = None
 
     for event in events:
-
         if event["evaluation"] <= evaluation:
             best = event["fitness"]
-
         else:
             break
 
@@ -265,7 +227,6 @@ def first_evaluation_of_final_best(run):
         return None
 
     for event in run["events"]:
-
         if abs(event["fitness"] - final) < 1e-9:
             return event["evaluation"]
 
@@ -275,10 +236,6 @@ def first_evaluation_of_final_best(run):
 
     return None
 
-
-# ------------------------------------------------------------
-# Plot
-# ------------------------------------------------------------
 
 def plot_pair(pair_index, pso, naive, output_dir):
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -292,27 +249,13 @@ def plot_pair(pair_index, pso, naive, output_dir):
 
     for run in [pso, naive]:
 
-        # Only include events inside the fair evaluation budget
-        events = [
-            event
-            for event in run["events"]
-            if event["evaluation"] <= common_budget
-        ]
+        xs = [event["evaluation"] for event in run["events"]]
+        ys = [event["fitness"] for event in run["events"]]
 
-        if not events:
+        if not xs:
             continue
 
-        xs = [
-            event["evaluation"]
-            for event in events
-        ]
-
-        ys = [
-            event["fitness"]
-            for event in events
-        ]
-
-        # Extend the final known best until the end of the budget
+        # Extend curve until common budget
         if xs[-1] < common_budget:
             xs.append(common_budget)
             ys.append(ys[-1])
@@ -335,28 +278,14 @@ def plot_pair(pair_index, pso, naive, output_dir):
     plt.title(title)
     plt.xlabel("Fitness evaluations")
     plt.ylabel("Best PDR found so far")
-
-    plt.xlim(
-        left=0,
-        right=common_budget
-    )
-
-    plt.ylim(
-        0,
-        1.02
-    )
-
+    plt.xlim(left=0, right=common_budget)
+    plt.ylim(0, 1.02)
     plt.grid(alpha=0.3)
     plt.legend()
     plt.tight_layout()
 
     filename = output_dir / f"pair_{pair_index:03d}.png"
-
-    plt.savefig(
-        filename,
-        dpi=150
-    )
-
+    plt.savefig(filename, dpi=150)
     plt.close()
 
 
@@ -366,12 +295,10 @@ def plot_pair(pair_index, pso, naive, output_dir):
 
 def main():
     parser = argparse.ArgumentParser()
-
     parser.add_argument(
         "folder",
-        help="Folder containing PSO and Naive log files"
+        help="Folder containing alternating PSO / Naive log files"
     )
-
     parser.add_argument(
         "--pattern",
         default="*.log",
@@ -390,54 +317,6 @@ def main():
     if len(files) == 0:
         raise RuntimeError("No files found.")
 
-    # --------------------------------------------------------
-    # Build scenario groups
-    #
-    # Instead of:
-    #
-    # file 1 -> PSO
-    # file 2 -> Naive
-    #
-    # we pair using:
-    #
-    # (seed, relays, area)
-    #
-    # This prevents one missing file from shifting every pair.
-    # --------------------------------------------------------
-
-    scenarios = {}
-
-    for path in files:
-
-        text = path.read_text(errors="replace")
-
-        method = detect_method(text)
-        metadata = get_metadata(text)
-
-        if method is None:
-            print(f"Skipping unknown file: {path.name}")
-            continue
-
-        if (
-            metadata["seed"] is None
-            or metadata["relays"] is None
-            or metadata["width"] is None
-            or metadata["height"] is None
-        ):
-            print(f"Skipping file with missing metadata: {path.name}")
-            continue
-
-        key = scenario_key(metadata)
-
-        if key not in scenarios:
-            scenarios[key] = {}
-
-        scenarios[key][method] = path
-
-    # --------------------------------------------------------
-    # Output directories
-    # --------------------------------------------------------
-
     output_dir = folder / "parsed_results"
     plot_dir = output_dir / "plots"
 
@@ -446,44 +325,44 @@ def main():
     event_rows = []
     summary_rows = []
 
+    # Group files by scenario so one missing file does not shift all later pairs.
+    scenarios = {}
+
+    for path in files:
+        text = path.read_text(errors="replace")
+        metadata = get_metadata(text)
+
+        key = (
+            metadata["seed"],
+            metadata["relays"],
+            metadata["width"],
+            metadata["height"],
+        )
+
+        if "Particles:" in text:
+            method = "PSO"
+        elif "new best fitness:" in text:
+            method = "Naive"
+        else:
+            continue
+
+        if key not in scenarios:
+            scenarios[key] = {}
+
+        scenarios[key][method] = path
+
     pair_index = 0
 
-    # Sort:
-    #
-    # relays -> area -> seed
-    scenario_keys = sorted(
-        scenarios.keys(),
-        key=lambda key: (
-            key[1],
-            key[2],
-            key[0]
-        )
-    )
+    for key in sorted(scenarios):
 
-    # --------------------------------------------------------
-    # Process complete pairs
-    # --------------------------------------------------------
-
-    for key in scenario_keys:
-
-        runs = scenarios[key]
-
-        # If PSO or Naive is missing, simply ignore this scenario.
-        if "PSO" not in runs or "Naive" not in runs:
-
-            print(
-                f"Skipping incomplete scenario: "
-                f"seed={key[0]}, "
-                f"relays={key[1]}, "
-                f"area={key[2]}x{key[3]}"
-            )
-
+        if "PSO" not in scenarios[key] or "Naive" not in scenarios[key]:
+            print(f"Skipping incomplete pair: {key}")
             continue
 
         pair_index += 1
 
-        pso_file = runs["PSO"]
-        naive_file = runs["Naive"]
+        pso_file = scenarios[key]["PSO"]
+        naive_file = scenarios[key]["Naive"]
 
         print()
         print(f"Pair {pair_index}")
@@ -491,56 +370,39 @@ def main():
         print(f"  Naive: {naive_file.name}")
 
         pso = parse_pso(pso_file)
-
-        # Naive has exactly 400 actual simulation evaluations
-        naive = parse_naive(
-            naive_file,
-            total_evaluations=400
-        )
+        naive = parse_naive(naive_file)
 
         # ----------------------------------------------------
-        # Metadata sanity check
+        # Sanity check
         # ----------------------------------------------------
 
         pso_meta = pso["metadata"]
         naive_meta = naive["metadata"]
 
-        if pso_meta != naive_meta:
-            print("WARNING: scenario metadata do not match!")
+        if (
+            pso_meta["seed"] is not None
+            and naive_meta["seed"] is not None
+            and pso_meta["seed"] != naive_meta["seed"]
+        ):
+            print("WARNING: seeds do not match!")
 
         # ----------------------------------------------------
         # Save improvement events
         # ----------------------------------------------------
 
         for run in [pso, naive]:
-
             for event in run["events"]:
-
                 event_rows.append({
                     "pair": pair_index,
                     "method": run["method"],
                     "file": run["path"].name,
-
-                    "seed":
-                        run["metadata"]["seed"],
-
-                    "relays":
-                        run["metadata"]["relays"],
-
-                    "width":
-                        run["metadata"]["width"],
-
-                    "height":
-                        run["metadata"]["height"],
-
-                    "iteration":
-                        event["iteration"],
-
-                    "evaluation":
-                        event["evaluation"],
-
-                    "best_fitness":
-                        event["fitness"],
+                    "seed": run["metadata"]["seed"],
+                    "relays": run["metadata"]["relays"],
+                    "width": run["metadata"]["width"],
+                    "height": run["metadata"]["height"],
+                    "iteration": event["iteration"],
+                    "evaluation": event["evaluation"],
+                    "best_fitness": event["fitness"],
                 })
 
         # ----------------------------------------------------
@@ -564,86 +426,36 @@ def main():
 
         delta_common = None
 
-        if (
-            pso_common is not None
-            and naive_common is not None
-        ):
-            delta_common = (
-                pso_common - naive_common
-            )
+        if pso_common is not None and naive_common is not None:
+            delta_common = pso_common - naive_common
 
-        # ----------------------------------------------------
-        # Evaluation where final best was first found
-        # ----------------------------------------------------
-
-        pso_final_eval = (
-            first_evaluation_of_final_best(pso)
-        )
-
-        naive_final_eval = (
-            first_evaluation_of_final_best(naive)
-        )
-
-        # ----------------------------------------------------
-        # Summary
-        # ----------------------------------------------------
+        pso_final_eval = first_evaluation_of_final_best(pso)
+        naive_final_eval = first_evaluation_of_final_best(naive)
 
         summary_rows.append({
-            "pair":
-                pair_index,
+            "pair": pair_index,
+            "seed": pso_meta["seed"],
+            "relays": pso_meta["relays"],
+            "width": pso_meta["width"],
+            "height": pso_meta["height"],
 
-            "seed":
-                pso_meta["seed"],
+            "pso_total_evaluations": pso["total_evaluations"],
+            "naive_total_evaluations": naive["total_evaluations"],
+            "common_budget": common_budget,
 
-            "relays":
-                pso_meta["relays"],
+            "pso_final_fitness": pso["final_fitness"],
+            "naive_final_fitness": naive["final_fitness"],
 
-            "width":
-                pso_meta["width"],
+            "pso_best_common_budget": pso_common,
+            "naive_best_common_budget": naive_common,
+            "delta_common_budget": delta_common,
 
-            "height":
-                pso_meta["height"],
+            "pso_final_best_first_eval": pso_final_eval,
+            "naive_final_best_first_eval": naive_final_eval,
 
-            "pso_total_evaluations":
-                pso["total_evaluations"],
-
-            "naive_total_evaluations":
-                naive["total_evaluations"],
-
-            "common_budget":
-                common_budget,
-
-            "pso_final_fitness":
-                pso["final_fitness"],
-
-            "naive_final_fitness":
-                naive["final_fitness"],
-
-            "pso_best_common_budget":
-                pso_common,
-
-            "naive_best_common_budget":
-                naive_common,
-
-            "delta_common_budget":
-                delta_common,
-
-            "pso_final_best_first_eval":
-                pso_final_eval,
-
-            "naive_final_best_first_eval":
-                naive_final_eval,
-
-            "pso_final_time":
-                pso["final_time"],
-
-            "naive_final_time":
-                naive["final_time"],
+            "pso_final_time": pso["final_time"],
+            "naive_final_time": naive["final_time"],
         })
-
-        # ----------------------------------------------------
-        # Console output
-        # ----------------------------------------------------
 
         print(
             f"  evaluations: "
@@ -664,10 +476,6 @@ def main():
             f"delta={delta_common}"
         )
 
-        # ----------------------------------------------------
-        # Plot
-        # ----------------------------------------------------
-
         plot_pair(
             pair_index,
             pso,
@@ -681,60 +489,29 @@ def main():
 
     events_csv = output_dir / "best_events.csv"
 
-    if event_rows:
-
-        with events_csv.open(
-            "w",
-            newline=""
-        ) as f:
-
-            writer = csv.DictWriter(
-                f,
-                fieldnames=event_rows[0].keys()
-            )
-
-            writer.writeheader()
-            writer.writerows(event_rows)
+    with events_csv.open("w", newline="") as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=event_rows[0].keys()
+        )
+        writer.writeheader()
+        writer.writerows(event_rows)
 
     summary_csv = output_dir / "pair_summary.csv"
 
-    if summary_rows:
-
-        with summary_csv.open(
-            "w",
-            newline=""
-        ) as f:
-
-            writer = csv.DictWriter(
-                f,
-                fieldnames=summary_rows[0].keys()
-            )
-
-            writer.writeheader()
-            writer.writerows(summary_rows)
+    with summary_csv.open("w", newline="") as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=summary_rows[0].keys()
+        )
+        writer.writeheader()
+        writer.writerows(summary_rows)
 
     print()
     print("Done.")
-
-    print(
-        f"Complete pairs parsed: "
-        f"{pair_index}"
-    )
-
-    print(
-        f"Summary: "
-        f"{summary_csv}"
-    )
-
-    print(
-        f"Events: "
-        f"{events_csv}"
-    )
-
-    print(
-        f"Plots: "
-        f"{plot_dir}"
-    )
+    print(f"Summary: {summary_csv}")
+    print(f"Events:  {events_csv}")
+    print(f"Plots:   {plot_dir}")
 
 
 if __name__ == "__main__":
