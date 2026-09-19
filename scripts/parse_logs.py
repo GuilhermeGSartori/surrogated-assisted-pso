@@ -325,44 +325,55 @@ def main():
     event_rows = []
     summary_rows = []
 
-    # Group files by scenario so one missing file does not shift all later pairs.
-    scenarios = {}
+    # Files normally alternate PSO, Naive, PSO, Naive...
+    # If one file is missing, skip the orphan and continue.
+    pair_index = 0
+    i = 0
 
-    for path in files:
-        text = path.read_text(errors="replace")
-        metadata = get_metadata(text)
+    while i < len(files):
+        current_file = files[i]
+        current_text = current_file.read_text(errors="replace")
 
-        key = (
-            metadata["seed"],
-            metadata["relays"],
-            metadata["width"],
-            metadata["height"],
-        )
-
-        if "Particles:" in text:
-            method = "PSO"
-        elif "new best fitness:" in text:
-            method = "Naive"
+        if "Particles:" in current_text:
+            current_method = "PSO"
+        elif "new best fitness:" in current_text:
+            current_method = "Naive"
         else:
+            print(f"Skipping unknown log: {current_file.name}")
+            i += 1
             continue
 
-        if key not in scenarios:
-            scenarios[key] = {}
+        # A valid pair must start with PSO.
+        if current_method != "PSO":
+            print(f"Skipping orphan Naive log: {current_file.name}")
+            i += 1
+            continue
 
-        scenarios[key][method] = path
+        # PSO is the last file: its Naive partner is missing.
+        if i + 1 >= len(files):
+            print(f"Skipping PSO with missing Naive log: {current_file.name}")
+            break
 
-    pair_index = 0
+        next_file = files[i + 1]
+        next_text = next_file.read_text(errors="replace")
 
-    for key in sorted(scenarios):
+        if "Particles:" in next_text:
+            next_method = "PSO"
+        elif "new best fitness:" in next_text:
+            next_method = "Naive"
+        else:
+            next_method = None
 
-        if "PSO" not in scenarios[key] or "Naive" not in scenarios[key]:
-            print(f"Skipping incomplete pair: {key}")
+        # If another PSO comes next, the current PSO's Naive file is missing.
+        if next_method != "Naive":
+            print(f"Skipping PSO with missing Naive log: {current_file.name}")
+            i += 1
             continue
 
         pair_index += 1
 
-        pso_file = scenarios[key]["PSO"]
-        naive_file = scenarios[key]["Naive"]
+        pso_file = current_file
+        naive_file = next_file
 
         print()
         print(f"Pair {pair_index}")
@@ -371,6 +382,9 @@ def main():
 
         pso = parse_pso(pso_file)
         naive = parse_naive(naive_file)
+
+        # Consume both files in this valid pair.
+        i += 2
 
         # ----------------------------------------------------
         # Sanity check
