@@ -66,7 +66,7 @@ python3 ../plot.py "$OUTPUT_PLOT"
 cd ../..
 cd build
 
-./surrogated-assisted-optimizer pso 4_relays/first_seed/1 0 400
+./surrogated-assisted-optimizer naive 4_relays/first_seed/1 0 400
 
 cd "$RUN_DIR"
 
