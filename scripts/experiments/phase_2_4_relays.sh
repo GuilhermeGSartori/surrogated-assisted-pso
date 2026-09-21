@@ -38,9 +38,6 @@ SCRIPT_BASE="${SCRIPT_NAME%.*}"
 OUTPUT_DIR="$RUN_DIR/$SCRIPT_BASE"
 OUTPUT_DIR_NAIVE="$RUN_DIR/${SCRIPT_BASE}_naive"
 
-mkdir -p "$OUTPUT_DIR"
-mkdir -p "$OUTPUT_DIR_NAIVE"
-
 
 echo "=== Building project ==="
 
