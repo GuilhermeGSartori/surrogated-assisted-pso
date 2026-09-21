@@ -1,0 +1,5761 @@
+PSO EXECUTION
+============================
+Seed: 37283284
+Particles: 20
+Relays: 4
+Iterations: 20
+Backend: Simulation
+Network Configuration: 7
+Area: 500 x 500
+Sink: 0, 0
+Simulated Relay range: 85
+w: 0.8
+c1: 1.7
+c2: 1.3
+
+Relay Nodes Positions: 
+PARTICLE 1: 
+64.7151, 140.754
+23.2701, 31.4932
+70.4678, 41.1213
+116.362, 76.5745
+PARTICLE 2: 
+67.1415, 118.483
+44.3289, 7.41625
+59.0999, 78.4439
+112.943, 161.165
+PARTICLE 3: 
+97.094, 81.1594
+52.7105, 13.295
+40.2109, 118.996
+69.0835, 1.16964
+PARTICLE 4: 
+179.043, 70.7674
+58.8898, 15.3932
+130.53, 32.045
+85.0377, 83.9903
+PARTICLE 5: 
+152.878, 36.5384
+216.502, 75.6969
+13.3351, 61.2645
+85.5197, 29.4764
+PARTICLE 6: 
+41.9716, 3.6596
+36.0431, 17.4997
+63.5403, 72.8253
+35.9844, 35.9247
+PARTICLE 7: 
+32.5682, 182.368
+47.8449, 64.0399
+4.91983, 77.6964
+64.2738, 118.045
+PARTICLE 8: 
+7.98083, 129.592
+130.652, 42.3083
+54.6141, 27.2291
+1.9501, 71.9454
+PARTICLE 9: 
+68.2456, 41.0521
+35.3154, 119.099
+11.2748, 74.3062
+92.0604, 94.5575
+PARTICLE 10: 
+22.7458, 43.4642
+2.40633, 105.773
+51.9802, 35.5601
+58.2252, 8.35426
+PARTICLE 11: 
+62.6703, 1.08479
+187.464, 134.466
+114.852, 55.3955
+133.289, 131.8
+PARTICLE 12: 
+65.6049, 69.5826
+64.4957, 51.6182
+78.6122, 75.6073
+29.7713, 57.0397
+PARTICLE 13: 
+113.675, 21.9741
+59.3955, 56.7486
+125.031, 70.6653
+129.13, 88.528
+PARTICLE 14: 
+83.2496, 192.692
+100.628, 123.969
+55.6318, 36.7532
+109.848, 48.0438
+PARTICLE 15: 
+31.6932, 47.3315
+170.53, 87.9204
+92.2205, 103.239
+34.3483, 145.042
+PARTICLE 16: 
+127.382, 129.636
+84.3343, 73.3592
+156.887, 58.5026
+34.3905, 32.2453
+PARTICLE 17: 
+8.11778, 43.086
+144.781, 17.4561
+190.949, 45.0241
+66.3628, 16.2354
+PARTICLE 18: 
+94.854, 0.567859
+141.298, 83.1133
+68.7491, 51.279
+34.6615, 28.2307
+PARTICLE 19: 
+76.4441, 115.453
+62.8952, 74.1102
+66.4758, 4.7579
+77.2472, 4.27039
+PARTICLE 20: 
+78.3342, 90.0327
+63.3445, 81.0859
+47.8167, 60.849
+34.6732, 39.0769
+Nodes Positions: 
+100.095, 455.006
+409.899, 340.535
+245.523, 260.548
+3.05226, 39.9931
+213.752, 269.364
+379.828, 155.468
+328.149, 70.4301
+130.482, 415.207
+496.585, 228.9
+306.833, 110.735
+340.6, 370.458
+420.948, 220.521
+491.6, 8.42477
+407.253, 365.489
+276.989, 18.0564
+16.872, 87.5204
+372.42, 98.0003
+67.438, 25.7687
+396.576, 64.8555
+186.244, 377.168
+36.5812, 207.829
+86.2271, 436.556
+216.962, 124.255
+481.469, 254.723
+468.822, 327.88
+291.769, 302.829
+438.025, 321.165
+175.687, 487.451
+143.595, 7.3464
+309.572, 290.55
+453.049, 51.7111
+123.612, 432.849
+319.698, 466.278
+284.028, 102.105
+166.037, 405.211
+56.5571, 292.359
+268.743, 171.625
+206.823, 354.383
+359.528, 48.1077
+444.102, 236.997
+387.114, 211.962
+258.92, 309.863
+140.594, 279.089
+195.989, 397.628
+257.775, 498.704
+42.4623, 125.302
+65.5796, 442.948
+28.1001, 345.949
+227.716, 159.065
+172.039, 471.057
+342.841, 143.403
+426.33, 389.391
+238.318, 183.608
+112.013, 477.151
+91.7667, 196.359
+9.88312, 75.1092
+459.694, 176.006
+78.5309, 243.462
+353.447, 135.932
+152.144, 416.787
+All particles start with velocity zero
+-- ITERATION 0 --
+-------------
+Particle: 1:
+Relays Coordinates:
+64.7151, 140.754
+23.2701, 31.4932
+70.4678, 41.1213
+116.362, 76.5745
+Evaluation Time: 1.1106 seconds
+Resulting Fitness: 0.133333
+New local best!
+New global best!
+-------------
+Particle: 2:
+Relays Coordinates:
+67.1415, 118.483
+44.3289, 7.41625
+59.0999, 78.4439
+112.943, 161.165
+Evaluation Time: 1.08835 seconds
+Resulting Fitness: 0.15
+New local best!
+New global best!
+-------------
+Particle: 3:
+Relays Coordinates:
+97.094, 81.1594
+52.7105, 13.295
+40.2109, 118.996
+69.0835, 1.16964
+Evaluation Time: 1.03873 seconds
+Resulting Fitness: 0.133333
+New local best!
+-------------
+Particle: 4:
+Relays Coordinates:
+179.043, 70.7674
+58.8898, 15.3932
+130.53, 32.045
+85.0377, 83.9903
+Evaluation Time: 1.05359 seconds
+Resulting Fitness: 0.130556
+New local best!
+-------------
+Particle: 5:
+Relays Coordinates:
+152.878, 36.5384
+216.502, 75.6969
+13.3351, 61.2645
+85.5197, 29.4764
+Evaluation Time: 1.13347 seconds
+Resulting Fitness: 0.183333
+New local best!
+New global best!
+-------------
+Particle: 6:
+Relays Coordinates:
+41.9716, 3.6596
+36.0431, 17.4997
+63.5403, 72.8253
+35.9844, 35.9247
+Evaluation Time: 0.967325 seconds
+Resulting Fitness: 0.1
+New local best!
+-------------
+Particle: 7:
+Relays Coordinates:
+32.5682, 182.368
+47.8449, 64.0399
+4.91983, 77.6964
+64.2738, 118.045
+Evaluation Time: 1.04527 seconds
+Resulting Fitness: 0.133333
+New local best!
+-------------
+Particle: 8:
+Relays Coordinates:
+7.98083, 129.592
+130.652, 42.3083
+54.6141, 27.2291
+1.9501, 71.9454
+Evaluation Time: 0.992888 seconds
+Resulting Fitness: 0.116667
+New local best!
+-------------
+Particle: 9:
+Relays Coordinates:
+68.2456, 41.0521
+35.3154, 119.099
+11.2748, 74.3062
+92.0604, 94.5575
+Evaluation Time: 1.0105 seconds
+Resulting Fitness: 0.133333
+New local best!
+-------------
+Particle: 10:
+Relays Coordinates:
+22.7458, 43.4642
+2.40633, 105.773
+51.9802, 35.5601
+58.2252, 8.35426
+Evaluation Time: 0.952418 seconds
+Resulting Fitness: 0.1
+New local best!
+-------------
+Particle: 11:
+Relays Coordinates:
+62.6703, 1.08479
+187.464, 134.466
+114.852, 55.3955
+133.289, 131.8
+Evaluation Time: 1.11471 seconds
+Resulting Fitness: 0.2
+New local best!
+New global best!
+-------------
+Particle: 12:
+Relays Coordinates:
+65.6049, 69.5826
+64.4957, 51.6182
+78.6122, 75.6073
+29.7713, 57.0397
+Evaluation Time: 0.947889 seconds
+Resulting Fitness: 0.1
+New local best!
+-------------
+Particle: 13:
+Relays Coordinates:
+113.675, 21.9741
+59.3955, 56.7486
+125.031, 70.6653
+129.13, 88.528
+Evaluation Time: 1.12432 seconds
+Resulting Fitness: 0.116667
+New local best!
+-------------
+Particle: 14:
+Relays Coordinates:
+83.2496, 192.692
+100.628, 123.969
+55.6318, 36.7532
+109.848, 48.0438
+Evaluation Time: 1.02606 seconds
+Resulting Fitness: 0.15
+New local best!
+-------------
+Particle: 15:
+Relays Coordinates:
+31.6932, 47.3315
+170.53, 87.9204
+92.2205, 103.239
+34.3483, 145.042
+Evaluation Time: 1.03897 seconds
+Resulting Fitness: 0.163889
+New local best!
+-------------
+Particle: 16:
+Relays Coordinates:
+127.382, 129.636
+84.3343, 73.3592
+156.887, 58.5026
+34.3905, 32.2453
+Evaluation Time: 1.0029 seconds
+Resulting Fitness: 0.133333
+New local best!
+-------------
+Particle: 17:
+Relays Coordinates:
+8.11778, 43.086
+144.781, 17.4561
+190.949, 45.0241
+66.3628, 16.2354
+Evaluation Time: 1.0524 seconds
+Resulting Fitness: 0.133333
+New local best!
+-------------
+Particle: 18:
+Relays Coordinates:
+94.854, 0.567859
+141.298, 83.1133
+68.7491, 51.279
+34.6615, 28.2307
+Evaluation Time: 0.970349 seconds
+Resulting Fitness: 0.116667
+New local best!
+-------------
+Particle: 19:
+Relays Coordinates:
+76.4441, 115.453
+62.8952, 74.1102
+66.4758, 4.7579
+77.2472, 4.27039
+Evaluation Time: 1.0546 seconds
+Resulting Fitness: 0.133333
+New local best!
+-------------
+Particle: 20:
+Relays Coordinates:
+78.3342, 90.0327
+63.3445, 81.0859
+47.8167, 60.849
+34.6732, 39.0769
+Evaluation Time: 0.969777 seconds
+Resulting Fitness: 0.0833333
+New local best!
+Current global best fitness: 0.2
+Current global best relays: 62.6703, 1.08479
+187.464, 134.466
+114.852, 55.3955
+133.289, 131.8
+Particle 1 new velocities: -2.2955, -43.2268
+113.941, 61.884
+49.4092, 16.9908
+0.482881, 37.8816
+Particle 2 new velocities: -5.16615, -68.8416
+73.8399, 79.4003
+50.4368, -0.385573
+18.8482, -37.1873
+Particle 3 new velocities: -0.249165, -59.9011
+92.5286, 11.356
+4.47631, -24.903
+43.2118, 77.9323
+Particle 4 new velocities: -61.0571, -32.7711
+47.1122, 101.212
+-8.06409, 2.80616
+38.4638, 8.12964
+Particle 5 new velocities: -49.639, -31.5572
+-7.1846, 50.6868
+58.2874, -5.96708
+43.6078, 116.377
+Particle 6 new velocities: 3.57446, -0.697473
+194.624, 21.3788
+39.7047, -14.3224
+31.4588, 46.3045
+Particle 7 new velocities: 19.1066, -88.9184
+169.732, 87.9246
+139.382, -28.1711
+77.4154, 8.57944
+Particle 8 new velocities: 6.2205, -44.0394
+30.7458, 20.0559
+25.7123, 9.20117
+5.51168, 64.4192
+Particle 9 new velocities: -1.22617, -16.4025
+178.428, 11.3105
+39.5759, -11.9605
+1.19354, 29.9674
+Particle 10 new velocities: 37.7449, -15.0317
+39.1298, 30.3904
+38.2051, 7.67847
+47.0376, 128.201
+Particle 11 new velocities: 0, 0
+0, 0
+0, 0
+0, 0
+Particle 12 new velocities: -1.82612, -82.4836
+102.795, 10.8616
+1.37195, -14.7603
+62.0213, 53.9705
+Particle 13 new velocities: -23.8708, -26.7606
+112.29, 60.807
+-10.4721, -18.0632
+3.1368, 51.1515
+Particle 14 new velocities: -13.2772, -98.6648
+80.0402, 4.85255
+30.9179, 10.6324
+13.2821, 100.374
+Particle 15 new velocities: 15.134, -24.8965
+18.9127, 50.9487
+20.6472, -32.2012
+55.9228, -5.40857
+Particle 16 new velocities: -39.5316, -69.1368
+64.7684, 28.5328
+-31.7105, -3.41454
+48.9486, 35.4159
+Particle 17 new velocities: 43.6334, -27.562
+36.1552, 45.6863
+-41.2913, 4.46913
+9.62811, 150.047
+Particle 18 new velocities: -7.45531, 0.526147
+51.1891, 41.5087
+6.12016, 1.32538
+61.9755, 102.932
+Particle 19 new velocities: -1.27884, -7.58163
+139.263, 45.7695
+29.7253, 41.4507
+28.1481, 99.6025
+Particle 20 new velocities: -10.1013, -104.128
+67.5693, 65.1926
+55.0436, -1.51859
+2.11816, 86.7341
+-- ITERATION 1 --
+-------------
+Particle: 1:
+Relays Coordinates:
+45.5039, 71.0976
+100.027, 68.0719
+87.3903, 42.3637
+85.1796, 83.4385
+Evaluation Time: 0.924919 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 2:
+Relays Coordinates:
+61.9754, 49.641
+118.169, 86.8165
+109.537, 78.0583
+131.791, 123.978
+Evaluation Time: 1.03439 seconds
+Resulting Fitness: 0.130556
+-------------
+Particle: 3:
+Relays Coordinates:
+78.4443, 17.2193
+117.644, 19.9673
+36.1967, 76.215
+90.9591, 64.0726
+Evaluation Time: 0.953191 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+77.4106, 24.9294
+69.5479, 76.5046
+80.3497, 22.8658
+81.0293, 60.4399
+Evaluation Time: 0.988519 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+75.2613, 3.63132
+152.593, 92.1337
+52.2128, 40.3118
+94.134, 106.327
+Evaluation Time: 1.06594 seconds
+Resulting Fitness: 0.144444
+-------------
+Particle: 6:
+Relays Coordinates:
+29.8827, 1.94345
+151.341, 25.5081
+67.7391, 38.3837
+44.2495, 53.9505
+Evaluation Time: 0.965387 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 7:
+Relays Coordinates:
+37.6709, 68.1246
+158.614, 110.782
+105.196, 36.1039
+103.291, 92.3091
+Evaluation Time: 1.01624 seconds
+Resulting Fitness: 0.127778
+-------------
+Particle: 8:
+Relays Coordinates:
+12.7812, 76.9973
+145.258, 56.1278
+72.2938, 32.7873
+6.7156, 122.728
+Evaluation Time: 0.994998 seconds
+Resulting Fitness: 0.133333
+New local best!
+-------------
+Particle: 9:
+Relays Coordinates:
+43.9714, 16.1727
+140.237, 85.5613
+33.3631, 40.905
+61.1839, 81.7008
+Evaluation Time: 0.998997 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 10:
+Relays Coordinates:
+48.9975, 23.0304
+33.6442, 110.293
+73.0501, 35.0232
+85.2629, 110.61
+Evaluation Time: 1.01283 seconds
+Resulting Fitness: 0.133333
+New local best!
+-------------
+Particle: 11:
+Relays Coordinates:
+62.6703, 1.08479
+187.464, 134.466
+114.852, 55.3955
+133.289, 131.8
+Evaluation Time: 1.14174 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 12:
+Relays Coordinates:
+57.4009, 0
+150.561, 56.2318
+71.9857, 54.7623
+82.6133, 99.9092
+Evaluation Time: 1.04594 seconds
+Resulting Fitness: 0.130556
+New local best!
+-------------
+Particle: 13:
+Relays Coordinates:
+80.8242, 0
+154.517, 105.8
+103.103, 47.3419
+119.04, 125.712
+Evaluation Time: 1.04239 seconds
+Resulting Fitness: 0.15
+New local best!
+-------------
+Particle: 14:
+Relays Coordinates:
+56.6777, 76.1617
+146.341, 104.346
+70.1052, 38.3824
+99.7358, 120.218
+Evaluation Time: 1.03643 seconds
+Resulting Fitness: 0.147222
+-------------
+Particle: 15:
+Relays Coordinates:
+37.9301, 18.1723
+153.449, 112.484
+91.4228, 57.5405
+73.1196, 113.103
+Evaluation Time: 1.09914 seconds
+Resulting Fitness: 0.158333
+-------------
+Particle: 16:
+Relays Coordinates:
+64.0432, 44.1038
+108.696, 74.2793
+91.2536, 40.1592
+60.7542, 49.3251
+Evaluation Time: 0.976921 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 17:
+Relays Coordinates:
+30.5586, 9.16677
+106.841, 37.285
+88.3713, 29.2253
+44.8719, 98.188
+Evaluation Time: 0.947031 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 18:
+Relays Coordinates:
+70.7929, 0.886145
+155.915, 100.944
+60.6441, 42.6095
+78.276, 106.242
+Evaluation Time: 1.0583 seconds
+Resulting Fitness: 0.15
+New local best!
+-------------
+Particle: 19:
+Relays Coordinates:
+54.7955, 78.6379
+147.373, 87.3923
+70.1306, 33.6861
+76.8331, 75.7233
+Evaluation Time: 0.96069 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 20:
+Relays Coordinates:
+61.4096, 0
+117.822, 131.651
+92.5743, 53.3974
+33.1122, 113.23
+Evaluation Time: 1.04861 seconds
+Resulting Fitness: 0.15
+New local best!
+Current global best fitness: 0.2
+Current global best relays: 62.6703, 1.08479
+187.464, 134.466
+114.852, 55.3955
+133.289, 131.8
+Particle 1 new velocities: 32.7305, -31.2062
+143.254, 96.3127
+31.995, 26.1498
+60.484, 40.9612
+Particle 2 new velocities: -1.00674, -20.9683
+3.67634, -15.0299
+-28.5867, -13.7479
+-0.527635, 20.3048
+Particle 3 new velocities: 13.4386, 33.378
+52.6507, 92.4354
+56.9481, 8.6415
+43.607, 77.24
+Particle 4 new velocities: -13.4782, 33.6388
+80.6466, 31.4944
+37.5307, 10.1966
+41.577, 44.5973
+Particle 5 new velocities: 64.6668, 14.139
+82.3283, 20.7837
+50.2561, 27.4209
+57.4715, 65.6562
+Particle 6 new velocities: 57.7749, -0.179321
+158.795, 24.4086
+42.5007, 7.99909
+64.8064, 31.8334
+Particle 7 new velocities: 21.9386, -97.8121
+53.053, 31.1067
+73.0184, 27.1979
+46.3103, 58.7417
+Particle 8 new velocities: 8.64742, -115.717
+62.6521, 41.2365
+22.491, 17.6921
+109.901, 51.756
+Particle 9 new velocities: 20.0211, 13.1873
+91.7334, 69.834
+80.6774, 14.0064
+53.8999, 59.2791
+Particle 10 new velocities: 42.4474, -36.8997
+223.021, 48.8973
+84.8405, 6.90166
+76.5971, 120.81
+Particle 11 new velocities: 0, 0
+0, 0
+0, 0
+0, 0
+Particle 12 new velocities: 1.99414, 0.908755
+86.8123, 17.7941
+25.7025, -11.3591
+85.4961, 80.2953
+Particle 13 new velocities: -40.0933, 0.0919134
+131.61, 80.6644
+1.67997, -12.9628
+15.5236, 41.8218
+Particle 14 new velocities: -0.806065, -16.5598
+36.4946, 32.2778
+43.5984, 20.195
+52.855, 4.52534
+Particle 15 new velocities: 37.3671, 1.76356
+60.1146, 36.8655
+34.5868, 34.3163
+92.754, 16.8393
+Particle 16 new velocities: 62.4067, 15.9525
+51.8786, 71.8837
+105.369, 14.8079
+103.758, 57.0703
+Particle 17 new velocities: 21.3247, 28.6327
+69.726, 52.84
+56.7143, 38.1893
+35.6958, 37.298
+Particle 18 new velocities: -8.30105, 0.640869
+64.2901, 51.5294
+27.5885, 4.34673
+112.379, 94.709
+Particle 19 new velocities: 11.8752, 31.2046
+86.9241, 58.4585
+59.4486, 53.2241
+74.2226, 78.4203
+Particle 20 new velocities: -7.32281, 0.760675
+97.3111, 52.3472
+62.9724, -0.139971
+23.0649, 73.2872
+-- ITERATION 2 --
+-------------
+Particle: 1:
+Relays Coordinates:
+57.0329, 29.0809
+177.351, 119.836
+87.0318, 49.9463
+106.189, 90.6874
+Evaluation Time: 1.06124 seconds
+Resulting Fitness: 0.147222
+New local best!
+-------------
+Particle: 2:
+Relays Coordinates:
+60.9686, 28.6728
+121.845, 71.7867
+80.95, 64.3105
+131.263, 144.283
+Evaluation Time: 1.07676 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 3:
+Relays Coordinates:
+74.4251, 40.9838
+137.938, 91.0462
+75.4473, 68.7337
+108.999, 114.463
+Evaluation Time: 0.998785 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 4:
+Relays Coordinates:
+57.5391, 52.7114
+135.175, 97.1991
+106.092, 29.7562
+110.346, 94.5335
+Evaluation Time: 0.964407 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 5:
+Relays Coordinates:
+91.8069, 11.6591
+154.132, 74.0851
+67.2299, 44.4394
+99.4683, 112.838
+Evaluation Time: 1.02411 seconds
+Resulting Fitness: 0.130556
+-------------
+Particle: 6:
+Relays Coordinates:
+33.9604, 0.683461
+120.153, 19.3388
+42.7091, 17.9697
+42.2505, 33.2344
+Evaluation Time: 0.979448 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 7:
+Relays Coordinates:
+35.1988, 0
+124.987, 83.7839
+105.234, 37.3791
+88.3384, 89.194
+Evaluation Time: 1.02302 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 8:
+Relays Coordinates:
+14.0593, 0
+136.41, 63.8807
+62.1883, 33.1195
+76.5124, 114.479
+Evaluation Time: 1.05361 seconds
+Resulting Fitness: 0.15
+New local best!
+-------------
+Particle: 9:
+Relays Coordinates:
+41.9855, 19.2631
+152.196, 101.955
+74.822, 36.0274
+75.5065, 92.4969
+Evaluation Time: 1.04081 seconds
+Resulting Fitness: 0.127778
+-------------
+Particle: 10:
+Relays Coordinates:
+48.5976, 0
+136.403, 84.6001
+83.9095, 22.2806
+86.019, 122.986
+Evaluation Time: 1.08885 seconds
+Resulting Fitness: 0.15
+New local best!
+-------------
+Particle: 11:
+Relays Coordinates:
+62.6703, 1.08479
+187.464, 134.466
+114.852, 55.3955
+133.289, 131.8
+Evaluation Time: 1.10585 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 12:
+Relays Coordinates:
+35.0722, 0.536611
+140.167, 43.7115
+57.6839, 25.6292
+99.2669, 106.409
+Evaluation Time: 0.980053 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 13:
+Relays Coordinates:
+21.646, 0.0488465
+152.06, 99.0949
+55.6858, 18.2704
+71.5127, 89.0341
+Evaluation Time: 1.03056 seconds
+Resulting Fitness: 0.127778
+-------------
+Particle: 14:
+Relays Coordinates:
+55.8716, 59.6019
+182.836, 136.623
+113.704, 58.5774
+152.591, 124.744
+Evaluation Time: 1.08864 seconds
+Resulting Fitness: 0.175
+New local best!
+-------------
+Particle: 15:
+Relays Coordinates:
+67.7675, 17.9423
+192.207, 134.415
+113.409, 82.6711
+149.286, 116.948
+Evaluation Time: 1.15068 seconds
+Resulting Fitness: 0.2
+New local best!
+-------------
+Particle: 16:
+Relays Coordinates:
+74.6674, 35.4626
+94.8176, 86.3078
+116.104, 32.4576
+97.1431, 62.8254
+Evaluation Time: 0.958043 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 17:
+Relays Coordinates:
+42.0255, 30.6176
+143.02, 73.0012
+117.519, 54.6058
+65.2598, 109.744
+Evaluation Time: 1.029 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 18:
+Relays Coordinates:
+29.8897, 0.730366
+105.323, 72.9275
+42.2014, 22.459
+91.1898, 96.1142
+Evaluation Time: 0.999548 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 19:
+Relays Coordinates:
+43.7427, 72.0677
+153.722, 95.6927
+85.0169, 57.0217
+99.1077, 101.134
+Evaluation Time: 1.04461 seconds
+Resulting Fitness: 0.138889
+New local best!
+-------------
+Particle: 20:
+Relays Coordinates:
+28.7439, 0.404254
+114.331, 97.784
+82.6639, 28.3032
+29.8548, 99.1228
+Evaluation Time: 1.01821 seconds
+Resulting Fitness: 0.116667
+Current global best fitness: 0.2
+Current global best relays: 62.6703, 1.08479
+187.464, 134.466
+114.852, 55.3955
+133.289, 131.8
+Particle 1 new velocities: 26.5926, -32.1448
+115.456, 87.7606
+32.5925, 22.1141
+63.2009, 41.5799
+Particle 2 new velocities: 0.947463, -17.9237
+3.28644, -30.0359
+-18.4992, 7.60259
+-29.2138, 28.8607
+Particle 3 new velocities: 36.2268, 43.8094
+-91.0438, 50.5949
+83.4377, 35.8631
+63.5861, 40.1666
+Particle 4 new velocities: 68.3078, -13.105
+76.216, -0.998494
+47.5318, 13.8531
+15.7258, 64.4897
+Particle 5 new velocities: 112.708, 24.167
+124.103, 71.6586
+46.8378, 32.203
+59.8628, -16.4183
+Particle 6 new velocities: 63.3134, 1.53227
+3.05119, 62.9839
+60.2765, 124.706
+124.101, 54.1428
+Particle 7 new velocities: 50.964, 156.227
+43.4602, 39.5687
+63.0643, 88.8309
+52.4951, 80.2225
+Particle 8 new velocities: 47.2038, 1.09937
+72.1802, 120.142
+19.3342, 30.3051
+151.083, 43.1756
+Particle 9 new velocities: 62.3433, 40.7749
+40.9163, 97.479
+74.465, 94.8041
+50.0918, 84.3367
+Particle 10 new velocities: 38.2392, 0.63686
+244.222, 63.8167
+94.5082, 45.9446
+70.5927, 104.844
+Particle 11 new velocities: 0, 0
+0, 0
+0, 0
+0, 0
+Particle 12 new velocities: 63.341, 0.396751
+121.735, 112.737
+72.2131, 41.9791
+68.934, 82.0402
+Particle 13 new velocities: 89.1855, 0.971414
+134.348, 106.579
+86.4853, 14.8611
+104.221, 106.46
+Particle 14 new velocities: 1.46605, -58.8055
+30.1854, 24.3882
+35.8471, 15.4242
+27.7238, 9.93912
+Particle 15 new velocities: 27.3451, -5.20966
+47.7675, 29.5375
+28.3279, -7.463
+54.1723, 24.7176
+Particle 16 new velocities: 132.692, 131.26
+63.5288, 108.312
+103.241, 76.3271
+35.1687, 70.6913
+Particle 17 new velocities: 0.494631, 35.328
+114.105, 35.1249
+52.9886, 22.1351
+99.3473, 30.9689
+Particle 18 new velocities: 41.6658, 0.627361
+187.635, 85.0492
+61.5033, 37.1726
+92.1723, 82.8054
+Particle 19 new velocities: 28.2188, -33.3641
+70.1889, 62.192
+64.4938, 42.4243
+82.5454, 87.3234
+Particle 20 new velocities: 57.9527, 0.639318
+102.006, 96.4464
+79.9761, 36.7997
+78.871, 93.4705
+-- ITERATION 3 --
+-------------
+Particle: 1:
+Relays Coordinates:
+44.442, 0
+155.61, 110.326
+63.5733, 38.2958
+90.0206, 70.2923
+Evaluation Time: 1.05746 seconds
+Resulting Fitness: 0.127778
+-------------
+Particle: 2:
+Relays Coordinates:
+45.1368, 7.83606
+91.2209, 30.4363
+45.5267, 52.4246
+74.3939, 126.222
+Evaluation Time: 0.988785 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 3:
+Relays Coordinates:
+65.3388, 50.0695
+27.6908, 83.6376
+93.82, 61.7634
+101.91, 91.3074
+Evaluation Time: 0.955588 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+74.3114, 23.3872
+124.824, 56.8055
+90.7135, 25.7509
+74.4439, 93.9016
+Evaluation Time: 0.948686 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+120.764, 21.155
+164.295, 86.0602
+67.3558, 45.2566
+94.0835, 56.935
+Evaluation Time: 1.02822 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 6:
+Relays Coordinates:
+78.7917, 1.79474
+99.7953, 66.6814
+83.4184, 115.567
+134.745, 70.7755
+Evaluation Time: 1.0358 seconds
+Resulting Fitness: 0.133333
+New local best!
+-------------
+Particle: 7:
+Relays Coordinates:
+37.0903, 67.2507
+72.511, 53.0993
+72.4468, 54.3292
+60.6242, 72.9283
+Evaluation Time: 0.960922 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 8:
+Relays Coordinates:
+29.302, 0.525824
+99.7679, 88.0176
+38.992, 30.3358
+108.858, 75.4057
+Evaluation Time: 0.964798 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 9:
+Relays Coordinates:
+68.4502, 39.3909
+126.701, 130.849
+97.9472, 85.8385
+82.405, 116.021
+Evaluation Time: 1.01808 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 10:
+Relays Coordinates:
+33.6423, 0.246733
+147.462, 57.4997
+69.1227, 26.4319
+60.6746, 88.2661
+Evaluation Time: 1.02829 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 11:
+Relays Coordinates:
+62.6703, 1.08479
+187.464, 134.466
+114.852, 55.3955
+133.289, 131.8
+Evaluation Time: 1.14205 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 12:
+Relays Coordinates:
+64.5689, 0.612379
+171.834, 102.646
+85.2255, 44.3578
+110.357, 123.641
+Evaluation Time: 1.06858 seconds
+Resulting Fitness: 0.15
+New local best!
+-------------
+Particle: 13:
+Relays Coordinates:
+53.0104, 0.487987
+136.988, 98.3731
+68, 15.8467
+84.0529, 93.5041
+Evaluation Time: 1.01312 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 14:
+Relays Coordinates:
+37.6192, 0.522495
+139.763, 105.64
+98.1203, 48.5524
+118.304, 88.3655
+Evaluation Time: 1.01339 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 15:
+Relays Coordinates:
+77.0412, 10.3134
+194.379, 132.801
+114.807, 60.9186
+164.801, 114.749
+Evaluation Time: 1.09936 seconds
+Resulting Fitness: 0.183333
+-------------
+Particle: 16:
+Relays Coordinates:
+89.2616, 71.7685
+68.163, 83.7773
+94.4207, 46.8282
+56.9559, 57.4745
+Evaluation Time: 0.973081 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 17:
+Relays Coordinates:
+27.8974, 43.2669
+168.699, 70.9416
+111.87, 50.3497
+107.999, 92.3215
+Evaluation Time: 0.99079 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 18:
+Relays Coordinates:
+42.2528, 0.801724
+172.989, 93.2836
+61.2366, 35.2119
+108.273, 105.65
+Evaluation Time: 1.06557 seconds
+Resulting Fitness: 0.144444
+-------------
+Particle: 19:
+Relays Coordinates:
+58.2888, 31.3499
+181.368, 127.887
+121.104, 80.5513
+147.139, 152.65
+Evaluation Time: 1.21859 seconds
+Resulting Fitness: 0.183333
+New local best!
+-------------
+Particle: 20:
+Relays Coordinates:
+51.1935, 0.616218
+127.745, 114.691
+96.0373, 38.4426
+64.2015, 113.724
+Evaluation Time: 1.03446 seconds
+Resulting Fitness: 0.147222
+Current global best fitness: 0.2
+Current global best relays: 62.6703, 1.08479
+187.464, 134.466
+114.852, 55.3955
+133.289, 131.8
+Particle 1 new velocities: 61.5353, 38.8689
+156.128, 105.795
+99.909, 34.7712
+100.091, 78.4026
+Particle 2 new velocities: 28.9199, 35.0279
+-44.8104, -7.1202
+-8.19353, 29.5107
+48.2882, 51.1344
+Particle 3 new velocities: 52.921, 27.8426
+106.119, 9.72941
+25.1214, 52.8059
+55.4584, -27.2712
+Particle 4 new velocities: 203.678, 60.6354
+113.368, 34.6005
+73.1709, 26.8997
+64.6868, 56.4754
+Particle 5 new velocities: 77.8205, -0.964894
+140.725, 93.891
+33.0774, 55.5633
+77.3676, -33.8631
+Particle 6 new velocities: 34.3049, 1.00727
+107.804, 74.5751
+87.8154, 70.5084
+98.8072, 99.8548
+Particle 7 new velocities: 43.715, 208.461
+150.26, 134.057
+6.55535, 110.659
+119.841, 197.207
+Particle 8 new velocities: 35.739, 0.870606
+159.308, 78.0201
+137.382, 37.0273
+70.466, 94.1634
+Particle 9 new velocities: 46.2799, 5.44606
+-86.305, 75.7688
+-54.1281, 60.5036
+64.9094, 85.3352
+Particle 10 new velocities: 58.0736, 0.802766
+235.19, 101.99
+78.1052, 71.9409
+116.797, 128.762
+Particle 11 new velocities: 0, 0
+0, 0
+0, 0
+0, 0
+Particle 12 new velocities: 49.1859, 0.39032
+114.952, 98.9154
+85.4431, 45.1521
+67.5031, 72.1981
+Particle 13 new velocities: 111.649, 0.544808
+144.147, 113.837
+101.58, 70.2042
+116.335, 170.092
+Particle 14 new velocities: 49.3729, 46.5762
+94.4887, 60.2478
+49.1948, 32.626
+40.9129, 92.4862
+Particle 15 new velocities: 1.46552, -4.88748
+36.3212, 26.3519
+21.1422, 11.9877
+20.3734, 27.6232
+Particle 16 new velocities: 117.161, 161.924
+131.397, 78.5139
+148.708, 82.9708
+65.3202, 76.0161
+Particle 17 new velocities: 10.0158, 16.6583
+103.875, 27.0022
+98.1962, 13.9829
+25.2882, -34.2795
+Particle 18 new velocities: 50.4842, 0.733029
+135.365, 110.431
+58.8725, 65.4218
+79.0135, 80.8771
+Particle 19 new velocities: 28.0835, -28.4491
+56.6311, 55.2873
+48.7289, 13.4834
+49.4343, 58.3042
+Particle 20 new velocities: 57.577, 0.677833
+104.229, 93.9617
+79.5002, 56.3583
+122.537, 95.8222
+-- ITERATION 4 --
+-------------
+Particle: 1:
+Relays Coordinates:
+62.5785, 22.9517
+184.078, 127.617
+96.5347, 43.1454
+112.259, 87.8028
+Evaluation Time: 1.08893 seconds
+Resulting Fitness: 0.161111
+New local best!
+-------------
+Particle: 2:
+Relays Coordinates:
+48.5886, 28.123
+30.4499, 15.2977
+24.4943, 53.7577
+80.4917, 116.363
+Evaluation Time: 1.01386 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 3:
+Relays Coordinates:
+69.8312, 46.0063
+79.0135, 55.1323
+70.2337, 67.652
+92.9242, 37.8127
+Evaluation Time: 1.0111 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+132.961, 40.1877
+113.926, 43.7192
+78.3854, 25.1826
+66.5458, 71.9249
+Evaluation Time: 0.962669 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+85.4841, 8.69117
+131.301, 77.4631
+43.2332, 43.3996
+73.8041, 9.9317
+Evaluation Time: 0.982003 seconds
+Resulting Fitness: 0.113889
+-------------
+Particle: 6:
+Relays Coordinates:
+54.0938, 1.34019
+99.294, 67.5625
+81.9006, 88.9994
+111.707, 81.612
+Evaluation Time: 0.969942 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 7:
+Relays Coordinates:
+34.784, 118.685
+95.8954, 80.5644
+34.0078, 71.0222
+77.6845, 116.284
+Evaluation Time: 0.980755 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 8:
+Relays Coordinates:
+42.6734, 0.916198
+169.98, 108.937
+115.719, 44.1969
+117.655, 111.254
+Evaluation Time: 1.09505 seconds
+Resulting Fitness: 0.163889
+New local best!
+-------------
+Particle: 9:
+Relays Coordinates:
+75.2744, 29.4175
+26.5038, 135.562
+28.7498, 96.0151
+96.653, 132.109
+Evaluation Time: 1.00705 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 10:
+Relays Coordinates:
+35.5326, 0.406597
+148.247, 61.7896
+57.0391, 38.1116
+68.7561, 84.0812
+Evaluation Time: 1.00936 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 11:
+Relays Coordinates:
+62.6703, 1.08479
+187.464, 134.466
+114.852, 55.3955
+133.289, 131.8
+Evaluation Time: 1.13743 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 12:
+Relays Coordinates:
+82.9273, 0.730968
+209.067, 146.938
+124.417, 65.2527
+129.66, 142.767
+Evaluation Time: 1.12169 seconds
+Resulting Fitness: 0.2
+New local best!
+-------------
+Particle: 13:
+Relays Coordinates:
+78.7563, 0.493983
+134.466, 101.5
+81.1097, 41.1579
+95.8448, 126.077
+Evaluation Time: 1.07503 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 14:
+Relays Coordinates:
+70.4637, 38.1499
+189.744, 134.369
+119.325, 65.7545
+128.966, 146.49
+Evaluation Time: 1.31517 seconds
+Resulting Fitness: 0.194444
+New local best!
+-------------
+Particle: 15:
+Relays Coordinates:
+70.6561, 4.88334
+207.631, 143.238
+122.354, 65.6157
+166.657, 128.135
+Evaluation Time: 1.12867 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 16:
+Relays Coordinates:
+88.8582, 100.597
+85.904, 69.861
+104.659, 55.8742
+52.6358, 57.4633
+Evaluation Time: 0.97857 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 17:
+Relays Coordinates:
+30.7097, 48.5394
+220.785, 79.3345
+170.154, 52.1094
+107.962, 47.014
+Evaluation Time: 1.11542 seconds
+Resulting Fitness: 0.180556
+New local best!
+-------------
+Particle: 18:
+Relays Coordinates:
+60.8447, 1.00695
+202.311, 133.657
+78.8036, 66.0257
+122.879, 122.381
+Evaluation Time: 1.14972 seconds
+Resulting Fitness: 0.2
+New local best!
+-------------
+Particle: 19:
+Relays Coordinates:
+56.6688, 1.90323
+156.151, 120.18
+111.427, 61.6962
+128.972, 138.407
+Evaluation Time: 1.07839 seconds
+Resulting Fitness: 0.136111
+-------------
+Particle: 20:
+Relays Coordinates:
+79.2937, 0.943363
+169.108, 152.108
+127.967, 69.1099
+136.133, 152.759
+Evaluation Time: 1.13248 seconds
+Resulting Fitness: 0.183333
+New local best!
+Current global best fitness: 0.2
+Current global best relays: 62.6703, 1.08479
+187.464, 134.466
+114.852, 55.3955
+133.289, 131.8
+Particle 1 new velocities: 49.2291, 5.9597
+126.285, 85.0325
+99.3799, 28.4831
+80.865, 73.9861
+Particle 2 new velocities: 31.0177, 104.294
+124.904, 54.3667
+70.1628, 24.8912
+87.8019, 92.7794
+Particle 3 new velocities: 60.0417, 64.2148
+126.762, 54.925
+43.1932, 64.9919
+72.3173, -49.3898
+Particle 4 new velocities: 153.334, 57.985
+177.854, 119.118
+82.4872, 45.1628
+99.2248, 78.3396
+Particle 5 new velocities: 124.754, 29.6342
+260.712, 97.98
+51.3542, 52.1322
+96.5098, 127.275
+Particle 6 new velocities: 52.5066, 1.07211
+157.73, 124.877
+113.437, 25.9292
+107.893, 142.638
+Particle 7 new velocities: 50.0025, 71.9776
+49.6933, 113.511
+-15.9834, 84.3702
+145.681, 171.137
+Particle 8 new velocities: 43.1519, 0.712253
+149.492, 89.3347
+109.226, 30.0824
+62.3402, 87.4113
+Particle 9 new velocities: 19.4621, -17.8993
+32.1723, 34.7722
+-58.7803, -24.3514
+70.2568, 64.8528
+Particle 10 new velocities: 66.2121, 1.10022
+190.239, 182.154
+78.5112, 52.4638
+149.558, 201.433
+Particle 11 new velocities: 0, 0
+0, 0
+0, 0
+0, 0
+Particle 12 new velocities: 27.5868, 0.421949
+89.9322, 63.1342
+61.2047, 27.3033
+58.4764, 50.8986
+Particle 13 new velocities: 80.2895, 0.0564753
+194.72, 130.836
+118.85, 63.2335
+148.749, 141.63
+Particle 14 new velocities: 38.1589, -5.83206
+73.6801, 48.3022
+34.943, 22.7401
+36.4263, 65.5774
+Particle 15 new velocities: -10.4567, 5.67498
+-2.62232, 9.60285
+3.34111, 23.4339
+0.501093, 10.2109
+Particle 16 new velocities: 138.376, 74.7702
+130.008, 65.3767
+196.93, 67.6721
+58.8255, 101.011
+Particle 17 new velocities: 44.9429, -32.7432
+71.9483, 31.3747
+73.7641, 14.2854
+39.8126, 26.9341
+Particle 18 new velocities: 40.8211, 0.685686
+101.163, 89.1428
+73.0734, 49.7046
+63.8715, 74.068
+Particle 19 new velocities: 29.9566, 5.37238
+98.2078, 56.5614
+40.4333, 32.4372
+71.1861, 47.9126
+Particle 20 new velocities: 26.2781, 0.641536
+101.615, 61.4909
+47.1789, 38.4208
+96.5636, 74.3694
+-- ITERATION 5 --
+-------------
+Particle: 1:
+Relays Coordinates:
+73.357, 18.9687
+203.629, 139.519
+128.54, 46.9954
+126.709, 106.15
+Evaluation Time: 1.14483 seconds
+Resulting Fitness: 0.2
+New local best!
+-------------
+Particle: 2:
+Relays Coordinates:
+52.2297, 86.8786
+101.928, 45.7068
+62.1045, 51.6016
+110.417, 137.219
+Evaluation Time: 1.00304 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 3:
+Relays Coordinates:
+62.1178, 52.7184
+98.4219, 52.6401
+54.2518, 63.4432
+79.0345, 0
+Evaluation Time: 0.948199 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+136.934, 46.9557
+139.558, 77.8843
+76.9449, 33.646
+79.2876, 71.871
+Evaluation Time: 1.00973 seconds
+Resulting Fitness: 0.113889
+-------------
+Particle: 5:
+Relays Coordinates:
+73.3055, 13.3632
+136.687, 61.1732
+32.9806, 33.3099
+59.3848, 47.841
+Evaluation Time: 1.01061 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 6:
+Relays Coordinates:
+62.9465, 1.42444
+151.77, 113.634
+115.345, 67.8642
+129.672, 132.417
+Evaluation Time: 1.06296 seconds
+Resulting Fitness: 0.15
+New local best!
+-------------
+Particle: 7:
+Relays Coordinates:
+45.0591, 101.326
+77.3718, 103.14
+9.57895, 82.5819
+118.706, 152.748
+Evaluation Time: 1.00316 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 8:
+Relays Coordinates:
+45.6111, 0.865425
+169.78, 105.37
+119.545, 39.4751
+95.6566, 105.579
+Evaluation Time: 1.09079 seconds
+Resulting Fitness: 0.141667
+-------------
+Particle: 9:
+Relays Coordinates:
+69.0629, 8.39684
+42.7749, 124.173
+0, 52.2428
+121.677, 143.586
+Evaluation Time: 1.03857 seconds
+Resulting Fitness: 0.15
+New local best!
+-------------
+Particle: 10:
+Relays Coordinates:
+39.418, 0.58377
+131.136, 94.5088
+52.5149, 35.0908
+84.5794, 110.614
+Evaluation Time: 1.00989 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 11:
+Relays Coordinates:
+62.6703, 1.08479
+187.464, 134.466
+114.852, 55.3955
+133.289, 131.8
+Evaluation Time: 1.13497 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 12:
+Relays Coordinates:
+72.5083, 0.756428
+196.174, 137.829
+121.787, 60.726
+123.436, 127.064
+Evaluation Time: 1.1145 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 13:
+Relays Coordinates:
+76.0711, 0.263283
+157.449, 111.125
+95.6399, 49.9301
+116.988, 128.043
+Evaluation Time: 1.02478 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 14:
+Relays Coordinates:
+71.2673, 21.2038
+172.833, 119.85
+101.215, 58.0613
+108.514, 139.137
+Evaluation Time: 1.12556 seconds
+Resulting Fitness: 0.175
+-------------
+Particle: 15:
+Relays Coordinates:
+48.7615, 8.55224
+166.057, 123.801
+101.813, 72.1301
+135.398, 112.06
+Evaluation Time: 1.06636 seconds
+Resulting Fitness: 0.163889
+-------------
+Particle: 16:
+Relays Coordinates:
+97.8171, 75.4899
+92.9431, 58.2154
+129.824, 53.1826
+47.9805, 68.2178
+Evaluation Time: 0.987763 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 17:
+Relays Coordinates:
+61.2786, 12.7949
+237.114, 89.6745
+197.573, 53.7798
+119.698, 59.898
+Evaluation Time: 1.23523 seconds
+Resulting Fitness: 0.233333
+New local best!
+New global best!
+-------------
+Particle: 18:
+Relays Coordinates:
+66.7029, 1.11054
+199.109, 146.179
+99.6465, 75.9307
+122.527, 128.89
+Evaluation Time: 1.14833 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 19:
+Relays Coordinates:
+63.1499, 5.30392
+185.428, 128.845
+110.706, 68.6232
+145.915, 135.827
+Evaluation Time: 1.09511 seconds
+Resulting Fitness: 0.180556
+-------------
+Particle: 20:
+Relays Coordinates:
+62.3391, 0.935867
+159.86, 126.128
+103.422, 63.4958
+137.405, 134.117
+Evaluation Time: 1.08478 seconds
+Resulting Fitness: 0.161111
+Current global best fitness: 0.233333
+Current global best relays: 61.2786, 12.7949
+237.114, 89.6745
+197.573, 53.7798
+119.698, 59.898
+Particle 1 new velocities: 25.071, 4.50025
+126.919, 28.8097
+160.975, 29.3758
+57.2733, 40.062
+Particle 2 new velocities: 49.0575, 98.0454
+191.446, 66.3685
+152.066, 21.1351
+74.3355, 65.1087
+Particle 3 new velocities: 76.5794, 80.9887
+136.961, 45.9716
+179.016, 109.533
+68.5435, 6.37448
+Particle 4 new velocities: 115.495, 55.2203
+197.079, 22.0373
+295.386, 58.6475
+109.141, 64.1696
+Particle 5 new velocities: 105.89, 46.7202
+348.992, 87.7021
+168.055, 50.8068
+143.139, 84.8697
+Particle 6 new velocities: 40.5017, 4.72468
+145.049, 77.2769
+184.607, 17.1751
+80.7941, 105.131
+Particle 7 new velocities: 41.0345, 19.6872
+62.6284, 77.0769
+223.488, 46.2217
+24.956, 41.7775
+Particle 8 new velocities: 47.2048, 4.04211
+124.247, 74.3266
+144.841, 35.5584
+60.9569, 41.2783
+Particle 9 new velocities: 6.58504, -11.8885
+145.033, 27.0948
+208.219, -19.2939
+55.0802, -20.5236
+Particle 10 new velocities: 83.2107, 2.48485
+233.785, 143.045
+180.888, 40.0358
+146.668, 118.157
+Particle 11 new velocities: -0.681194, 7.01804
+10.8367, -3.26118
+67.5369, -0.310067
+-4.9923, -80.9038
+Particle 12 new velocities: 11.7171, 3.27105
+87.9341, 33.6291
+138.11, 26.5219
+49.7548, 36.8311
+Particle 13 new velocities: 68.1024, 2.46779
+253.834, 82.634
+229.173, 54.6427
+121.996, 72.8423
+Particle 14 new velocities: 29.5923, 5.21839
+89.2229, 17.1191
+96.2765, 27.3307
+60.9713, 1.8533
+Particle 15 new velocities: 7.57412, 9.91245
+38.752, -26.9679
+56.1648, 24.5048
+5.76269, -50.0366
+Particle 16 new velocities: 103.09, 54.9169
+171.354, 87.4466
+229.569, 59.8296
+98.3568, 47.4218
+Particle 17 new velocities: 35.9543, -26.1946
+57.5586, 25.0998
+59.0112, 11.4283
+31.8501, 21.5473
+Particle 18 new velocities: 29.0889, 15.4559
+117.592, 18.8236
+54.7839, 20.9142
+48.4977, 13.7842
+Particle 19 new velocities: 20.517, 45.7531
+123.185, 3.59711
+124.053, 26.9865
+38.2048, -22.6879
+Particle 20 new velocities: 25.4511, 2.03452
+174.285, 65.5334
+149.645, 33.8696
+69.2323, 13.7062
+-- ITERATION 6 --
+-------------
+Particle: 1:
+Relays Coordinates:
+52.3087, 12.4724
+175.667, 89.4569
+153.86, 40.5868
+97.7755, 77.7029
+Evaluation Time: 1.02734 seconds
+Resulting Fitness: 0.130556
+-------------
+Particle: 2:
+Relays Coordinates:
+39.2408, 71.6434
+113.659, 43.4203
+82.9739, 28.1797
+71.5771, 78.3857
+Evaluation Time: 0.935299 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 3:
+Relays Coordinates:
+73.7094, 71.0574
+125.092, 52.4063
+123.968, 91.9268
+78.429, 3.38766
+Evaluation Time: 1.01571 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 4:
+Relays Coordinates:
+88.0165, 35.6266
+117.378, 34.8405
+129.824, 32.1807
+65.701, 47.4344
+Evaluation Time: 0.929861 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+50.6102, 16.9693
+137.17, 42.0468
+56.7785, 23.757
+57.1986, 37.4814
+Evaluation Time: 0.967822 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 6:
+Relays Coordinates:
+40.0779, 2.38229
+114.994, 73.9626
+116.208, 32.946
+81.5387, 92.031
+Evaluation Time: 0.96355 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 7:
+Relays Coordinates:
+45.7537, 64.3112
+74.4019, 95.7746
+123.861, 68.4515
+76.3477, 103.379
+Evaluation Time: 0.964369 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 8:
+Relays Coordinates:
+49.3262, 2.60807
+156.258, 95.4981
+140.506, 39.8759
+83.2308, 78.046
+Evaluation Time: 1.03486 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 9:
+Relays Coordinates:
+44.6693, 0
+110.899, 89.3224
+122.951, 19.456
+104.374, 72.6668
+Evaluation Time: 0.977269 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 10:
+Relays Coordinates:
+65.1699, 1.63079
+193.934, 126.246
+124.04, 39.9253
+122.894, 121.578
+Evaluation Time: 1.13792 seconds
+Resulting Fitness: 0.2
+New local best!
+-------------
+Particle: 11:
+Relays Coordinates:
+61.9891, 8.10283
+198.3, 131.205
+182.389, 55.0854
+128.296, 50.8962
+Evaluation Time: 1.11004 seconds
+Resulting Fitness: 0.183333
+-------------
+Particle: 12:
+Relays Coordinates:
+36.2562, 1.7337
+122.299, 73.8069
+111.877, 37.5574
+74.553, 70.5515
+Evaluation Time: 0.9577 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 13:
+Relays Coordinates:
+55.8558, 1.05807
+159.339, 75.0664
+125.839, 40.5136
+92.5875, 77.8272
+Evaluation Time: 1.03123 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 14:
+Relays Coordinates:
+73.5266, 19.2617
+191.038, 99.8508
+143.972, 62.2508
+123.555, 102.782
+Evaluation Time: 1.12236 seconds
+Resulting Fitness: 0.183333
+-------------
+Particle: 15:
+Relays Coordinates:
+45.6318, 14.9564
+165.895, 78.4348
+127.962, 78.2743
+114.34, 50.2394
+Evaluation Time: 1.061 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 16:
+Relays Coordinates:
+86.484, 56.1358
+113.771, 62.7027
+154.707, 48.6481
+62.9934, 49.7791
+Evaluation Time: 1.00148 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 17:
+Relays Coordinates:
+70.8828, 0
+214.817, 83.6704
+187.05, 47.5367
+110.478, 59.3736
+Evaluation Time: 1.12625 seconds
+Resulting Fitness: 0.183333
+-------------
+Particle: 18:
+Relays Coordinates:
+50.9077, 8.80407
+168.308, 87.6892
+82.0706, 51.4674
+90.8895, 75.8229
+Evaluation Time: 1.04924 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 19:
+Relays Coordinates:
+54.8939, 33.4985
+202.481, 86.8952
+154.026, 62.7295
+120.801, 74.2307
+Evaluation Time: 1.09725 seconds
+Resulting Fitness: 0.166667
+-------------
+Particle: 20:
+Relays Coordinates:
+37.7908, 1.27866
+143.838, 82.5039
+108.937, 41.9126
+88.9505, 63.6332
+Evaluation Time: 1.01106 seconds
+Resulting Fitness: 0.116667
+Current global best fitness: 0.233333
+Current global best relays: 61.2786, 12.7949
+237.114, 89.6745
+197.573, 53.7798
+119.698, 59.898
+Particle 1 new velocities: 54.8232, 13.7539
+159.384, 82.5263
+127.964, 29.8241
+80.8727, 34.291
+Particle 2 new velocities: 79.8766, 72.4986
+161.625, 71.7868
+197.695, 34.0704
+144.839, 130.64
+Particle 3 new velocities: 69.655, 53.6366
+39.8809, 55.2756
+122.602, 64.1454
+83.7607, 48.2666
+Particle 4 new velocities: 145.544, 64.3739
+170.452, 64.6075
+264.022, 71.8118
+166.722, 72.6638
+Particle 5 new velocities: 181.568, 50.061
+503.083, 128.153
+77.6065, 65.135
+209.208, 73.7613
+Particle 6 new velocities: 70.9528, 14.177
+279.408, 94.0221
+247.289, 84.228
+158.488, 126.835
+Particle 7 new velocities: 33.9222, 25.124
+82.2087, 34.5153
+180.075, 29.3511
+37.6433, 19.9009
+Particle 8 new velocities: 30.8921, 2.98087
+206.882, 65.671
+100.073, 35.786
+114.036, 60.507
+Particle 9 new velocities: 33.7294, 23.7074
+118.678, 67.7141
+181.525, 13.8511
+69.5792, 81.0721
+Particle 10 new velocities: 64.7924, 13.7488
+206.171, 74.3081
+233.746, 36.1925
+114.043, 56.1925
+Particle 11 new velocities: -0.131604, 5.22739
+14.7553, -19.085
+-34.8195, -1.33734
+-3.88037, 4.58739
+Particle 12 new velocities: 38.9391, 9.17523
+169.78, 45.176
+185.924, 44.7635
+119.04, 126.507
+Particle 13 new velocities: 72.4257, 3.84489
+283.981, 116.466
+230.975, 60.7367
+146.312, 120.049
+Particle 14 new velocities: 18.5131, 22.978
+115.253, 52.3252
+139.787, 16.4167
+51.2012, 1.21819
+Particle 15 new velocities: 46.5462, 12.3756
+153.009, 30.5105
+71.352, 2.56752
+35.7027, 57.2725
+Particle 16 new velocities: 114.405, 150.18
+175.403, 105.142
+239.148, 54.5291
+114.541, 43.9307
+Particle 17 new velocities: 11.5804, 27.1383
+59.5485, 27.1164
+64.0319, 12.6074
+45.1179, 18.1941
+Particle 18 new velocities: 27.3013, 12.5002
+160.645, 87.52
+65.004, 34.5686
+44.5289, 73.1309
+Particle 19 new velocities: 24.3626, 28.7697
+113.394, 69.2732
+65.6927, 38.1333
+31.2701, 32.6736
+Particle 20 new velocities: 52.061, 3.35256
+211.818, 88.6863
+180.113, 74.1321
+95.689, 123.382
+-- ITERATION 7 --
+-------------
+Particle: 1:
+Relays Coordinates:
+78.0991, 19.119
+244.252, 125.376
+205.449, 51.3295
+130.235, 81.6435
+Evaluation Time: 1.22961 seconds
+Resulting Fitness: 0.244444
+New local best!
+New global best!
+-------------
+Particle: 2:
+Relays Coordinates:
+51.2761, 62.0484
+118.501, 49.5929
+120.819, 26.7966
+93.1602, 89.9789
+Evaluation Time: 0.938814 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 3:
+Relays Coordinates:
+68.5708, 59.6408
+78.906, 51.5039
+117.934, 74.6489
+77.5749, 24.7061
+Evaluation Time: 0.939061 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+73.2938, 31.3812
+90.3241, 31.2078
+123.593, 32.634
+72.9368, 37.6881
+Evaluation Time: 0.948597 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+80.9555, 23.372
+174.339, 59.345
+46.8571, 30.9947
+92.8903, 38.7879
+Evaluation Time: 1.00584 seconds
+Resulting Fitness: 0.113889
+-------------
+Particle: 6:
+Relays Coordinates:
+38.714, 5.77388
+137.519, 58.5727
+126.743, 40.856
+83.692, 76.3138
+Evaluation Time: 0.966117 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 7:
+Relays Coordinates:
+42.343, 47.5295
+83.2293, 69.2414
+161.524, 51.9763
+60.5795, 65.5158
+Evaluation Time: 0.985046 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 8:
+Relays Coordinates:
+38.3681, 2.67317
+173.689, 77.0867
+115.068, 36.1888
+94.3521, 66.2695
+Evaluation Time: 1.04222 seconds
+Resulting Fitness: 0.130556
+-------------
+Particle: 9:
+Relays Coordinates:
+37.4979, 11.3392
+109.806, 75.11
+145.63, 15.9307
+83.201, 73.5328
+Evaluation Time: 0.970761 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 10:
+Relays Coordinates:
+55.9445, 6.62043
+172.232, 86.3319
+154.015, 32.7662
+101.994, 76.5244
+Evaluation Time: 1.01563 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 11:
+Relays Coordinates:
+55.6718, 11.9972
+191.75, 100.908
+132.812, 48.3733
+111.974, 49.9352
+Evaluation Time: 1.05087 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 12:
+Relays Coordinates:
+26.219, 3.80371
+101.842, 41.4868
+103.837, 28.7035
+67.5016, 68.7101
+Evaluation Time: 0.979166 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 13:
+Relays Coordinates:
+44.729, 1.70956
+154.576, 66.7834
+124.414, 35.3038
+83.2993, 68.9951
+Evaluation Time: 1.01526 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 14:
+Relays Coordinates:
+67.097, 30.7928
+223.287, 110.936
+206.86, 57.3485
+127.397, 75.8163
+Evaluation Time: 1.18278 seconds
+Resulting Fitness: 0.216667
+New local best!
+-------------
+Particle: 15:
+Relays Coordinates:
+60.478, 17.9325
+209.233, 71.479
+130.77, 53.0403
+98.4433, 70.5385
+Evaluation Time: 1.12878 seconds
+Resulting Fitness: 0.166667
+-------------
+Particle: 16:
+Relays Coordinates:
+77.8286, 79.9311
+112.032, 65.0266
+152.587, 39.9729
+68.7804, 36.3051
+Evaluation Time: 0.937912 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 17:
+Relays Coordinates:
+66.7952, 21.982
+222.236, 89.7374
+203.377, 48.7167
+126.033, 62.8299
+Evaluation Time: 1.30847 seconds
+Resulting Fitness: 0.197222
+-------------
+Particle: 18:
+Relays Coordinates:
+33.6664, 9.17079
+141.604, 75.4218
+63.3108, 37.0357
+58.2932, 64.1197
+Evaluation Time: 0.990939 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 19:
+Relays Coordinates:
+57.778, 45.3935
+230.272, 113.847
+160.175, 73.529
+110.86, 77.9332
+Evaluation Time: 1.12581 seconds
+Resulting Fitness: 0.2
+New local best!
+-------------
+Particle: 20:
+Relays Coordinates:
+34.8104, 1.79423
+137.789, 66.3226
+111.984, 44.9581
+71.5331, 72.4533
+Evaluation Time: 0.99955 seconds
+Resulting Fitness: 0.113889
+Current global best fitness: 0.244444
+Current global best relays: 78.0991, 19.119
+244.252, 125.376
+205.449, 51.3295
+130.235, 81.6435
+Particle 1 new velocities: 43.8585, 11.0032
+127.507, 66.021
+102.371, 23.8593
+64.6982, 27.4328
+Particle 2 new velocities: 90.686, 108.493
+157.939, 5.49634
+173.702, 128.367
+172.232, 126.876
+Particle 3 new velocities: 103.066, 1.4798
+96.717, 42.755
+92.246, 79.9548
+93.4618, 79.0535
+Particle 4 new velocities: 241.738, 82.0239
+266.812, 57.2149
+223.844, 77.851
+184.092, 150.974
+Particle 5 new velocities: 182.834, 41.304
+70.64, 145.069
+53.8177, 107.579
+187.551, 98.2425
+Particle 6 new velocities: 88.3236, 17.2182
+264.192, 94.475
+201.501, 83.8299
+178.096, 190.039
+Particle 7 new velocities: 51.8368, 200.182
+83.2346, 54.7773
+-87.5531, 26.6965
+60.0197, 57.3699
+Particle 8 new velocities: 52.1293, 9.14268
+253.74, 98.0517
+128.775, 49.0483
+131.327, 79.9955
+Particle 9 new velocities: 76.877, 18.7356
+22.4749, 174.199
+88.5808, 96.801
+148.538, 182.877
+Particle 10 new velocities: 82.8625, 13.6345
+237.415, 108.868
+153.692, 57.6189
+156.219, 55.9868
+Particle 11 new velocities: 22.0965, 0.523846
+54.4889, 16.0921
+-48.9365, 2.39564
+38.9265, 117.629
+Particle 12 new velocities: 51.8486, 20.1886
+274.716, 250.711
+230.812, 66.319
+203.832, 211.018
+Particle 13 new velocities: 115.438, 10.5307
+316.759, 138.528
+185.792, 80.3179
+154.581, 188.341
+Particle 14 new velocities: 18.6878, 11.3907
+94.8087, 44.9917
+111.236, 7.51713
+44.1147, 6.30026
+Particle 15 new velocities: 50.5804, 10.7404
+122.19, 100.06
+57.5466, 36.8778
+71.3366, 127.333
+Particle 16 new velocities: 161.315, 93.5705
+163.316, 118.436
+220.406, 55.705
+96.9104, 65.7533
+Particle 17 new velocities: 6.86517, 3.24614
+59.2696, 31.2312
+47.1026, 17.9692
+35.6985, 34.612
+Particle 18 new velocities: 74.1916, 4.85885
+214.706, 78.5027
+152.159, 42.6758
+125.955, 168.283
+Particle 19 new velocities: 23.4954, -8.97626
+93.0491, 68.8876
+63.8867, 5.67625
+49.86, 26.5753
+Particle 20 new velocities: 117.975, 3.00418
+261.728, 216.178
+175.735, 94.3999
+127.824, 157.352
+-- ITERATION 8 --
+-------------
+Particle: 1:
+Relays Coordinates:
+72.0148, 17.7868
+219.52, 113.018
+181.765, 44.3982
+115.106, 64.4085
+Evaluation Time: 1.14879 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 2:
+Relays Coordinates:
+49.4991, 59.464
+96.3885, 19.2084
+102.693, 54.1023
+92.5364, 75.6128
+Evaluation Time: 0.935419 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 3:
+Relays Coordinates:
+73.8841, 26.3104
+75.5999, 40.5754
+90.4755, 66.5518
+73.6257, 44.6651
+Evaluation Time: 0.957861 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+80.0769, 28.8261
+90.7791, 22.4759
+88.314, 28.0838
+65.3333, 47.9553
+Evaluation Time: 0.941424 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+126.17, 30.9343
+117.173, 97.7705
+48.1525, 66.2792
+134.134, 65.5412
+Evaluation Time: 1.02591 seconds
+Resulting Fitness: 0.127778
+-------------
+Particle: 6:
+Relays Coordinates:
+44.2953, 8.01686
+140.068, 53.3644
+114.452, 43.4753
+91.28, 92.8714
+Evaluation Time: 0.982996 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 7:
+Relays Coordinates:
+61.7914, 162.523
+109.217, 81.3686
+48.5324, 51.6172
+79.1251, 80.6253
+Evaluation Time: 1.03128 seconds
+Resulting Fitness: 0.15
+New local best!
+-------------
+Particle: 8:
+Relays Coordinates:
+35.0605, 4.5777
+165.594, 67.8522
+94.4697, 33.0226
+87.4326, 56.6661
+Evaluation Time: 1.01988 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 9:
+Relays Coordinates:
+60.7835, 15.983
+70.2993, 132.493
+124.469, 59.9103
+123.156, 136.266
+Evaluation Time: 1.05016 seconds
+Resulting Fitness: 0.141667
+-------------
+Particle: 10:
+Relays Coordinates:
+66.391, 9.68788
+195.933, 93.3633
+147.176, 43.2309
+123.502, 63.3797
+Evaluation Time: 1.0935 seconds
+Resulting Fitness: 0.166667
+-------------
+Particle: 11:
+Relays Coordinates:
+45.9214, 7.39355
+145.402, 69.0872
+49.5278, 29.9785
+89.1056, 98.9448
+Evaluation Time: 1.01113 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 12:
+Relays Coordinates:
+24.4984, 7.52904
+118.168, 91.6948
+105.016, 29.8191
+85.1473, 87.7816
+Evaluation Time: 0.948023 seconds
+Resulting Fitness: 0.0972222
+-------------
+Particle: 13:
+Relays Coordinates:
+68.9468, 5.26902
+202.894, 88.38
+133.533, 49.7713
+102.399, 110.775
+Evaluation Time: 1.08648 seconds
+Resulting Fitness: 0.183333
+New local best!
+-------------
+Particle: 14:
+Relays Coordinates:
+45.5896, 22.418
+169.049, 82.8666
+169.049, 34.4723
+91.1484, 43.6401
+Evaluation Time: 1.0241 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 15:
+Relays Coordinates:
+53.1189, 13.7142
+158.518, 82.0464
+90.0712, 43.0075
+81.2052, 94.6416
+Evaluation Time: 1.00687 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 16:
+Relays Coordinates:
+102.943, 74.6867
+118.528, 78.9747
+160.562, 41.1862
+71.3244, 43.9328
+Evaluation Time: 0.993193 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 17:
+Relays Coordinates:
+53.6984, 18.3913
+205.217, 88.1861
+182.599, 48.6141
+117.902, 71.0351
+Evaluation Time: 1.15004 seconds
+Resulting Fitness: 0.183333
+-------------
+Particle: 18:
+Relays Coordinates:
+57.3201, 7.45593
+189.357, 81.8018
+114.509, 42.362
+97.917, 123.508
+Evaluation Time: 1.05374 seconds
+Resulting Fitness: 0.166667
+-------------
+Particle: 19:
+Relays Coordinates:
+47.9912, 21.504
+190.918, 107.903
+132.306, 46.7699
+94.9034, 61.7112
+Evaluation Time: 1.1378 seconds
+Resulting Fitness: 0.177778
+-------------
+Particle: 20:
+Relays Coordinates:
+65.7691, 2.06556
+171.979, 121.607
+123.854, 59.9891
+85.8169, 98.9235
+Evaluation Time: 1.0825 seconds
+Resulting Fitness: 0.163889
+Current global best fitness: 0.244444
+Current global best relays: 78.0991, 19.119
+244.252, 125.376
+205.449, 51.3295
+130.235, 81.6435
+Particle 1 new velocities: 42.6221, 11.1965
+145.203, 63.6683
+133.064, 36.5147
+60.2629, 42.3973
+Particle 2 new velocities: 114.721, 153.663
+224.677, 89.7791
+191.563, 102.846
+177.527, 158.342
+Particle 3 new velocities: 88.4207, 86.7218
+115.677, 57.6117
+137.2, 107.542
+120.217, 7.7251
+Particle 4 new velocities: 240.924, 77.1149
+322.855, 55.6171
+285.171, 88.8749
+172.087, 213.94
+Particle 5 new velocities: 160.819, 24.3904
+222.574, 126.086
+158.542, 80.0795
+90.9739, 61.6564
+Particle 6 new velocities: 94.579, 13.7824
+333.393, 215.781
+200.356, 115.651
+191.93, 178.666
+Particle 7 new velocities: 54.0393, 105.601
+189.476, 82.2516
+70.074, 21.1744
+49.6462, 46.1264
+Particle 8 new velocities: 60.5769, 19.1015
+220.741, 128.049
+166.145, 58.9495
+119.283, 121.241
+Particle 9 new velocities: 94.5336, 13.7953
+124.641, 128.342
+-44.288, 58.622
+119.102, 113.403
+Particle 10 new velocities: 65.5779, 4.06227
+214.05, 132.758
+130.685, 44.5377
+131.944, 113.063
+Particle 11 new velocities: 65.0982, 0.208264
+152.872, 145.127
+210.795, 51.0351
+111.825, 124.34
+Particle 12 new velocities: 138.035, 29.808
+520.91, 268.411
+258.967, 99.9148
+252.768, 203.036
+Particle 13 new velocities: 94.1933, 22.6212
+278.196, 145.699
+151.603, 64.4253
+138.435, 142.675
+Particle 14 new velocities: 38.7633, 9.89562
+144.549, 48.7572
+130.34, 29.4823
+117.829, 70.1777
+Particle 15 new velocities: 74.5803, 12.8432
+221.253, 158.234
+112.777, 98.6746
+213.156, 134.209
+Particle 16 new velocities: 137.67, 114.176
+90.2511, 145.884
+203.788, 68.2409
+119.204, 66.9199
+Particle 17 new velocities: 35.3474, 1.81068
+71.3029, 56.9737
+56.3359, 22.0121
+33.8358, 27.9254
+Particle 18 new velocities: 75.3961, 13.9123
+233.354, 189.672
+84.2928, 64.8303
+127.499, 127.987
+Particle 19 new velocities: 31.9658, -7.22193
+117.754, 66.3955
+186.513, 39.6281
+97.9522, 57.2071
+Particle 20 new velocities: 126.615, 9.437
+287.071, 197.587
+215.679, 77.3909
+195.331, 147.742
+-- ITERATION 9 --
+-------------
+Particle: 1:
+Relays Coordinates:
+67.6919, 17.1144
+215.366, 104.331
+185.903, 47.7783
+103.554, 63.0677
+Evaluation Time: 1.24439 seconds
+Resulting Fitness: 0.213889
+-------------
+Particle: 2:
+Relays Coordinates:
+51.5339, 66.8814
+100.754, 34.2014
+92.3407, 49.252
+84.7488, 73.4174
+Evaluation Time: 0.976142 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 3:
+Relays Coordinates:
+62.8802, 43.791
+74.1047, 38.0397
+88.206, 67.4474
+75.0986, 20.297
+Evaluation Time: 0.983559 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+73.4348, 24.2359
+94.6263, 17.8652
+85.4414, 26.7564
+54.3142, 59.9133
+Evaluation Time: 0.955511 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+90.0602, 17.3615
+106.616, 70.2485
+64.8629, 45.9289
+70.6413, 39.916
+Evaluation Time: 0.946814 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 6:
+Relays Coordinates:
+48.4225, 7.60095
+165.086, 93.8453
+109.767, 55.4837
+98.7491, 94.6793
+Evaluation Time: 1.08263 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 7:
+Relays Coordinates:
+55.4015, 128.243
+142.864, 78.259
+56.7291, 34.816
+61.5909, 60.625
+Evaluation Time: 1.06587 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 8:
+Relays Coordinates:
+41.1688, 10.1931
+166.305, 84.3293
+112.186, 39.591
+88.9845, 76.5833
+Evaluation Time: 1.02531 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 9:
+Relays Coordinates:
+66.8589, 12.8185
+83.9155, 112.281
+34.5154, 51.0243
+104.284, 107.475
+Evaluation Time: 0.966846 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 10:
+Relays Coordinates:
+63.1203, 6.57665
+196.094, 108.153
+132.9, 41.9795
+122.179, 84.3922
+Evaluation Time: 1.22334 seconds
+Resulting Fitness: 0.180556
+-------------
+Particle: 11:
+Relays Coordinates:
+53.1004, 3.63592
+142.664, 102.458
+124.512, 38.7485
+96.1046, 106.796
+Evaluation Time: 1.05122 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 12:
+Relays Coordinates:
+56.6718, 13.0186
+174.339, 125.561
+126.913, 45.2354
+117.824, 101.402
+Evaluation Time: 1.08408 seconds
+Resulting Fitness: 0.166667
+-------------
+Particle: 13:
+Relays Coordinates:
+56.8835, 9.72472
+167.746, 81.6183
+99.4211, 39.8179
+83.9737, 88.3725
+Evaluation Time: 1.02949 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 14:
+Relays Coordinates:
+44.8286, 17.1728
+166.659, 69.9503
+159.108, 33.9881
+111.059, 60.4874
+Evaluation Time: 0.990197 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 15:
+Relays Coordinates:
+75.4051, 15.6818
+224.251, 141.883
+119.78, 83.6619
+173.817, 135.134
+Evaluation Time: 1.08881 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 16:
+Relays Coordinates:
+83.8969, 65.8525
+72.7969, 78.4033
+127.041, 38.1549
+66.4333, 38.6519
+Evaluation Time: 0.93571 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 17:
+Relays Coordinates:
+72.1271, 16.3636
+223.981, 117.579
+193.538, 57.2072
+122.908, 80.158
+Evaluation Time: 1.12131 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 18:
+Relays Coordinates:
+51.417, 8.27848
+163.767, 105.174
+77.02, 41.5285
+87.3308, 97.4343
+Evaluation Time: 1.08233 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 19:
+Relays Coordinates:
+42.4924, 7.5901
+164.041, 92.6293
+169.434, 45.9154
+102.491, 63.1981
+Evaluation Time: 1.02338 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 20:
+Relays Coordinates:
+82.8151, 4.95147
+197.606, 137.402
+146.158, 59.1376
+121.025, 106.181
+Evaluation Time: 1.13837 seconds
+Resulting Fitness: 0.197222
+New local best!
+Current global best fitness: 0.244444
+Current global best relays: 78.0991, 19.119
+244.252, 125.376
+205.449, 51.3295
+130.235, 81.6435
+Particle 1 new velocities: 51.141, 11.5982
+150.572, 87.2404
+139.2, 31.8113
+91.7978, 74.7777
+Particle 2 new velocities: 125.452, 110.207
+198.869, 105.788
+290.532, 117.803
+181.847, 247.032
+Particle 3 new velocities: 138.048, 115.527
+146.422, 30.5186
+56.6137, 108.995
+111.233, 49.9291
+Particle 4 new velocities: 269.809, 85.7973
+369.208, 66.1968
+309.587, 76.002
+252.505, 203.265
+Particle 5 new velocities: 205.186, 23.543
+346.682, 144.96
+64.1236, 83.3451
+104.19, 44.6923
+Particle 6 new velocities: 114.235, 14.656
+281.13, 196.211
+197.7, 101.562
+218.639, 140.432
+Particle 7 new velocities: 52.9928, 55.9828
+190.708, 93.9616
+65.6804, 33.1211
+100.496, 51.5907
+Particle 8 new velocities: 83.5245, 15.2944
+240.913, 143.999
+146.582, 54.1595
+154.647, 154.905
+Particle 9 new velocities: 89.0364, 8.49938
+246.693, 128.61
+-20.7772, 47.6703
+122.018, 68.6128
+Particle 10 new velocities: 65.675, 11.8328
+179.637, 124.07
+129.709, 39.8367
+108.877, 87.7421
+Particle 11 new velocities: 64.738, 11.3278
+262.748, 168.209
+176.042, 43.483
+185.34, 87.3398
+Particle 12 new velocities: 138.889, 13.1406
+108.831, 241.429
+224.163, 95.9842
+224.659, 177.936
+Particle 13 new velocities: 107.848, 24.4469
+337.244, 146.679
+179.574, 72.436
+138.663, 113.813
+Particle 14 new velocities: 73.2718, 22.4888
+204.194, 124.618
+173.277, 60.7453
+123.494, 94.6228
+Particle 15 new velocities: 58.3246, 13.4726
+159.924, 111.349
+88.8109, 54.9407
+132.83, 62.2239
+Particle 16 new velocities: 123.056, 77.5938
+267.265, 149.074
+253.333, 77.0351
+90.9839, 79.3333
+Particle 17 new velocities: 23.373, 1.24143
+76.5716, 51.8316
+59.9869, 13.7365
+33.5614, 14.7186
+Particle 18 new velocities: 94.2415, 13.8212
+315.593, 217.065
+96.9267, 84.274
+149.112, 118.652
+Particle 19 new velocities: 54.4276, 27.8812
+154.76, 65.959
+173.757, 69.1706
+95.1064, 83.2967
+Particle 20 new velocities: 100.199, 17.3064
+237.167, 151.775
+196.26, 57.18
+166.927, 106.145
+-- ITERATION 10 --
+-------------
+Particle: 1:
+Relays Coordinates:
+70.1696, 16.9545
+216.083, 113.121
+191.97, 46.9969
+115.353, 81.3963
+Evaluation Time: 1.15428 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 2:
+Relays Coordinates:
+55.54, 55.5724
+94.0249, 43.9302
+120.149, 52.4237
+83.6607, 100.56
+Evaluation Time: 0.960318 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 3:
+Relays Coordinates:
+77.8437, 61.7229
+85.4367, 26.5609
+56.1061, 68.3575
+72.1887, 27.207
+Evaluation Time: 0.968571 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+78.5232, 25.1721
+106.11, 19.2307
+90.3697, 23.5078
+70.1904, 60.2068
+Evaluation Time: 0.957008 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+102.946, 14.2625
+158.055, 75.0387
+44.9748, 45.0751
+60.96, 29.5011
+Evaluation Time: 1.00375 seconds
+Resulting Fitness: 0.113889
+-------------
+Particle: 6:
+Relays Coordinates:
+63.0168, 8.62281
+172.873, 112.374
+119.119, 60.8426
+122.963, 91.0871
+Evaluation Time: 1.05248 seconds
+Resulting Fitness: 0.136111
+-------------
+Particle: 7:
+Relays Coordinates:
+46.6602, 79.3032
+143.592, 74.1353
+52.6932, 29.2447
+69.7731, 48.3052
+Evaluation Time: 1.00322 seconds
+Resulting Fitness: 0.113889
+-------------
+Particle: 8:
+Relays Coordinates:
+59.6404, 12.1906
+194.771, 109.209
+123.768, 44.8406
+116.528, 110.72
+Evaluation Time: 1.17046 seconds
+Resulting Fitness: 0.188889
+New local best!
+-------------
+Particle: 9:
+Relays Coordinates:
+74.5642, 10.1963
+158.129, 115.218
+6.57094, 47.2053
+108.24, 84.222
+Evaluation Time: 1.01414 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 10:
+Relays Coordinates:
+68.4471, 9.78354
+199.679, 123.413
+139.561, 43.4805
+122.793, 91.4792
+Evaluation Time: 1.1199 seconds
+Resulting Fitness: 0.183333
+-------------
+Particle: 11:
+Relays Coordinates:
+50.7255, 6.44141
+174.517, 116.513
+129.378, 35.398
+121.153, 83.5692
+Evaluation Time: 1.05264 seconds
+Resulting Fitness: 0.144444
+-------------
+Particle: 12:
+Relays Coordinates:
+84.1826, 11.2607
+121.895, 157.977
+151.127, 60.7904
+147.428, 120.246
+Evaluation Time: 1.11623 seconds
+Resulting Fitness: 0.183333
+-------------
+Particle: 13:
+Relays Coordinates:
+51.6944, 10.7234
+156.905, 71.6422
+87.5516, 35.2265
+69.8657, 63.4479
+Evaluation Time: 1.00816 seconds
+Resulting Fitness: 0.113889
+-------------
+Particle: 14:
+Relays Coordinates:
+56.4871, 18.97
+177.377, 93.0616
+158.978, 45.3107
+112.186, 74.1887
+Evaluation Time: 1.02893 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 15:
+Relays Coordinates:
+78.9661, 17.2154
+226.852, 149.531
+123.171, 81.8434
+181.072, 116.538
+Evaluation Time: 1.12561 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 16:
+Relays Coordinates:
+89.0862, 61.7489
+146.385, 97.9215
+163.738, 49.5855
+67.763, 50.7888
+Evaluation Time: 1.04176 seconds
+Resulting Fitness: 0.130556
+-------------
+Particle: 17:
+Relays Coordinates:
+69.6196, 12.8341
+219.103, 123.501
+184.819, 51.7179
+114.066, 69.165
+Evaluation Time: 1.14211 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 18:
+Relays Coordinates:
+45.7092, 6.93512
+150.428, 101.122
+54.5863, 39.4781
+74.1981, 67.8101
+Evaluation Time: 1.04903 seconds
+Resulting Fitness: 0.130556
+-------------
+Particle: 19:
+Relays Coordinates:
+51.5073, 18.8509
+169.424, 84.2803
+182.386, 61.1614
+105.012, 77.8533
+Evaluation Time: 1.02091 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 20:
+Relays Coordinates:
+78.7818, 9.58126
+187.156, 124.481
+147.4, 50.0709
+123.954, 91.3996
+Evaluation Time: 1.12092 seconds
+Resulting Fitness: 0.183333
+Current global best fitness: 0.244444
+Current global best relays: 78.0991, 19.119
+244.252, 125.376
+205.449, 51.3295
+130.235, 81.6435
+Particle 1 new velocities: 53.7997, 14.2458
+154.394, 94.0197
+138.519, 29.4699
+90.128, 60.1606
+Particle 2 new velocities: 127.759, 158.27
+215.56, 94.7414
+247.58, 107.052
+188.47, 281.92
+Particle 3 new velocities: 129.873, 80.7194
+244.557, 36.7613
+218.433, 98.9661
+151.818, 60.8729
+Particle 4 new velocities: 363.404, 142.435
+267.222, 161.593
+310.53, 80.9142
+258.563, 191.909
+Particle 5 new velocities: 197.28, 42.6561
+335.302, 126.914
+124.518, 94.8125
+145.985, 55.9897
+Particle 6 new velocities: 103.28, 13.8895
+227.004, 166.062
+189.373, 87.2114
+186.074, 107.699
+Particle 7 new velocities: 93.3568, 82.2489
+192.452, 94.0853
+117.774, 64.8132
+161.397, 111.383
+Particle 8 new velocities: 71.4159, 19.3835
+219.399, 121.809
+153.269, 46.4267
+136.659, 98.55
+Particle 9 new velocities: 69.4117, 10.5323
+140.967, 123.925
+155.456, 48.9532
+120.642, 149.326
+Particle 10 new velocities: 52.471, 10.7065
+170.596, 101.351
+109.967, 41.2021
+88.1863, 96.0804
+Particle 11 new velocities: 87.9423, 20.0903
+266.627, 157.452
+204.397, 44.7632
+164.98, 75.1462
+Particle 12 new velocities: 107.852, 4.72129
+225.061, 176.641
+223.587, 69.0309
+142.004, 150.005
+Particle 13 new velocities: 124.908, 12.3538
+75.5798, 147.62
+208.496, 80.1825
+190.445, 170.646
+Particle 14 new velocities: 67.6062, 38.1063
+245.916, 151.927
+253.852, 62.5566
+117.136, 82.2235
+Particle 15 new velocities: 30.3041, 12.4711
+89.8413, 81.478
+161.464, 22.2174
+50.3013, 15.9485
+Particle 16 new velocities: 151.31, 114.282
+207.094, 90.3129
+202.158, 72.4659
+80.1918, 93.4077
+Particle 17 new velocities: 8.30488, 5.33865
+90.2247, 24.2219
+71.9625, 13.2112
+42.7239, 16.2215
+Particle 18 new velocities: 96.149, 11.822
+366.987, 181.41
+131.804, 108.471
+218.594, 190.354
+Particle 19 new velocities: 58.7777, 30.8176
+227.025, 100.342
+144.993, 65.424
+90.7129, 71.0935
+Particle 20 new velocities: 81.9881, 15.7454
+212.417, 126.834
+157.94, 47.155
+136.096, 97.8902
+-- ITERATION 11 --
+-------------
+Particle: 1:
+Relays Coordinates:
+73.2027, 18.4234
+218.762, 122.315
+195.151, 45.1529
+121.334, 83.588
+Evaluation Time: 1.14372 seconds
+Resulting Fitness: 0.213889
+-------------
+Particle: 2:
+Relays Coordinates:
+51.769, 60.3954
+87.436, 39.1649
+103.858, 45.0408
+76.8577, 108.024
+Evaluation Time: 0.98527 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 3:
+Relays Coordinates:
+72.4263, 49.6666
+115.062, 22.0791
+95.7258, 58.3421
+78.1064, 30.7116
+Evaluation Time: 0.953287 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+81.89, 31.0579
+69.1792, 33.5071
+74.2875, 19.3496
+60.9187, 46.7176
+Evaluation Time: 0.94317 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+104.683, 19.8463
+172.023, 70.4164
+59.0986, 48.7758
+72.1574, 29.8088
+Evaluation Time: 1.0801 seconds
+Resulting Fitness: 0.111111
+-------------
+Particle: 6:
+Relays Coordinates:
+71.5855, 9.69083
+172.134, 119.858
+132.796, 63.7324
+133.03, 85.571
+Evaluation Time: 1.07721 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 7:
+Relays Coordinates:
+60.2727, 69.5429
+144.656, 72.4135
+73.3807, 40.4888
+99.5111, 68.7407
+Evaluation Time: 0.988776 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 8:
+Relays Coordinates:
+62.6838, 15.1018
+198.096, 110.495
+132.506, 43.6529
+121.098, 100.093
+Evaluation Time: 1.11442 seconds
+Resulting Fitness: 0.197222
+New local best!
+-------------
+Particle: 9:
+Relays Coordinates:
+76.5147, 11.016
+158.952, 127.09
+86.108, 51.1025
+121.637, 124.117
+Evaluation Time: 1.05721 seconds
+Resulting Fitness: 0.166667
+New local best!
+-------------
+Particle: 10:
+Relays Coordinates:
+57.8348, 9.8003
+177.101, 107.504
+119.349, 40.5034
+100.911, 89.7092
+Evaluation Time: 1.07342 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 11:
+Relays Coordinates:
+53.7228, 10.2789
+170.908, 106.14
+129.311, 31.0561
+110.854, 61.4896
+Evaluation Time: 0.998299 seconds
+Resulting Fitness: 0.127778
+-------------
+Particle: 12:
+Relays Coordinates:
+74.3982, 6.19175
+134.418, 129.638
+145.172, 50.2954
+112.132, 104.701
+Evaluation Time: 1.03702 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 13:
+Relays Coordinates:
+76.0215, 9.934
+100.077, 94.385
+127.439, 49.6798
+112.055, 100.77
+Evaluation Time: 0.997286 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 14:
+Relays Coordinates:
+53.4181, 24.5695
+182.214, 105.46
+177.71, 46.4333
+98.7155, 67.3303
+Evaluation Time: 1.19192 seconds
+Resulting Fitness: 0.161111
+-------------
+Particle: 15:
+Relays Coordinates:
+58.0707, 15.7766
+168.304, 122.768
+151.267, 55.3022
+122.961, 70.4087
+Evaluation Time: 1.05538 seconds
+Resulting Fitness: 0.138889
+-------------
+Particle: 16:
+Relays Coordinates:
+93.1344, 68.198
+136.945, 72.9259
+141.756, 47.2852
+57.3207, 55.8647
+Evaluation Time: 1.00585 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 17:
+Relays Coordinates:
+63.1188, 14.7199
+250.556, 119.655
+207.993, 52.5926
+127, 69.1631
+Evaluation Time: 1.24447 seconds
+Resulting Fitness: 0.241667
+New local best!
+-------------
+Particle: 18:
+Relays Coordinates:
+54.9588, 7.2669
+193.71, 109.459
+72.2114, 57.3185
+113.434, 100.018
+Evaluation Time: 1.12829 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 19:
+Relays Coordinates:
+65.1222, 29.3287
+234.099, 109.018
+193.314, 74.7475
+115.573, 87.9516
+Evaluation Time: 1.1874 seconds
+Resulting Fitness: 0.230556
+New local best!
+-------------
+Particle: 20:
+Relays Coordinates:
+76.8957, 12.1136
+191.114, 120.203
+146.043, 46.5029
+124.381, 90.5367
+Evaluation Time: 1.08458 seconds
+Resulting Fitness: 0.183333
+Current global best fitness: 0.244444
+Current global best relays: 78.0991, 19.119
+244.252, 125.376
+205.449, 51.3295
+130.235, 81.6435
+Particle 1 new velocities: 47.0476, 13.0967
+183.603, 77.1259
+122.813, 33.3995
+76.7376, 45.9533
+Particle 2 new velocities: 134.372, 103.473
+223.816, 115.572
+220.524, 141.311
+189.957, 230.701
+Particle 3 new velocities: 127.21, 47.3018
+208.424, 57.0544
+144.99, 141.208
+168.997, 60.8056
+Particle 4 new velocities: 327.737, 180.596
+423.213, 118.831
+411.333, 94.5653
+298.343, 208.771
+Particle 5 new velocities: 198.739, 34.849
+357.387, 144.277
+80.7852, 93.4543
+132.909, 106.883
+Particle 6 new velocities: 78.2495, 11.9743
+233.881, 133.759
+179.8, 70.164
+143.805, 134.287
+Particle 7 new velocities: 90.8052, 84.4229
+229.498, 149.08
+170.432, 61.4075
+135.397, 107.432
+Particle 8 new velocities: 65.4423, 19.6187
+220.13, 108.814
+127.892, 45.4542
+112.846, 65.0139
+Particle 9 new velocities: 55.6739, 17.5065
+117.054, 98.3611
+232.977, 39.2309
+96.6379, 64.3355
+Particle 10 new velocities: 64.4797, 5.29436
+237.786, 106.1
+142.794, 33.328
+87.977, 96.098
+Particle 11 new velocities: 105.598, 17.0971
+251.925, 181.805
+218.957, 91.0813
+154.545, 76.3422
+Particle 12 new velocities: 96.5861, 4.50519
+303.02, 158.809
+202.969, 67.0615
+122.759, 118.63
+Particle 13 new velocities: 101.057, 5.00424
+343.787, 138.991
+215.356, 65.8923
+161.775, 129.856
+Particle 14 new velocities: 103.912, 31.2688
+272.104, 149.467
+211.712, 62.1394
+150.179, 79.1497
+Particle 15 new velocities: 47.4032, 14.8008
+124.135, 83.0506
+151.388, 35.4888
+48.2127, 27.2625
+Particle 16 new velocities: 133.566, 75.083
+201.001, 105.399
+219.587, 62.35
+120.567, 69.3548
+Particle 17 new velocities: 20.6495, 7.36489
+64.6637, 20.9098
+57.4864, 10.1795
+34.8554, 27.3523
+Particle 18 new velocities: 100.274, 7.32047
+32.7194, 176.174
+252.135, 89.1551
+183.422, 159.941
+Particle 19 new velocities: 59.4659, 18.8023
+183.65, 87.0058
+118.149, 29.7096
+80.9447, 54.122
+Particle 20 new velocities: 72.0345, 15.4248
+193.538, 125.368
+183.064, 42.9639
+108.38, 88.4649
+-- ITERATION 12 --
+-------------
+Particle: 1:
+Relays Coordinates:
+63.9059, 16.7511
+213.834, 105.991
+168.979, 41.7459
+105.264, 68.8436
+Evaluation Time: 1.13474 seconds
+Resulting Fitness: 0.191667
+-------------
+Particle: 2:
+Relays Coordinates:
+58.4132, 51.4236
+97.6741, 48.5582
+101.794, 58.4792
+83.7292, 106.295
+Evaluation Time: 0.98194 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 3:
+Relays Coordinates:
+69.6088, 33.8108
+112.792, 27.5921
+83.9324, 69.579
+86.1596, 31.9101
+Evaluation Time: 0.959201 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+75.9048, 39.22
+91.2413, 28.2285
+89.9864, 21.1087
+66.572, 47.3425
+Evaluation Time: 0.961721 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+95.2168, 17.164
+156.905, 67.3732
+43.897, 44.6333
+64.3521, 42.8953
+Evaluation Time: 1.01745 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 6:
+Relays Coordinates:
+58.0492, 8.39351
+157.298, 98.2561
+121.106, 51.8742
+107.251, 85.1776
+Evaluation Time: 1.02886 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 7:
+Relays Coordinates:
+58.5307, 59.6495
+144.955, 85.8111
+94.458, 39.4767
+91.0081, 68.2528
+Evaluation Time: 0.988572 seconds
+Resulting Fitness: 0.113889
+-------------
+Particle: 8:
+Relays Coordinates:
+55.1541, 14.9461
+180.033, 94.4054
+112.093, 38.3576
+100.705, 71.0732
+Evaluation Time: 1.07023 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 9:
+Relays Coordinates:
+56.9029, 12.278
+118.812, 97.0493
+137.356, 38.8856
+93.9603, 81.1226
+Evaluation Time: 1.01261 seconds
+Resulting Fitness: 0.113889
+-------------
+Particle: 10:
+Relays Coordinates:
+47.3871, 5.84798
+160.736, 82.7545
+101.559, 28.6038
+73.1789, 71.9855
+Evaluation Time: 1.07791 seconds
+Resulting Fitness: 0.130556
+-------------
+Particle: 11:
+Relays Coordinates:
+68.5822, 11.7845
+182.016, 123.951
+149.918, 52.5762
+114.245, 59.3321
+Evaluation Time: 1.0992 seconds
+Resulting Fitness: 0.163889
+-------------
+Particle: 12:
+Relays Coordinates:
+66.2428, 4.14422
+169.473, 111.75
+134.877, 45.4665
+91.0016, 86.5229
+Evaluation Time: 1.09624 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 13:
+Relays Coordinates:
+76.2264, 6.43042
+191.069, 100.461
+147.562, 49.75
+117.875, 99.2767
+Evaluation Time: 1.09194 seconds
+Resulting Fitness: 0.183333
+-------------
+Particle: 14:
+Relays Coordinates:
+75.2506, 26.7073
+217.299, 121.931
+186.259, 51.93
+119.046, 70.061
+Evaluation Time: 1.15034 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 15:
+Relays Coordinates:
+62.2812, 18.0556
+172.682, 121.534
+178.715, 53.6112
+101.077, 57.6739
+Evaluation Time: 1.06491 seconds
+Resulting Fitness: 0.144444
+-------------
+Particle: 16:
+Relays Coordinates:
+87.8282, 55.51
+130.927, 69.0865
+139.992, 42.4749
+68.9172, 48.5126
+Evaluation Time: 0.935691 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 17:
+Relays Coordinates:
+61.0671, 16.0998
+229.795, 102.472
+193.535, 45.7609
+117.993, 70.3597
+Evaluation Time: 1.17707 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 18:
+Relays Coordinates:
+60.1403, 5.65144
+87.7235, 110.66
+125.658, 56.7469
+115.008, 100.713
+Evaluation Time: 0.988415 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 19:
+Relays Coordinates:
+73.568, 28.4209
+246.677, 115.75
+183.916, 61.6808
+116.042, 83.893
+Evaluation Time: 1.17719 seconds
+Resulting Fitness: 0.233333
+New local best!
+-------------
+Particle: 20:
+Relays Coordinates:
+71.2329, 13.1715
+183.978, 117.456
+157.411, 42.7917
+111.329, 85.6159
+Evaluation Time: 1.10131 seconds
+Resulting Fitness: 0.183333
+Current global best fitness: 0.244444
+Current global best relays: 78.0991, 19.119
+244.252, 125.376
+205.449, 51.3295
+130.235, 81.6435
+Particle 1 new velocities: 50.7335, 16.1353
+182.382, 79.0689
+163.199, 47.02
+82.0601, 45.6206
+Particle 2 new velocities: 146.149, 181.603
+340.098, 117.062
+218.914, 126.735
+182.871, 261.359
+Particle 3 new velocities: 114.726, 40.7901
+253.337, 61.5108
+117.707, 133.747
+179.01, 43.2188
+Particle 4 new velocities: 405.721, 157.298
+434.55, 83.5944
+475.234, 113.006
+326.58, 232.08
+Particle 5 new velocities: 219.265, 34.7554
+90.854, 200.335
+213.758, 85.5113
+172.528, 91.7488
+Particle 6 new velocities: 83.4424, 10.9731
+197.609, 141.179
+229.307, 79.4894
+148.537, 170.809
+Particle 7 new velocities: 84.5328, 208.06
+145.185, 164.255
+161.264, 71.2321
+107.845, 92.4275
+Particle 8 new velocities: 90.9368, 17.732
+268.143, 99.1103
+138.902, 44.5436
+130.628, 61.487
+Particle 9 new velocities: 59.0716, 15.6287
+181.248, 141.895
+173.051, 44.2977
+143.614, 88.3627
+Particle 10 new velocities: 80.4972, 10.8011
+316.481, 166.099
+213.452, 54.9155
+140.824, 89.2684
+Particle 11 new velocities: 86.9293, -2.40885
+205.993, 157.109
+151.612, 76.0992
+154.113, 166.621
+Particle 12 new velocities: 107.514, 17.6395
+295.238, 202.44
+186.717, 90.0024
+145.634, 145.224
+Particle 13 new velocities: 79.1956, 19.151
+283.041, 116.025
+163.593, 53.9144
+116.58, 109.448
+Particle 14 new velocities: 71.0493, 26.0982
+244.98, 113.508
+191.81, 55.9066
+123.115, 84.0599
+Particle 15 new velocities: 49.0514, 12.5512
+138.067, 88.015
+126.087, 62.2605
+51.5122, 107.135
+Particle 16 new velocities: 111.333, 130.709
+157.983, 134.555
+231.994, 71.4679
+126.22, 44.2756
+Particle 17 new velocities: 37.1828, 8.09035
+74.6524, 38.475
+47.6336, 17.7412
+49.7455, 27.5539
+Particle 18 new velocities: 100.742, 4.90469
+244.794, 187.793
+264.225, 72.9939
+167.705, 133.597
+Particle 19 new velocities: 49.6039, 5.12624
+145.3, 77.3653
+121.852, 20.6555
+82.145, 42.2732
+Particle 20 new velocities: 78.0253, 4.00819
+223.801, 122.769
+171.803, 46.4288
+116.784, 72.0355
+-- ITERATION 13 --
+-------------
+Particle: 1:
+Relays Coordinates:
+60.9241, 17.4771
+210.565, 98.3484
+176.533, 47.1739
+99.5515, 60.831
+Evaluation Time: 1.14292 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 2:
+Relays Coordinates:
+51.997, 59.2322
+111.276, 42.0985
+81.5197, 47.0791
+67.7661, 93.4529
+Evaluation Time: 0.95724 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 3:
+Relays Coordinates:
+71.4151, 28.9019
+141.846, 34.5203
+78.1193, 78.7725
+102.732, 29.1065
+Evaluation Time: 0.943136 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+80.3215, 32.7737
+83.3859, 18.6489
+83.3859, 22.3665
+65.5667, 46.5997
+Evaluation Time: 0.95865 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+88.819, 14.6636
+69.9746, 75.6088
+72.7694, 36.7567
+66.9018, 38.0275
+Evaluation Time: 0.951747 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 6:
+Relays Coordinates:
+49.335, 6.75272
+123.749, 83.486
+122.181, 45.8037
+89.188, 89.2569
+Evaluation Time: 1.03472 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 7:
+Relays Coordinates:
+44.8948, 84.0102
+91.0489, 78.4735
+80.2484, 34.7416
+62.4023, 50.4232
+Evaluation Time: 0.965516 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 8:
+Relays Coordinates:
+50.9387, 11.3941
+156.269, 67.4748
+87.5165, 28.9059
+80.6609, 46.2209
+Evaluation Time: 0.979563 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 9:
+Relays Coordinates:
+49.9232, 12.0129
+129.166, 102.858
+133.62, 35.8077
+102.268, 72.9579
+Evaluation Time: 1.04593 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 10:
+Relays Coordinates:
+44.5905, 5.80517
+166.395, 86.7699
+109.838, 29.1214
+74.6183, 56.2258
+Evaluation Time: 1.05212 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 11:
+Relays Coordinates:
+66.9426, 4.0359
+167.025, 120.987
+129.799, 55.3905
+115.52, 97.2652
+Evaluation Time: 1.11708 seconds
+Resulting Fitness: 0.166667
+-------------
+Particle: 12:
+Relays Coordinates:
+60.5853, 7.59553
+162.034, 109.551
+112.133, 47.2351
+82.5096, 80.8053
+Evaluation Time: 1.06287 seconds
+Resulting Fitness: 0.125
+-------------
+Particle: 13:
+Relays Coordinates:
+60.2137, 9.91075
+183.68, 83.8712
+120.548, 40.1617
+90.8325, 80.8642
+Evaluation Time: 1.05617 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 14:
+Relays Coordinates:
+77.7498, 28.063
+245.674, 125.122
+200.921, 57.3088
+128.694, 81.9061
+Evaluation Time: 1.24847 seconds
+Resulting Fitness: 0.25
+New local best!
+New global best!
+-------------
+Particle: 15:
+Relays Coordinates:
+59.1667, 16.2657
+165.145, 111.363
+161.984, 61.5789
+81.092, 87.5862
+Evaluation Time: 1.05006 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 16:
+Relays Coordinates:
+77.1593, 72.1451
+111.93, 78.8951
+144.115, 44.1438
+75.6, 35.948
+Evaluation Time: 0.974105 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 17:
+Relays Coordinates:
+79.5824, 19.594
+246.602, 114.167
+195.346, 51.4367
+135.868, 79.31
+Evaluation Time: 1.21693 seconds
+Resulting Fitness: 0.233333
+-------------
+Particle: 18:
+Relays Coordinates:
+50.4866, 3.31263
+104.348, 93.6578
+122.35, 40.714
+88.7183, 73.529
+Evaluation Time: 0.977071 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 19:
+Relays Coordinates:
+72.7318, 19.8092
+231.458, 114.033
+180.553, 48.6187
+117.027, 74.4999
+Evaluation Time: 1.18077 seconds
+Resulting Fitness: 0.211111
+-------------
+Particle: 20:
+Relays Coordinates:
+71.3897, 8.21702
+195.039, 114.899
+157.462, 42.6739
+109.106, 75.4042
+Evaluation Time: 1.10609 seconds
+Resulting Fitness: 0.183333
+Current global best fitness: 0.25
+Current global best relays: 77.7498, 28.063
+245.674, 125.122
+200.921, 57.3088
+128.694, 81.9061
+Particle 1 new velocities: 76.2868, 27.3372
+195.86, 123.219
+179.147, 51.2498
+137.113, 64.5128
+Particle 2 new velocities: 148.14, 160.964
+347.223, 62.5429
+206.981, 116.971
+249.188, 299.483
+Particle 3 new velocities: 113.516, 45.5429
+84.8471, 56.0209
+140.611, 105.379
+130.982, 48.0234
+Particle 4 new velocities: 486.195, 174.676
+108.864, 172.538
+108.953, 139.539
+345.023, 220.951
+Particle 5 new velocities: 225.373, 72.03
+386.075, 167.244
+100.633, 98.5882
+199.76, 113.163
+Particle 6 new velocities: 112.624, 28.0398
+327.2, 169.264
+278.035, 77.5788
+230.833, 158.986
+Particle 7 new velocities: 94.4609, 137.74
+287.379, 164.346
+167.875, 78.2424
+158.233, 124.836
+Particle 8 new velocities: 80.2654, 15.9501
+328.152, 159.876
+262.895, 92.1042
+163.47, 125.29
+Particle 9 new velocities: 89.9115, 29.5516
+163.072, 160.352
+214.173, 61.4905
+131.206, 133.172
+Particle 10 new velocities: 136.842, 24.3003
+371.265, 192.597
+190.41, 52.8739
+190.182, 157.655
+Particle 11 new velocities: 76.5759, 20.3106
+276.614, 142.192
+188.85, 62.4445
+141.178, 159.252
+Particle 12 new velocities: 130.462, 31.1959
+327.644, 185.462
+193.676, 101.065
+190.18, 157.176
+Particle 13 new velocities: 75.9699, 17.0589
+313.118, 140.563
+141.643, 59.5326
+146.586, 128.808
+Particle 14 new velocities: 56.8395, 20.8786
+195.984, 90.8061
+153.448, 44.7253
+98.492, 67.2479
+Particle 15 new velocities: 53.637, 24.9011
+152.553, 99.2722
+104.275, 73.9621
+108.041, 105.931
+Particle 16 new velocities: 132.582, 109.589
+110.037, 114.922
+199.146, 69.0328
+142.367, 41.8008
+Particle 17 new velocities: 24.0504, 1.55097
+64.9392, 40.0625
+55.1609, 15.8222
+38.4286, 8.54577
+Particle 18 new velocities: 104.665, 19.1972
+393.989, 181.127
+213.039, 88.3423
+210.982, 156.063
+Particle 19 new velocities: 46.0209, 16.3099
+149.247, 66.7921
+123.727, 36.7832
+76.8239, 51.9229
+Particle 20 new velocities: 78.7463, 14.0439
+203.729, 116.11
+140.081, 57.0869
+118.36, 108.375
+-- ITERATION 14 --
+-------------
+Particle: 1:
+Relays Coordinates:
+72.9195, 23.8162
+215.991, 117.75
+189.023, 52.3064
+125.773, 66.6128
+Evaluation Time: 1.13259 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 2:
+Relays Coordinates:
+56.5246, 62.1898
+129.494, 29.5538
+81.481, 46.3326
+89.5173, 110.977
+Evaluation Time: 0.969009 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 3:
+Relays Coordinates:
+71.646, 28.8415
+87.8256, 35.0775
+84.7406, 71.344
+90.5458, 29.8817
+Evaluation Time: 0.957591 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+156.905, 65.1
+60.3299, 59.9965
+60.3579, 50.8077
+128.848, 83.9601
+Evaluation Time: 0.992855 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 5:
+Relays Coordinates:
+109.552, 30.2282
+159.015, 84.6776
+60.4615, 47.1918
+92.9792, 52.7168
+Evaluation Time: 1.08545 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 6:
+Relays Coordinates:
+50.8245, 10.9183
+141.512, 79.3155
+125.592, 38.7187
+100.426, 77.9011
+Evaluation Time: 0.987683 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 7:
+Relays Coordinates:
+43.7313, 69.5877
+118.755, 76.1992
+77.8636, 35.4556
+69.2377, 54.9983
+Evaluation Time: 0.935085 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 8:
+Relays Coordinates:
+56.4791, 11.7708
+208.527, 97.867
+150.84, 52.0909
+105.09, 73.8299
+Evaluation Time: 1.13918 seconds
+Resulting Fitness: 0.194444
+-------------
+Particle: 9:
+Relays Coordinates:
+60.1942, 17.8922
+125.799, 113.303
+149.714, 41.8837
+100.503, 88.732
+Evaluation Time: 1.00989 seconds
+Resulting Fitness: 0.130556
+-------------
+Particle: 10:
+Relays Coordinates:
+56.9355, 9.44742
+156.905, 87.6682
+94.221, 25.731
+83.0971, 67.1179
+Evaluation Time: 1.01553 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 11:
+Relays Coordinates:
+55.602, 9.43234
+171.875, 101.961
+123.451, 45.6517
+99.4498, 99.3801
+Evaluation Time: 1.12019 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 12:
+Relays Coordinates:
+66.6141, 13.5257
+170.74, 102.865
+106.629, 51.7092
+95.081, 82.9788
+Evaluation Time: 1.08091 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 13:
+Relays Coordinates:
+42.7358, 8.46338
+155.9, 70.4297
+82.2782, 31.2851
+74.5043, 65.7974
+Evaluation Time: 1.03275 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 14:
+Relays Coordinates:
+79.4736, 28.8995
+260.795, 127.503
+209.251, 60.2501
+134.151, 88.074
+Evaluation Time: 1.26214 seconds
+Resulting Fitness: 0.258333
+New local best!
+New global best!
+-------------
+Particle: 15:
+Relays Coordinates:
+53.9537, 19.69
+151.954, 100.746
+127.351, 64.8289
+90.4617, 92.5588
+Evaluation Time: 1.06509 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 16:
+Relays Coordinates:
+73.1324, 63.3669
+77.3948, 67.5797
+119.688, 39.4622
+76.0003, 27.1094
+Evaluation Time: 0.98681 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 17:
+Relays Coordinates:
+75.5483, 15.4147
+227.114, 112.433
+182.62, 49.0318
+127.062, 64.0469
+Evaluation Time: 1.1733 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 18:
+Relays Coordinates:
+60.1089, 8.72078
+193.066, 106.457
+129.936, 49.9991
+116.11, 88.9487
+Evaluation Time: 1.13706 seconds
+Resulting Fitness: 0.177778
+-------------
+Particle: 19:
+Relays Coordinates:
+77.9137, 23.6978
+249.781, 118.639
+199.638, 56.0322
+127.186, 82.946
+Evaluation Time: 1.22933 seconds
+Resulting Fitness: 0.247222
+New local best!
+-------------
+Particle: 20:
+Relays Coordinates:
+71.8096, 10.6474
+190.73, 110.491
+142.314, 47.7152
+108.796, 87.901
+Evaluation Time: 1.11728 seconds
+Resulting Fitness: 0.183333
+Current global best fitness: 0.258333
+Current global best relays: 79.4736, 28.8995
+260.795, 127.503
+209.251, 60.2501
+134.151, 88.074
+Particle 1 new velocities: 69.4085, 21.6259
+185.547, 112.772
+180.086, 40.2554
+124.624, 73.4246
+Particle 2 new velocities: 143.152, 152.334
+373.632, 142.618
+195.288, 129.554
+211.506, 297.659
+Particle 3 new velocities: 117.888, 91.6596
+110.223, 26.3831
+148.875, 116.297
+108.114, 101.918
+Particle 4 new velocities: -74.5676, 146.977
+164.728, 113.783
+252.627, 119.867
+245.932, 178.482
+Particle 5 new velocities: 230.857, 66.5586
+445.74, 145.224
+66.4095, 112.799
+198.095, 69.4994
+Particle 6 new velocities: 108.33, 18.6945
+402.381, 189.681
+287.933, 66.611
+224.708, 216.427
+Particle 7 new velocities: 85.7722, 253.307
+351.721, 200.288
+213.627, 93.6809
+208.008, 126.28
+Particle 8 new velocities: 72.453, 27.3193
+259.263, 140.403
+223.247, 69.3308
+151.76, 138.449
+Particle 9 new velocities: 109.84, 23.6944
+309.603, 145.219
+171.098, 69.4804
+171.441, 135.621
+Particle 10 new velocities: 140.222, 26.7033
+54.6395, 215.094
+192.203, 63.3248
+239.931, 152.153
+Particle 11 new velocities: 76.8877, 7.09929
+248.985, 142.577
+157.176, 64.3087
+139.256, 130.834
+Particle 12 new velocities: 109.769, 30.1338
+349.048, 200.406
+165.334, 87.7235
+206.167, 204.927
+Particle 13 new velocities: 138.874, 27.1114
+309.628, 140.158
+300.55, 52.3124
+154.052, 131.481
+Particle 14 new velocities: 45.4716, 16.7029
+156.787, 72.6449
+122.758, 35.7802
+78.7936, 53.7983
+Particle 15 new velocities: 83.7448, 20.6738
+242.018, 128.26
+112.891, 84.4004
+171.583, 121.942
+Particle 16 new velocities: 190.213, 136.004
+321.966, 157.419
+267.654, 97.739
+78.8183, 98.4049
+Particle 17 new velocities: 6.248, 9.76813
+110.421, 45.1971
+80.2551, 24.2634
+31.9969, 27.5426
+Particle 18 new velocities: 108.049, 10.2041
+343.88, 176.178
+254.791, 100.184
+194.977, 132.663
+Particle 19 new velocities: 38.6635, 17.0273
+125.909, 61.6804
+105.525, 33.2516
+61.4655, 44.8915
+Particle 20 new velocities: 74.7571, 20.0121
+190.44, 146.069
+133.765, 68.9515
+100.284, 96.837
+-- ITERATION 15 --
+-------------
+Particle: 1:
+Relays Coordinates:
+75.6389, 24.1498
+213.394, 122.509
+196.159, 49.1911
+133.072, 74.4216
+Evaluation Time: 1.1533 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 2:
+Relays Coordinates:
+56.3946, 60.5879
+141.215, 48.6264
+78.1679, 49.6755
+85.0177, 115.411
+Evaluation Time: 0.975469 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 3:
+Relays Coordinates:
+73.4292, 46.6846
+76.7281, 23.8111
+90.5075, 72.6961
+76.965, 51.062
+Evaluation Time: 0.951958 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+28.7094, 73.9467
+78.4728, 60.5932
+109.131, 59.5107
+130.678, 91.5081
+Evaluation Time: 0.98315 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 5:
+Relays Coordinates:
+131.881, 37.4972
+193.71, 89.0687
+49.1524, 61.9836
+112.768, 47.3491
+Evaluation Time: 1.06229 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 6:
+Relays Coordinates:
+49.9442, 9.2928
+156.905, 84.4138
+129.769, 33.0536
+102.03, 92.3634
+Evaluation Time: 0.988572 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 7:
+Relays Coordinates:
+32.9181, 82.0756
+119.589, 70.2794
+74.093, 32.8248
+70.4722, 46.0784
+Evaluation Time: 0.965804 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 8:
+Relays Coordinates:
+49.9509, 15.1443
+181.232, 92.3106
+144.929, 47.0413
+99.5092, 82.2413
+Evaluation Time: 1.03325 seconds
+Resulting Fitness: 0.127778
+-------------
+Particle: 9:
+Relays Coordinates:
+81.3267, 19.8908
+208.252, 123.65
+153.443, 53.2651
+130.07, 107.307
+Evaluation Time: 1.17554 seconds
+Resulting Fitness: 0.216667
+New local best!
+-------------
+Particle: 10:
+Relays Coordinates:
+76.383, 14.0055
+81.9568, 117.296
+110.967, 34.502
+125.148, 84.9501
+Evaluation Time: 1.12044 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 11:
+Relays Coordinates:
+57.0325, 7.11633
+181.166, 105.266
+120.801, 47.3343
+102.755, 99.0996
+Evaluation Time: 1.10696 seconds
+Resulting Fitness: 0.155556
+-------------
+Particle: 12:
+Relays Coordinates:
+68.3344, 16.9146
+193.71, 117.493
+105.364, 54.0191
+116.71, 111.541
+Evaluation Time: 1.16021 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 13:
+Relays Coordinates:
+78.1772, 15.3138
+200.395, 90.6513
+164.795, 35.986
+98.3859, 84.9218
+Evaluation Time: 1.07633 seconds
+Resulting Fitness: 0.163889
+-------------
+Particle: 14:
+Relays Coordinates:
+73.7789, 26.9277
+246.578, 118.185
+196.048, 56.7049
+125.742, 83.7742
+Evaluation Time: 1.21772 seconds
+Resulting Fitness: 0.25
+-------------
+Particle: 15:
+Relays Coordinates:
+73.1786, 21.451
+209.373, 121.703
+127.675, 79.3066
+139.261, 113.994
+Evaluation Time: 1.17001 seconds
+Resulting Fitness: 0.213889
+New local best!
+-------------
+Particle: 16:
+Relays Coordinates:
+102.025, 77.2404
+154.721, 87.1691
+150.064, 53.1546
+59.9799, 48.6268
+Evaluation Time: 0.978621 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 17:
+Relays Coordinates:
+59.6295, 18.3583
+246.063, 114.913
+191.636, 53.4322
+115.954, 66.7687
+Evaluation Time: 1.21464 seconds
+Resulting Fitness: 0.247222
+New local best!
+-------------
+Particle: 18:
+Relays Coordinates:
+52.7698, 5.93884
+156.905, 88.6939
+120.732, 47.1289
+97.6224, 69.5442
+Evaluation Time: 1.03677 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 19:
+Relays Coordinates:
+76.4863, 26.7198
+246.49, 118.308
+200.218, 58.5791
+123.774, 83.8742
+Evaluation Time: 1.20349 seconds
+Resulting Fitness: 0.247222
+-------------
+Particle: 20:
+Relays Coordinates:
+70.1024, 14.6643
+182.312, 122.711
+132.048, 55.8014
+100.003, 88.3596
+Evaluation Time: 1.08953 seconds
+Resulting Fitness: 0.163889
+Current global best fitness: 0.258333
+Current global best relays: 79.4736, 28.8995
+260.795, 127.503
+209.251, 60.2501
+134.151, 88.074
+Particle 1 new velocities: 58.7231, 18.4972
+209.116, 92.7748
+168.722, 39.9062
+99.6446, 68.0979
+Particle 2 new velocities: 123.858, 150.182
+-0.636406, 107.28
+231.964, 114.364
+267.82, 211.662
+Particle 3 new velocities: 105.854, 74.0372
+243.552, 25.635
+182.805, 146.42
+90.3285, 88.4318
+Particle 4 new velocities: 207.01, 85.9207
+178.978, 69.0646
+358.208, 94.3464
+143.741, 135.752
+Particle 5 new velocities: 205.207, 51.5293
+35.9525, 130.487
+53.4003, 89.1673
+158.301, 35.0821
+Particle 6 new velocities: 104.249, 15.4417
+53.2379, 231.757
+262.324, 94.5584
+248.478, 182.121
+Particle 7 new velocities: 117.736, 263.691
+412.032, 180.307
+294.181, 115.551
+188.038, 210.986
+Particle 8 new velocities: 69.8978, 38.5458
+285.655, 155.148
+198.187, 56.2026
+147.341, 126.474
+Particle 9 new velocities: 86.2945, 24.925
+264.471, 117.449
+146.281, 59.3935
+140.79, 98.2252
+Particle 10 new velocities: 103.362, 23.7442
+75.0776, 186.949
+282.648, 73.1032
+191.799, 145.049
+Particle 11 new velocities: 93.9764, 8.67332
+208.811, 162.405
+237.11, 77.4569
+134.891, 136.222
+Particle 12 new velocities: 95.3021, 16.1332
+51.2884, 176.569
+182.039, 78.1891
+175.783, 154.688
+Particle 13 new velocities: 108.385, 24.7335
+279.091, 148.723
+245.397, 52.7702
+137.244, 148.154
+Particle 14 new velocities: 46.2709, 15.6949
+153.357, 69.906
+125.142, 34.9917
+72.3078, 52.4276
+Particle 15 new velocities: 72.4847, 24.5941
+235.112, 103.912
+178.766, 45.6277
+130.985, 76.7517
+Particle 16 new velocities: 150.671, 175.551
+282.689, 144.213
+262.418, 81.3053
+49.9558, 91.6805
+Particle 17 new velocities: 15.5876, 16.5978
+101.065, 38.8661
+82.6223, 22.4438
+36.5132, 47.6222
+Particle 18 new velocities: 90.9523, 20.6388
+120.242, 241.535
+264.164, 113.063
+194.582, 134.115
+Particle 19 new velocities: 34.723, 14.4409
+109.251, 60.3215
+90.4468, 25.0674
+61.7861, 35.3491
+Particle 20 new velocities: 71.4519, 23.0148
+182.259, 138.49
+207.939, 60.4442
+144.558, 95.5704
+-- ITERATION 16 --
+-------------
+Particle: 1:
+Relays Coordinates:
+79.3395, 25.1826
+249.488, 127.123
+215.459, 52.6111
+137.417, 84.1563
+Evaluation Time: 1.19636 seconds
+Resulting Fitness: 0.213889
+-------------
+Particle: 2:
+Relays Coordinates:
+69.8335, 81.6567
+54.4629, 60.4012
+120.151, 63.5522
+136.697, 126.715
+Evaluation Time: 1.01712 seconds
+Resulting Fitness: 0.141667
+-------------
+Particle: 3:
+Relays Coordinates:
+69.4582, 46.7701
+124.083, 19.1564
+105.887, 84.8901
+64.8129, 54.0427
+Evaluation Time: 0.958048 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+66.5741, 45.1513
+72.7116, 36.6192
+131.99, 43.4538
+77.504, 64.185
+Evaluation Time: 0.958974 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+145.106, 38.323
+98.8623, 94.5114
+44.1456, 65.0655
+116.686, 35.4839
+Evaluation Time: 0.979587 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 6:
+Relays Coordinates:
+48.3876, 7.76196
+65.9452, 99.2177
+123.043, 40.046
+109.993, 86.1361
+Evaluation Time: 1.01006 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 7:
+Relays Coordinates:
+34.4649, 79.1002
+114.384, 57.3261
+84.2493, 33.9436
+59.1388, 58.808
+Evaluation Time: 0.941863 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 8:
+Relays Coordinates:
+46.4319, 20.8007
+180.882, 95.8707
+132.93, 39.9988
+95.6347, 80.8607
+Evaluation Time: 1.0233 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 9:
+Relays Coordinates:
+64.9399, 17.3625
+183.142, 93.4067
+116.119, 43.6463
+104.937, 79.6274
+Evaluation Time: 1.0698 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 10:
+Relays Coordinates:
+62.6732, 13.1625
+54.7545, 106.084
+137.245, 37.5196
+110.513, 80.1958
+Evaluation Time: 1.0116 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 11:
+Relays Coordinates:
+52.6535, 5.50551
+135.977, 93.3311
+124.796, 43.512
+82.862, 82.0516
+Evaluation Time: 0.993173 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 12:
+Relays Coordinates:
+78.2668, 15.8067
+117.182, 140.649
+137.464, 63.2347
+139.898, 127.336
+Evaluation Time: 1.06171 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 13:
+Relays Coordinates:
+65.0504, 13.9636
+167.186, 83.4648
+143.025, 30.9474
+82.1589, 81.2685
+Evaluation Time: 1.02992 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 14:
+Relays Coordinates:
+70.8882, 25.1682
+236.157, 111.066
+189.66, 54.146
+116.946, 80.4258
+Evaluation Time: 1.21249 seconds
+Resulting Fitness: 0.227778
+-------------
+Particle: 15:
+Relays Coordinates:
+62.7033, 19.8209
+191.336, 97.1198
+131.912, 53.7801
+116.332, 82.1099
+Evaluation Time: 1.05376 seconds
+Resulting Fitness: 0.166667
+-------------
+Particle: 16:
+Relays Coordinates:
+108.778, 108.818
+188.291, 99.6022
+177.56, 57.8806
+47.3237, 60.3977
+Evaluation Time: 1.08839 seconds
+Resulting Fitness: 0.175
+New local best!
+-------------
+Particle: 17:
+Relays Coordinates:
+49.35, 22.9347
+227.751, 100.894
+179.941, 49.7822
+100.034, 75.0519
+Evaluation Time: 1.1957 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 18:
+Relays Coordinates:
+50.1128, 9.26706
+96.6354, 115.144
+134.205, 55.8553
+101.886, 71.0117
+Evaluation Time: 1.0038 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 19:
+Relays Coordinates:
+72.9644, 27.0055
+233.402, 117.199
+190.705, 54.8805
+121.746, 78.2224
+Evaluation Time: 1.16156 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 20:
+Relays Coordinates:
+60.9345, 16.2196
+156.936, 112.439
+146.353, 50.0399
+105.275, 79.1759
+Evaluation Time: 1.00452 seconds
+Resulting Fitness: 0.125
+Current global best fitness: 0.258333
+Current global best relays: 79.4736, 28.8995
+260.795, 127.503
+209.251, 60.2501
+134.151, 88.074
+Particle 1 new velocities: 45.6235, 8.3192
+173.185, 74.5322
+119.615, 36.3799
+69.7054, 58.3487
+Particle 2 new velocities: 99.2449, 94.7358
+131.015, 100.064
+243.784, 103.23
+173.768, 160.262
+Particle 3 new velocities: 104.093, 76.0976
+235.744, 111.193
+115.33, 151.035
+132.705, 57.6426
+Particle 4 new velocities: 295.73, 90.3435
+208.448, 139.752
+311.449, 82.4913
+143.543, 136.689
+Particle 5 new velocities: 90.6027, 32.6718
+322.134, 78.1555
+65.364, 67.3529
+123.993, 89.5354
+Particle 6 new velocities: 99.1814, 23.2789
+126.68, 210.884
+225.101, 109.525
+227.837, 150.904
+Particle 7 new velocities: 123.501, 325.632
+66.211, 188.614
+317.266, 108.542
+203.756, 220.542
+Particle 8 new velocities: 88.5766, 26.9918
+303.417, 155.416
+187.565, 72.3253
+161.207, 130.091
+Particle 9 new velocities: 93.8122, 28.2638
+265.595, 121.877
+225.92, 63.4959
+150.42, 114.145
+Particle 10 new velocities: 90.7277, 18.9261
+141.232, 202.338
+219.236, 81.4629
+168.593, 137.041
+Particle 11 new velocities: 106.437, 15.3161
+248.41, 229.828
+210.186, 93.941
+203.314, 138.044
+Particle 12 new velocities: 78.8284, 0.808838
+241.273, 128.28
+225.504, 63.4121
+120.338, 93.2364
+Particle 13 new velocities: 108.976, 37.2599
+348.433, 133.779
+272.139, 76.3877
+157.636, 157.418
+Particle 14 new velocities: 51.6048, 19.3737
+172.472, 98.6408
+146.748, 34.7075
+85.7559, 62.1981
+Particle 15 new velocities: 80.3539, 21.079
+278.374, 132.448
+183.229, 66.1501
+147.989, 120.332
+Particle 16 new velocities: 117.735, 124.985
+240.885, 116.542
+248.809, 67.9713
+49.2042, 76.7667
+Particle 17 new velocities: 23.0731, 14.5223
+130.806, 61.1545
+108.64, 35.6671
+55.9634, 34.3486
+Particle 18 new velocities: 90.2323, 36.5766
+182.086, 207.787
+275.771, 104.581
+189.658, 159.27
+Particle 19 new velocities: 30.581, 9.13862
+132.318, 52.0144
+103.169, 24.4199
+70.1169, 34.0349
+Particle 20 new velocities: 94.0808, 15.5192
+299.124, 125.149
+210.62, 62.9581
+154.066, 124.501
+-- ITERATION 17 --
+-------------
+Particle: 1:
+Relays Coordinates:
+73.7894, 19.7825
+249.584, 119.075
+197.857, 52.5483
+122.303, 84.1478
+Evaluation Time: 1.22853 seconds
+Resulting Fitness: 0.236111
+-------------
+Particle: 2:
+Relays Coordinates:
+53.0586, 55.3538
+58.2051, 50.3558
+114.207, 52.3382
+97.4273, 90.0562
+Evaluation Time: 0.933068 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 3:
+Relays Coordinates:
+67.2372, 47.6015
+139.404, 50.4999
+85.7038, 91.4022
+76.5224, 43.2692
+Evaluation Time: 0.972319 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+102.325, 38.2677
+79.4078, 49.8124
+125.24, 35.5706
+62.4301, 56.7328
+Evaluation Time: 0.954464 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+101.465, 30.5609
+181.225, 74.3274
+47.1403, 57.0018
+103.604, 53.8167
+Evaluation Time: 1.02279 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 6:
+Relays Coordinates:
+51.4541, 10.8233
+67.1642, 108.126
+121.39, 52.1523
+117.794, 82.6507
+Evaluation Time: 1.01651 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 7:
+Relays Coordinates:
+40.1528, 102.878
+45.9048, 62.5146
+102.06, 36.2179
+66.8243, 71.0069
+Evaluation Time: 0.950264 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 8:
+Relays Coordinates:
+52.305, 18.5158
+187.627, 97.3535
+124.167, 43.5167
+99.5056, 81.7271
+Evaluation Time: 1.06886 seconds
+Resulting Fitness: 0.166667
+-------------
+Particle: 9:
+Relays Coordinates:
+75.9306, 21.823
+214.63, 102.97
+163.596, 51.2458
+122.136, 92.6808
+Evaluation Time: 1.16874 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 10:
+Relays Coordinates:
+53.4876, 11.1886
+68.3363, 107.54
+124.297, 41.4866
+97.318, 75.7459
+Evaluation Time: 1.05277 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 11:
+Relays Coordinates:
+61.6348, 8.06672
+148.919, 125.198
+129.779, 53.2521
+110.871, 85.2694
+Evaluation Time: 1.13154 seconds
+Resulting Fitness: 0.138889
+-------------
+Particle: 12:
+Relays Coordinates:
+54.7757, 5.79347
+124.986, 93.7698
+126.559, 44.159
+90.7386, 76.909
+Evaluation Time: 1.00808 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 13:
+Relays Coordinates:
+67.4213, 19.8451
+193.71, 84.1646
+160.843, 41.5838
+92.9014, 92.472
+Evaluation Time: 1.05631 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 14:
+Relays Coordinates:
+65.0978, 23.6714
+217.162, 111.447
+178.781, 47.2204
+107.724, 75.7962
+Evaluation Time: 1.14335 seconds
+Resulting Fitness: 0.194444
+-------------
+Particle: 15:
+Relays Coordinates:
+61.5814, 17.6061
+202.195, 98.8216
+135.658, 51.626
+113.782, 87.1445
+Evaluation Time: 1.12437 seconds
+Resulting Fitness: 0.177778
+-------------
+Particle: 16:
+Relays Coordinates:
+87.7555, 90.5804
+166.271, 83.7388
+165.184, 48.7576
+37.3969, 53.1403
+Evaluation Time: 1.02576 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 17:
+Relays Coordinates:
+42.7651, 22.118
+211.724, 95.6881
+170.404, 50.4569
+92.1148, 64.5999
+Evaluation Time: 1.22658 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 18:
+Relays Coordinates:
+48.9353, 15.9847
+97.1842, 112.599
+142.95, 55.9408
+101.655, 80.2943
+Evaluation Time: 1.03398 seconds
+Resulting Fitness: 0.130556
+-------------
+Particle: 19:
+Relays Coordinates:
+75.4846, 26.3491
+266.61, 123.356
+214.234, 57.81
+139.868, 81.8356
+Evaluation Time: 1.20963 seconds
+Resulting Fitness: 0.236111
+-------------
+Particle: 20:
+Relays Coordinates:
+60.0561, 12.2963
+176.687, 92.0464
+138.299, 43.7777
+100.474, 78.9087
+Evaluation Time: 1.02137 seconds
+Resulting Fitness: 0.133333
+Current global best fitness: 0.258333
+Current global best relays: 79.4736, 28.8995
+260.795, 127.503
+209.251, 60.2501
+134.151, 88.074
+Particle 1 new velocities: 44.2115, 12.4931
+137.4, 70.2602
+110.244, 29.9051
+70.8357, 44.8721
+Particle 2 new velocities: 98.9246, 132.339
+174.436, 42.8682
+209.033, 104.503
+188.43, 183.341
+Particle 3 new velocities: 116.278, 82.1714
+133.308, 68.1086
+58.5042, 104.695
+127.82, 53.9682
+Particle 4 new velocities: 324.182, 119.216
+218.319, 142.88
+337.8, 76.6806
+220.005, 149.156
+Particle 5 new velocities: 132.512, 29.0605
+361.174, 120.851
+22.34, 62.0723
+107.843, 84.0671
+Particle 6 new velocities: 99.2797, 29.0432
+154.939, 175.5
+264.586, 108.946
+206.642, 199.947
+Particle 7 new velocities: 141.557, 236.828
+202.334, 211.155
+281.078, 136.856
+235.38, 191.861
+Particle 8 new velocities: 84.2122, 23.937
+281.064, 166.274
+175.283, 76.9793
+177.258, 137.05
+Particle 9 new velocities: 83.808, 21.9906
+204.291, 143.189
+176.808, 63.4706
+140.895, 105.027
+Particle 10 new velocities: 105.658, 20.8746
+272.755, 185.642
+210.333, 77.2282
+209.868, 124.632
+Particle 11 new velocities: 108.152, 8.79449
+278.639, 187.094
+201.503, 84.3677
+184.81, 162.397
+Particle 12 new velocities: 113.81, 5.38979
+490.2, 182.05
+274.533, 98.181
+142.639, 114.42
+Particle 13 new velocities: 92.6923, 11.498
+94.9657, 139.996
+210.156, 90.0848
+188.896, 148.085
+Particle 14 new velocities: 71.7449, 20.7952
+155.903, 97.3699
+128.808, 47.5497
+94.2634, 61.7468
+Particle 15 new velocities: 81.9334, 21.1345
+241.589, 156.833
+224.331, 85.7112
+155.332, 97.7089
+Particle 16 new velocities: 115.244, 50.2004
+230.893, 141.401
+239.756, 72.9873
+123.731, 89.7638
+Particle 17 new velocities: 84.8803, 14.9252
+132.212, 108.298
+116.151, 33.6795
+116.375, 56.278
+Particle 18 new velocities: 109.677, 33.6913
+455.971, 184.032
+156.632, 98.4276
+165.732, 194.681
+Particle 19 new velocities: 33.652, 4.86677
+80.7544, 37.7635
+78.8399, 21.2844
+34.0479, 30.4316
+Particle 20 new velocities: 116.782, 6.61949
+357.44, 129.107
+198.096, 73.3891
+177.144, 117.726
+-- ITERATION 18 --
+-------------
+Particle: 1:
+Relays Coordinates:
+69.6783, 19.0584
+228.51, 111.801
+181.931, 48.6879
+114.047, 76.185
+Evaluation Time: 1.17269 seconds
+Resulting Fitness: 0.211111
+-------------
+Particle: 2:
+Relays Coordinates:
+52.9933, 65.4444
+81.1168, 32.5052
+112.707, 54.687
+99.6723, 95.3279
+Evaluation Time: 0.985438 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 3:
+Relays Coordinates:
+63.9878, 45.249
+95.0888, 41.3562
+50.2822, 68.3749
+71.25, 33.9046
+Evaluation Time: 0.988189 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+97.5712, 36.0271
+68.1103, 44.0817
+105.929, 25.6795
+64.6121, 47.1007
+Evaluation Time: 0.953845 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+66.0819, 16.8389
+141.215, 55.1243
+19.6233, 33.63
+59.7191, 38.9425
+Evaluation Time: 0.955134 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 6:
+Relays Coordinates:
+47.3019, 12.5105
+69.6983, 89.0047
+121.124, 50.5542
+101.812, 88.6821
+Evaluation Time: 0.986613 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 7:
+Relays Coordinates:
+41.5694, 77.7137
+56.7892, 62.6068
+87.6496, 39.5939
+69.1347, 60.1357
+Evaluation Time: 0.962885 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 8:
+Relays Coordinates:
+58.7662, 18.2745
+201.756, 113.483
+128.903, 51.8696
+119.138, 94.1765
+Evaluation Time: 1.12717 seconds
+Resulting Fitness: 0.172222
+-------------
+Particle: 9:
+Relays Coordinates:
+68.7623, 18.8603
+180.332, 105.963
+146.533, 49.3816
+113.227, 85.1069
+Evaluation Time: 1.02868 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 10:
+Relays Coordinates:
+68.507, 13.8022
+146.828, 126.205
+144.047, 51.1028
+132.233, 86.2561
+Evaluation Time: 1.05559 seconds
+Resulting Fitness: 0.147222
+-------------
+Particle: 11:
+Relays Coordinates:
+65.7788, 6.53238
+165.645, 120.989
+128.345, 53.3167
+114.553, 95.9509
+Evaluation Time: 1.05509 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 12:
+Relays Coordinates:
+72.5708, 4.81403
+215.234, 118.731
+172.657, 61.2727
+100.461, 82.3607
+Evaluation Time: 1.16007 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 13:
+Relays Coordinates:
+55.8282, 10.9286
+100.655, 78.1599
+129.359, 45.91
+98.2566, 83.8772
+Evaluation Time: 0.983318 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 14:
+Relays Coordinates:
+80.8042, 26.2571
+220.291, 123.304
+181.628, 55.9608
+119.272, 81.2178
+Evaluation Time: 1.12837 seconds
+Resulting Fitness: 0.194444
+-------------
+Particle: 15:
+Relays Coordinates:
+61.7784, 16.6765
+191.035, 110.051
+154.963, 59.1192
+115.844, 79.5734
+Evaluation Time: 1.10628 seconds
+Resulting Fitness: 0.183333
+-------------
+Particle: 16:
+Relays Coordinates:
+78.6463, 54.5414
+153.87, 87.2239
+156.882, 47.1665
+62.4242, 55.364
+Evaluation Time: 1.00293 seconds
+Resulting Fitness: 0.113889
+-------------
+Particle: 17:
+Relays Coordinates:
+75.3733, 21.8736
+203.091, 120.452
+169.208, 49.6818
+123.111, 71.3772
+Evaluation Time: 1.12668 seconds
+Resulting Fitness: 0.183333
+-------------
+Particle: 18:
+Relays Coordinates:
+55.3045, 17.3209
+174.339, 103.429
+104.458, 53.8249
+93.2322, 95.878
+Evaluation Time: 1.16938 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 19:
+Relays Coordinates:
+71.6045, 20.4807
+227.906, 105.711
+192.286, 51.8938
+114.106, 73.6584
+Evaluation Time: 1.1627 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 20:
+Relays Coordinates:
+76.1229, 8.14261
+215.234, 95.1993
+144.807, 50.4365
+119.505, 84.6449
+Evaluation Time: 1.15058 seconds
+Resulting Fitness: 0.211111
+New local best!
+Current global best fitness: 0.258333
+Current global best relays: 79.4736, 28.8995
+260.795, 127.503
+209.251, 60.2501
+134.151, 88.074
+Particle 1 new velocities: 49.0745, 15.0608
+168.209, 74.9086
+145.042, 28.0687
+82.0791, 45.5764
+Particle 2 new velocities: 99.224, 128.185
+265.208, 95.5855
+215.712, 121.21
+174.842, 146.275
+Particle 3 new velocities: 128.744, 53.4774
+268.06, 28.3045
+228.41, 125.491
+102.74, 47.8801
+Particle 4 new velocities: 381.533, 109.387
+414.972, 167.635
+360.02, 107.269
+292.728, 195.524
+Particle 5 new velocities: 141.959, 34.7483
+200.962, 146.355
+97.3957, 100.266
+133.008, 69.6448
+Particle 6 new velocities: 92.7025, 9.82571
+419.892, 188.788
+285.879, 100.283
+215.547, 194.75
+Particle 7 new velocities: 137.967, 194.633
+376.796, 234.088
+334.172, 130.681
+246.935, 197.426
+Particle 8 new velocities: 77.6725, 30.6973
+254.471, 141.637
+151.069, 58.0621
+160.466, 108.585
+Particle 9 new velocities: 85.7452, 30.0663
+200.737, 167.412
+175.924, 63.1733
+117.111, 111.35
+Particle 10 new velocities: 86.477, 25.984
+331.504, 149.776
+200.709, 61.8557
+169.478, 110.417
+Particle 11 new velocities: 88.6659, 17.3278
+356.17, 163.8
+207.808, 72.3696
+165.262, 162.813
+Particle 12 new velocities: 99.9508, 19.7352
+-5.8404, 183.012
+201.572, 81.8478
+134.009, 159.43
+Particle 13 new velocities: 107.933, 24.5913
+210.468, 171.629
+177.252, 82.8886
+171.629, 148.843
+Particle 14 new velocities: 55.2422, 19.3946
+173.827, 85.2624
+130.636, 41.9373
+106.672, 58.3917
+Particle 15 new velocities: 88.6345, 22.368
+249.41, 147.651
+157.375, 88.4219
+154.247, 113.962
+Particle 16 new velocities: 123.422, 85.0616
+210.593, 127.225
+252.046, 77.4467
+148.528, 97.4765
+Particle 17 new velocities: 72.2368, 11.4174
+193.737, 79.9069
+114.626, 37.4368
+97.6778, 55.3175
+Particle 18 new velocities: 98.3479, 18.8945
+120.195, 194.754
+194.93, 92.056
+189.175, 186.989
+Particle 19 new velocities: 43.4481, 5.96071
+100.494, 60.1783
+79.7252, 25.3657
+59.2069, 41.6059
+Particle 20 new velocities: 94.1472, 28.9499
+17.6314, 134.394
+225.368, 66.4909
+156.848, 97.52
+-- ITERATION 19 --
+-------------
+Particle: 1:
+Relays Coordinates:
+70.1224, 20.147
+234.259, 110.25
+193.074, 45.324
+115.81, 71.8989
+Evaluation Time: 1.22222 seconds
+Resulting Fitness: 0.233333
+-------------
+Particle: 2:
+Relays Coordinates:
+47.7674, 60.763
+108.68, 40.1962
+103.061, 55.1984
+86.1454, 75.8176
+Evaluation Time: 0.958358 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 3:
+Relays Coordinates:
+82.9646, 42.4985
+156.324, 29.9867
+119.968, 83.4531
+74.8972, 35.2056
+Evaluation Time: 0.967086 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 4:
+Relays Coordinates:
+88.7789, 26.9456
+89.5161, 39.2316
+86.3413, 24.6356
+66.2159, 44.9589
+Evaluation Time: 0.96255 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+89.5548, 22.2066
+147.296, 86.7303
+50.3728, 57.6377
+82.9629, 46.7433
+Evaluation Time: 0.997018 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 6:
+Relays Coordinates:
+39.5414, 6.30841
+138.275, 78.4569
+114.95, 42.6008
+89.6316, 80.0497
+Evaluation Time: 1.02004 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 7:
+Relays Coordinates:
+45.6358, 69.227
+110.212, 75.4159
+107.222, 43.2816
+80.3407, 65.4688
+Evaluation Time: 0.936522 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 8:
+Relays Coordinates:
+58.7324, 21.0808
+196.391, 109.821
+120.519, 47.322
+120.36, 87.2823
+Evaluation Time: 1.12391 seconds
+Resulting Fitness: 0.166667
+-------------
+Particle: 9:
+Relays Coordinates:
+73.9004, 23.4014
+182.264, 130.755
+154.23, 53.8347
+110.17, 93.9647
+Evaluation Time: 1.08615 seconds
+Resulting Fitness: 0.166667
+-------------
+Particle: 10:
+Relays Coordinates:
+60.044, 15.414
+185.316, 106.921
+133.565, 43.7624
+116.889, 76.1954
+Evaluation Time: 1.08421 seconds
+Resulting Fitness: 0.161111
+-------------
+Particle: 11:
+Relays Coordinates:
+53.8515, 8.31954
+174.339, 99.2995
+117.21, 43.8241
+97.5655, 90.2253
+Evaluation Time: 1.03443 seconds
+Resulting Fitness: 0.130556
+-------------
+Particle: 12:
+Relays Coordinates:
+60.1546, 8.55978
+73.0109, 105.211
+130.486, 49.903
+81.7549, 84.3074
+Evaluation Time: 1.02253 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 13:
+Relays Coordinates:
+78.3265, 16.9891
+148.809, 119.473
+146.651, 61.604
+129.086, 111.309
+Evaluation Time: 1.05399 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 14:
+Relays Coordinates:
+80.3341, 26.9569
+232.723, 123.156
+184.389, 57.8079
+133.417, 82.438
+Evaluation Time: 1.19413 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 15:
+Relays Coordinates:
+64.7478, 16.8074
+189.597, 110.932
+134.451, 63.5116
+116.265, 83.3104
+Evaluation Time: 1.10512 seconds
+Resulting Fitness: 0.180556
+-------------
+Particle: 16:
+Relays Coordinates:
+63.4113, 43.8089
+114.372, 67.2962
+128.326, 39.1049
+66.1991, 47.9629
+Evaluation Time: 0.966577 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 17:
+Relays Coordinates:
+70.6015, 15.923
+189.801, 95.831
+135.757, 41.6685
+105.603, 60.5977
+Evaluation Time: 1.07526 seconds
+Resulting Fitness: 0.166667
+-------------
+Particle: 18:
+Relays Coordinates:
+66.1423, 15.5896
+126.787, 128.358
+128.877, 62.797
+121.567, 121.765
+Evaluation Time: 1.00328 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 19:
+Relays Coordinates:
+75.486, 17.3482
+215.463, 108.84
+178.467, 50.6899
+113.711, 75.6249
+Evaluation Time: 1.16865 seconds
+Resulting Fitness: 0.2
+-------------
+Particle: 20:
+Relays Coordinates:
+73.2957, 15.9671
+100.241, 98.8323
+159.348, 50.3334
+118.961, 78.416
+Evaluation Time: 1.05546 seconds
+Resulting Fitness: 0.133333
+Current global best fitness: 0.258333
+Current global best relays: 79.4736, 28.8995
+260.795, 127.503
+209.251, 60.2501
+134.151, 88.074
+Particle 1 new velocities: 58.2916, 13.1331
+147.223, 84.9345
+143.078, 38.5352
+96.3456, 49.1823
+Particle 2 new velocities: 93.6869, 164.869
+283.152, 159.221
+182.058, 128.363
+148.932, 193.895
+Particle 3 new velocities: 103.125, 57.6863
+78.573, 44.6133
+176.871, 114.893
+100.273, 39.8237
+Particle 4 new velocities: 340.517, 163.062
+466.002, 193.42
+481.082, 128.47
+310.156, 189.633
+Particle 5 new velocities: 121.805, 39.8907
+357.678, 152.368
+180.551, 87.2188
+154.902, 81.043
+Particle 6 new velocities: 126.51, 2.35318
+391.402, 233.062
+329.207, 102.737
+212.45, 230.723
+Particle 7 new velocities: 154.716, 143.397
+319.313, 189.775
+340.136, 120.283
+234.941, 174.249
+Particle 8 new velocities: 73.5462, 27.8282
+252.323, 122.891
+198.018, 53.5735
+131.464, 96.3859
+Particle 9 new velocities: 70.8528, 21.7513
+198.271, 120.389
+182.162, 54.0549
+120.634, 94.5448
+Particle 10 new velocities: 87.1947, 5.25908
+322.495, 144.846
+247.051, 48.2562
+164.261, 114.894
+Particle 11 new velocities: 109.247, 21.8677
+80.4308, 182.074
+252.536, 96.1118
+142.046, 165.505
+Particle 12 new velocities: 135.072, 27.6499
+213.036, 185.222
+178.25, 75.1449
+212.583, 210.964
+Particle 13 new velocities: 83.802, 18.3088
+336.021, 98.7696
+146.095, 60.17
+128.018, 98.0989
+Particle 14 new velocities: 43.6666, 18.6003
+164.025, 72.423
+126.712, 38.6004
+86.32, 51.6007
+Particle 15 new velocities: 85.8129, 31.6754
+323.593, 151.417
+141.845, 70.9434
+160.346, 98.1363
+Particle 16 new velocities: 164.758, 144.802
+280.517, 198.709
+236.263, 89.9629
+122.624, 131.908
+Particle 17 new velocities: 59.8314, 26.9828
+262.962, 122.375
+234.528, 50.154
+96.0334, 53.8049
+Particle 18 new velocities: 80.4595, 25.7721
+285.228, 163.146
+194.888, 75.013
+157.131, 118.145
+Particle 19 new velocities: 41.8831, 26.5007
+149.184, 65.9038
+92.0581, 33.7727
+68.3562, 48.7182
+Particle 20 new velocities: 83.5186, 31.5799
+221.126, 116.113
+182.358, 59.3814
+143.007, 87.448
+-- ITERATION 20 --
+-------------
+Particle: 1:
+Relays Coordinates:
+75.8272, 19.6516
+225.261, 115.254
+198.495, 49.518
+125.276, 71.4972
+Evaluation Time: 1.16624 seconds
+Resulting Fitness: 0.216667
+-------------
+Particle: 2:
+Relays Coordinates:
+44.3899, 70.8057
+122.961, 62.5792
+89.4736, 57.6035
+73.7698, 84.6386
+Evaluation Time: 0.971939 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 3:
+Relays Coordinates:
+80.1053, 43.1263
+101.115, 32.1128
+127.779, 85.3814
+75.4052, 32.2976
+Evaluation Time: 1.05199 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 4:
+Relays Coordinates:
+79.5493, 35.2087
+92.651, 43.1109
+92.651, 28.3708
+69.7425, 43.4703
+Evaluation Time: 1.01538 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 5:
+Relays Coordinates:
+59.6941, 17.5381
+141.215, 67.5285
+65.2197, 40.9117
+67.18, 36.0906
+Evaluation Time: 1.08427 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 6:
+Relays Coordinates:
+42.2079, 2.20166
+127.093, 79.184
+112.899, 36.943
+76.7851, 78.9942
+Evaluation Time: 1.10175 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 7:
+Relays Coordinates:
+56.5853, 60.0513
+121.31, 74.8978
+126.347, 46.1955
+89.045, 67.7033
+Evaluation Time: 0.926035 seconds
+Resulting Fitness: 0.1
+-------------
+Particle: 8:
+Relays Coordinates:
+56.9416, 21.0537
+193.157, 100.175
+137.119, 43.4322
+108.402, 79.0631
+Evaluation Time: 1.11193 seconds
+Resulting Fitness: 0.158333
+-------------
+Particle: 9:
+Relays Coordinates:
+69.235, 21.5964
+182.009, 120.121
+160.895, 51.6032
+110.393, 90.1635
+Evaluation Time: 1.08979 seconds
+Resulting Fitness: 0.166667
+-------------
+Particle: 10:
+Relays Coordinates:
+57.0433, 8.00917
+193.71, 97.5396
+147.458, 35.6499
+108.923, 74.0321
+Evaluation Time: 1.10943 seconds
+Resulting Fitness: 0.163889
+-------------
+Particle: 11:
+Relays Coordinates:
+56.869, 10.5256
+88.8328, 98.1089
+128.922, 48.7926
+83.5475, 89.1678
+Evaluation Time: 1.0128 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 12:
+Relays Coordinates:
+75.6349, 14.0284
+110.82, 112.52
+119.61, 48.4461
+114.032, 114.394
+Evaluation Time: 0.953753 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 13:
+Relays Coordinates:
+62.8119, 13.6751
+187.833, 84.5518
+113.416, 47.1777
+99.6071, 81.129
+Evaluation Time: 1.07355 seconds
+Resulting Fitness: 0.15
+-------------
+Particle: 14:
+Relays Coordinates:
+73.2212, 26.9011
+234.275, 115.488
+183.702, 56.9281
+129.753, 79.1485
+Evaluation Time: 1.16277 seconds
+Resulting Fitness: 0.213889
+-------------
+Particle: 15:
+Relays Coordinates:
+52.4973, 16.9049
+174.339, 91.4757
+96.3385, 46.8816
+96.4485, 63.2666
+Evaluation Time: 1.10746 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 16:
+Relays Coordinates:
+71.6019, 59.188
+123.92, 83.4753
+114.412, 40.5028
+59.2547, 56.4454
+Evaluation Time: 0.998081 seconds
+Resulting Fitness: 0.116667
+-------------
+Particle: 17:
+Relays Coordinates:
+62.3856, 20.5217
+216.555, 104.367
+177.106, 43.9184
+96.4418, 54.7184
+Evaluation Time: 1.14633 seconds
+Resulting Fitness: 0.197222
+-------------
+Particle: 18:
+Relays Coordinates:
+56.7966, 16.0244
+159.623, 112.935
+125.433, 53.3904
+107.973, 92.9459
+Evaluation Time: 1.03066 seconds
+Resulting Fitness: 0.133333
+-------------
+Particle: 19:
+Relays Coordinates:
+69.3053, 25.8923
+215.32, 103.184
+159.742, 49.8743
+107.509, 73.4233
+Evaluation Time: 1.13831 seconds
+Resulting Fitness: 0.194444
+-------------
+Particle: 20:
+Relays Coordinates:
+75.0038, 22.7416
+153.709, 102.808
+163.437, 52.4762
+125.299, 79.3323
+Evaluation Time: 1.01824 seconds
+Resulting Fitness: 0.133333
+Final Evaluation Time: 441.6 seconds
+Final global best fitness: 0.258333
+Final global best relays:
+79.4736, 28.8995
+260.795, 127.503
+209.251, 60.2501
+134.151, 88.074
