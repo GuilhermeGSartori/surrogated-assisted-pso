@@ -233,6 +233,19 @@ def main():
     output_file = sys.argv[1]
 
 
+    # ============================================================
+    # Check if random solution generation failed
+    # ============================================================
+
+    with open(LOG_FILE, "r") as file:
+        if "COULD NOT GENERATE RANDOM SOLUTION!!" in file.read():
+            print(
+                "Could not generate random solution. "
+                "Skipping plot generation."
+            )
+            return
+
+
     (
         area_width,
         area_height,
@@ -260,7 +273,8 @@ def main():
         print(
             "No initial relay positions found. "
             "Plotting without them."
-    )
+        )
+
 
     if not final_relays:
 

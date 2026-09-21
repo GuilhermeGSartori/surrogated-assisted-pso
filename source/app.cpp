@@ -237,7 +237,9 @@ int initNaive(int argc, char* argv[], Scenario& scenario) {
 
         if (!isConnected(relays, scenario.sink, range)) {
             std::cerr << "Could not generate connected random solution\n";
-            return 1;
+            log << "COULD NOT GENERATE RANDOM SOLUTION!!\n";
+             final_log << "COULD NOT GENERATE RANDOM SOLUTION!!\n";
+            return 0;
         }
         
         double fitness = 0.0;
