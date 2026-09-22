@@ -184,13 +184,36 @@ def parse_naive(path):
         text
     )
 
+    # --------------------------------------------------------
+    # If Naive failed before printing the normal final result,
+    # use the last best fitness it found.
+    #
+    # If it never found a valid solution, use zero.
+    # --------------------------------------------------------
+
+    if final_fitness is None:
+        if events:
+            final_fitness = events[-1]["fitness"]
+        else:
+            final_fitness = 0.0
+
     final_time = extract_float(
         r"Final Evaluation Time:\s*([-+0-9.eE]+)",
         text
     )
 
-    # Naive always performs 400 fitness evaluations.
-    # It only logs iterations where a new best is found.
+    failed_random_solution = bool(
+        re.search(
+            r"COULD NOT GENERATE RANDOM SOLUTION",
+            text,
+            re.IGNORECASE
+        )
+    )
+
+    # Treat Naive as having consumed the complete experiment budget.
+    #
+    # If it failed to generate another feasible candidate,
+    # its current best is simply carried forward until evaluation 400.
     total_evaluations = 400
 
     return {
@@ -201,8 +224,8 @@ def parse_naive(path):
         "total_evaluations": total_evaluations,
         "final_fitness": final_fitness,
         "final_time": final_time,
+        "failed_random_solution": failed_random_solution,
     }
-
 
 # ------------------------------------------------------------
 # Analysis helpers
@@ -253,7 +276,11 @@ def plot_pair(pair_index, pso, naive, output_dir):
         ys = [event["fitness"] for event in run["events"]]
 
         if not xs:
-            continue
+            if run["method"] == "Naive":
+                xs = [1, common_budget]
+                ys = [0.0, 0.0]
+            else:
+                continue
 
         # Extend curve until common budget
         if xs[-1] < common_budget:
@@ -336,7 +363,10 @@ def main():
 
         if "Particles:" in current_text:
             current_method = "PSO"
-        elif "new best fitness:" in current_text:
+        elif (
+            "new best fitness:" in current_text
+            or "COULD NOT GENERATE RANDOM SOLUTION" in current_text
+            ):
             current_method = "Naive"
         else:
             print(f"Skipping unknown log: {current_file.name}")
@@ -359,7 +389,8 @@ def main():
 
         if "Particles:" in next_text:
             next_method = "PSO"
-        elif "new best fitness:" in next_text:
+        elif ("new best fitness:" in next_text
+              or "COULD NOT GENERATE RANDOM SOLUTION" in next_text):
             next_method = "Naive"
         else:
             next_method = None
@@ -437,6 +468,9 @@ def main():
             naive["events"],
             common_budget
         )
+
+        if naive_common is None:
+            naive_common = 0.0
 
         delta_common = None
 

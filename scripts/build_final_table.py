@@ -23,14 +23,18 @@ def main():
 
     # --------------------------------------------------------
     # Parse every PSO / Naive result
+    #
+    # Each block begins at "Scenario seed:" and ends before
+    # the next scenario.
     # --------------------------------------------------------
 
     pattern = re.compile(
         r"Scenario seed:\s*(\d+).*?"
         r"Scenario area:\s*(\d+).*?"
         r"Num relays:\s*(\d+).*?"
-        r"(PSO|Naive)!.*?"
-        r"Final global best fitness:\s*([-+0-9.eE]+)",
+        r"(PSO|Naive)!"
+        r"(.*?)"
+        r"(?=\nScenario seed:|\Z)",
         re.DOTALL | re.IGNORECASE
     )
 
@@ -41,8 +45,48 @@ def main():
         seed = int(match.group(1))
         area = int(match.group(2))
         relays = int(match.group(3))
-        method = match.group(4)
-        fitness = float(match.group(5))
+
+        method = (
+            "PSO"
+            if match.group(4).lower() == "pso"
+            else "Naive"
+        )
+
+        body = match.group(5)
+
+
+        # ----------------------------------------------------
+        # Normal completed run
+        # ----------------------------------------------------
+
+        final_match = re.search(
+            r"Final global best fitness:\s*([-+0-9.eE]+)",
+            body,
+            re.IGNORECASE
+        )
+
+        if final_match:
+            fitness = float(final_match.group(1))
+
+        else:
+
+            # ------------------------------------------------
+            # Failed / incomplete Naive run:
+            #
+            # use the LAST "new best fitness" found.
+            # ------------------------------------------------
+
+            best_values = re.findall(
+                r"new best fitness:\s*([-+0-9.eE]+)",
+                body,
+                re.IGNORECASE
+            )
+
+            if best_values:
+                fitness = float(best_values[-1])
+            else:
+                fitness = 0.0
+
 
         rows.append({
             "seed": seed,
