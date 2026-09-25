@@ -190,6 +190,10 @@ void generateDataset(TrainingScenario& scenario) {
         std::uniform_real_distribution<double> sink_x_dist(0.0, scenario.area.width);
         std::uniform_real_distribution<double> sink_y_dist(0.0, scenario.area.height);
 
+
+        std::uniform_real_distribution<double> x_dist(0.0, scenario.area.width);
+        std::uniform_real_distribution<double> y_dist(0.0, scenario.area.height);
+
         scenario.sink.x = sink_x_dist(rng);
         scenario.sink.y = sink_y_dist(rng);
    
@@ -205,19 +209,22 @@ void generateDataset(TrainingScenario& scenario) {
         //std::cout << "sink x: " << scenario.sink.y << "\n";
         //std::cout << "power: " << scenario.network.power[NodeType::Relay] << "\n";
         int retries = 0;
-        constexpr int MAX_RETRIES = 1000;
+        constexpr int MAX_RETRIES = 10000;
         do {
-            LHS(relays, scenario.n_relays, scenario.area, rng);
+            for (auto& relay : relays) {
+                relay.x = x_dist(rng);
+                relay.y = y_dist(rng);
+            }
             ++retries;
         } while (!isConnected(relays, scenario.sink, range) && retries < MAX_RETRIES);
-	if (retries == 1000) {
-	    while (!isConnected(relays, scenario.sink, range)) {
-	        for (auto& relay : relays) {
-	            relay.x = scenario.sink.x + 0.9 * (relay.x - scenario.sink.x);
-	            relay.y = scenario.sink.y + 0.9 * (relay.y - scenario.sink.y);
+	    if (retries == 1000) {
+	        while (!isConnected(relays, scenario.sink, range)) {
+	            for (auto& relay : relays) {
+	                relay.x = scenario.sink.x + 0.9 * (relay.x - scenario.sink.x);
+	                relay.y = scenario.sink.y + 0.9 * (relay.y - scenario.sink.y);
+	            }
 	        }
 	    }
-	}
 
         std::cout << "Found initial relay positions!\n";
 
