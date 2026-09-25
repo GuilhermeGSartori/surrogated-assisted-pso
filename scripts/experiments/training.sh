@@ -57,7 +57,7 @@ echo "=== Training Random Forest ==="
 
 source ../../.venv/bin/activate
 
-python3 ../../surrogate_model/trainer.py rf_4r_x1
+python3 ../../surrogate_model/trainer.py rf_4r_c1_hy1
 
 echo
 
@@ -68,7 +68,7 @@ cd build
 
 echo "=== Generating training dataset 2 ==="
 
-./surrogated-assisted-optimizer training training_2
+#./surrogated-assisted-optimizer training training_2
 
 echo
 
@@ -78,8 +78,9 @@ cd "$RUN_DIR"
 
 echo "=== Training Random Forest ==="
 
-source ../../.venv/bin/activate
+echo "=== Change nodes.csv to the correct number of clusters, comment the training_1 (python and optimizer) and run this again"
+echo "=== And after, change the trainer.py hyperparameters and train with both pythons withoyt any optimizer and chaning the name of the model"
 
-python3 ../../surrogate_model/trainer.py rf_4r_x2
+#python3 ../../surrogate_model/trainer.py rf_4r_c2_hy1
 
 echo "=== Random Forest training finished ==="
