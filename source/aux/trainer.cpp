@@ -170,8 +170,8 @@ void generateDataset(TrainingScenario& scenario) {
         std::uniform_real_distribution<double> area_width_dist(scenario.area_min.width, scenario.area_max.width);
         std::uniform_real_distribution<double> area_height_dist(scenario.area_min.height, scenario.area_max.height);
         std::uniform_int_distribution<int> node_dist(scenario.n_nodes_min,scenario.n_nodes_max);
-        std::uniform_int_distribution<int> power_relay_dist(0, 2);
-        std::uniform_int_distribution<int> power_node_dist(0, 2);
+        //std::uniform_int_distribution<int> power_relay_dist(0, 2);
+        std::uniform_int_distribution<int> power_node_dist(1, 2); //mid - high
         //std::uniform_int_distribution<unsigned int> propagation_dist(0, 1);
 
         scenario.area.height = area_height_dist(rng);
@@ -180,7 +180,7 @@ void generateDataset(TrainingScenario& scenario) {
 
         //scenario.network.propagation = propagation_dist(rng);
 
-        int selected_relay_power = power_relay_dist(rng);
+        int selected_relay_power = 2; //high
         int selected_node_power = power_node_dist(rng);
         scenario.network.power[NodeType::Relay] = getPower(selected_relay_power);
         scenario.network.power[NodeType::Node] = getPower(selected_node_power);

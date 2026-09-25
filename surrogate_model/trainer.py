@@ -1,3 +1,5 @@
+import argparse
+
 import numpy as np
 import pandas as pd
 import joblib
@@ -15,13 +17,39 @@ from feature_engineering import (
 
 
 # ============================================================
+# Command-line arguments
+# ============================================================
+
+parser = argparse.ArgumentParser(
+    description="Train Random Forest surrogate model"
+)
+
+parser.add_argument(
+    "model_name",
+    help="Name used to save the trained RF model"
+)
+
+args = parser.parse_args()
+
+
+model_name = args.model_name
+
+if not model_name.endswith(".joblib"):
+    model_name += ".joblib"
+
+
+# ============================================================
 # Configuration
 # ============================================================
 
 DATASET_PATH = "../../surrogate_model/data/dataset.csv"
 NODES_PATH = "../../surrogate_model/data/nodes.csv"
 
-MODEL_PATH = "../../surrogate_model/data/rf_model.joblib"
+MODEL_PATH = (
+    "../../surrogate_model/data/"
+    + model_name
+)
+
 FEATURES_PATH = "../../surrogate_model/data/engineered_features.csv"
 
 RANGE_COLUMN = "simulated_range"
@@ -321,6 +349,7 @@ feature_data.to_csv(
 
 
 print()
+
 print(
     "Engineered dataset shape:",
     feature_data.shape
@@ -328,12 +357,14 @@ print(
 
 
 print()
+
 print(
     "Engineered features:"
 )
 
 
 for column in feature_data.columns:
+
     print(
         column
     )
@@ -428,6 +459,7 @@ y_test = y.iloc[
 
 
 print()
+
 print(
     "Training rows:",
     len(X_train)
@@ -506,6 +538,7 @@ spearman, spearman_p = spearmanr(
 
 
 print()
+
 print(
     "=============================="
 )
@@ -619,6 +652,7 @@ importance = importance.sort_values(
 
 
 print()
+
 print(
     "=============================="
 )
@@ -670,6 +704,7 @@ joblib.dump(
 
 
 print()
+
 print(
     "Model saved to:",
     MODEL_PATH
