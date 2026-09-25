@@ -28,7 +28,7 @@ BASE_DIR = Path(
 
 MODEL_PATH = (
     BASE_DIR /
-    "data/rf_model.joblib"
+    "data/rf_4r_c1_hy1.joblib"
 )
 
 
