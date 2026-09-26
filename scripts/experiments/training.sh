@@ -45,7 +45,7 @@ echo
 
 echo "=== Generating training dataset 1 ==="
 
-./surrogated-assisted-optimizer training training_1
+#./surrogated-assisted-optimizer training training_1
 
 echo
 
