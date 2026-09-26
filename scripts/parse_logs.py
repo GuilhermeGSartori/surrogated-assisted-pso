@@ -806,8 +806,11 @@ def main():
         print(f"  Naive: {naive_file.name}")
 
         pso = parse_pso(pso_file)
-
         naive = parse_naive(naive_file)
+
+        # Naive's relay count is not reliably parsed.
+        # Both logs belong to the same paired scenario.
+        naive["metadata"]["relays"] = pso["metadata"]["relays"]
 
         # Consume both files in this valid pair.
 
