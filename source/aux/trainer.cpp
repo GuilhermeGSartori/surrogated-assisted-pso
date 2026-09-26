@@ -181,7 +181,7 @@ void generateDataset(TrainingScenario& scenario) {
         //scenario.network.propagation = propagation_dist(rng);
 
         int selected_relay_power = 2; //high
-        int selected_node_power = 1; //= power_node_dist(rng);
+        int selected_node_power = 2; //= power_node_dist(rng);
         scenario.network.power[NodeType::Relay] = getPower(selected_relay_power);
         scenario.network.power[NodeType::Node] = getPower(selected_node_power);
 
