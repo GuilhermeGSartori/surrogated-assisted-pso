@@ -163,7 +163,7 @@ void generateDataset(TrainingScenario& scenario) {
         
     }
 
-    for (int i = 0; i < 1000; ++i) {
+    for (int i = 0; i < 150; ++i) {
         std::cout << ">> Seed: " << i << "\n";
         std::mt19937 rng(scenario.seed*i);
         
@@ -181,7 +181,7 @@ void generateDataset(TrainingScenario& scenario) {
         //scenario.network.propagation = propagation_dist(rng);
 
         int selected_relay_power = 2; //high
-        int selected_node_power = power_node_dist(rng);
+        int selected_node_power = 1; //= power_node_dist(rng);
         scenario.network.power[NodeType::Relay] = getPower(selected_relay_power);
         scenario.network.power[NodeType::Node] = getPower(selected_node_power);
 
@@ -194,8 +194,11 @@ void generateDataset(TrainingScenario& scenario) {
         std::uniform_real_distribution<double> x_dist(0.0, scenario.area.width);
         std::uniform_real_distribution<double> y_dist(0.0, scenario.area.height);
 
-        scenario.sink.x = sink_x_dist(rng);
-        scenario.sink.y = sink_y_dist(rng);
+        //scenario.sink.x = sink_x_dist(rng);
+        //scenario.sink.y = sink_y_dist(rng);
+
+        scenario.sink.x = 0;
+        scenario.sink.y = 0;
    
         writeSimulationIni(scenario.n_nodes, scenario.n_relays, scenario.network, "network/omnetpp.ini");
         double range = scenario.network.simulated_range.at({NodeType::Relay, NodeType::Relay});
@@ -234,7 +237,7 @@ void generateDataset(TrainingScenario& scenario) {
 
         std::uniform_real_distribution<double> noise(-80.0, 80.0);
         
-        for (int j = 0; j < 10; ++j) {
+        for (int j = 0; j < 50; ++j) {
             std::cout << ":>>>> Simulation: " << j << "\n"; 
             
             if (j == 0) {
