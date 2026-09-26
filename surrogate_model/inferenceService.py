@@ -533,7 +533,7 @@ def prepare_features(
         clusters=
             clusters,
 
-        node_to_relay_range = 50
+        node_to_relay_range = 150
     )
 
 

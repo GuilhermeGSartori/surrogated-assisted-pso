@@ -306,7 +306,7 @@ for _, row in data.iterrows():
                 scenario_id
             ],
 
-        node_to_relay_range = 50
+        node_to_relay_range = 150
     )
 
 
