@@ -304,7 +304,9 @@ for _, row in data.iterrows():
         clusters=
             scenario_clusters[
                 scenario_id
-            ]
+            ],
+
+        node_to_relay_range = 50
     )
 
 
