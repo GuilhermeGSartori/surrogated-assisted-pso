@@ -14,7 +14,7 @@
 
 #include "network_files.h"
 
-#define sim_proportion 10
+#define sim_proportion 5
 
 template <typename T>
 class FixedSizeVector {
