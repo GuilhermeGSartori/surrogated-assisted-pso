@@ -13,7 +13,7 @@ Relay IDs are arbitrary: use minimum-cost one-to-one assignment instead of
 comparing relay 0 with relay 0, relay 1 with relay 1, etc.
 
 Example:
-  python3 compare_relay_layouts_by_order.py \
+  python3 compare_relay_layouts_with_pdr_naive_rf_fixed.py \
       --pso-sim ../build/logs/pso_sim \
       --pso-rf ../build/logs/pso_rf \
       --hybrid ../build/logs/hybrid \
@@ -21,10 +21,14 @@ Example:
       --naive-rf ../build/logs/naive_rf \
       --by-order --out ../build/logs/layout_comparison
 
-  python3 compare_relay_layouts_by_order.py \
+  python3 compare_relay_layouts_with_pdr_naive_rf_fixed.py \
       --combined-dir ../build/logs/final \
       --sequence pso_sim naive_sim pso_rf naive_rf hybrid \
       --combined-order interleaved --out ../build/logs/layout_comparison
+
+The logged final global best may be RF-predicted for surrogate backends.
+An explicit final simulation verification is extracted separately, when present.
+Missing actual PDR stays missing, rather than silently using a prediction.
 
 Dependencies: numpy, scipy, matplotlib.
 """
@@ -51,6 +55,68 @@ RELAY_COUNT_RE = re.compile(r"^\s*(?:Num(?:ber\s+of)?\s+)?Relays:\s*(\d+)\b", re
 NETWORK_RE = re.compile(r"^\s*Network\s+Configuration(?:\s+(?:ID|id))?:\s*(\d+)\b", re.I | re.M)
 SINK_RE = re.compile(rf"^\s*Sink(?:\s+(?:Position|Coordinates))?:\s*\(?\s*({NUM})\s*[,;]\s*({NUM})\s*\)?", re.I | re.M)
 FITNESS_RE = re.compile(rf"^\s*Final\s+global\s+best\s+fitness:\s*({NUM})", re.I | re.M)
+# PSO-RF/Hybrid usually log their RF prediction as final global best fitness,
+# then print an explicit final OMNeT++ verification. Naive-RF uses a DIFFERENT
+# format: its "new best fitness" lines are RF predictions, while its final
+# "Final global best fitness" is the final OMNeT++ verification.
+# Preserve those separate meanings and apply the Naive-RF fallback ONLY there.
+IMPROVEMENT_RE = re.compile(rf"^\s*new best fitness:\s*({NUM})", re.I | re.M)
+VALIDATED_PDR_PATTERNS = [
+    re.compile(rf"^\s*Simulation of the best (?:surrogate )?solution results:\s*({NUM})", re.I | re.M),
+    re.compile(rf"^\s*(?:Final|Best)\s+(?:(?:global|selected)\s+best\s+)?(?:actual|simulated|simulation)\s+(?:fitness|PDR):\s*({NUM})", re.I | re.M),
+    re.compile(rf"^\s*(?:Actual|Verified|Validation)\s+(?:simulation\s+)?(?:fitness|PDR):\s*({NUM})", re.I | re.M),
+    re.compile(rf"^\s*Simulation of (?:the )?final (?:best )?(?:solution|layout) (?:results|fitness|PDR):\s*({NUM})", re.I | re.M),
+]
+
+
+def final_simulated_pdr(text: str, extra_pattern: str | None = None) -> tuple[float | None, str]:
+    patterns = list(VALIDATED_PDR_PATTERNS)
+    if extra_pattern:
+        patterns.insert(0, re.compile(extra_pattern, re.I | re.M))
+    matches = [(m.start(), float(m.group(1)), m.group(0).strip())
+               for pattern in patterns for m in pattern.finditer(text)]
+    if not matches:
+        return None, ""
+    _, value, marker = max(matches, key=lambda item: item[0])
+    if not 0 <= value <= 1:
+        raise ValueError(f"Final verified PDR outside [0,1]: {marker}")
+    return value, marker
+
+
+def actual_pdr(run: 'Run', method: str) -> float | None:
+    if run.simulated_pdr is not None:
+        return run.simulated_pdr
+    if method in ('PSO-Sim', 'Naive-Sim'):
+        return run.fitness  # These methods optimize directly with OMNeT++.
+    if method == 'Naive-RF' and run.predicted_fitness is not None:
+        # Verified against the user's Naive-RF logger semantics: successive
+        # "new best fitness" lines are predictions; the FINAL global best
+        # fitness is the OMNeT++ result for the selected candidate.
+        return run.fitness
+    return None  # Do not treat PSO-RF/Hybrid predictions as simulated PDR.
+
+
+def pdr_fields(reference: 'Run', candidate: 'Run', method: str) -> dict:
+    reference_pdr = actual_pdr(reference, 'PSO-Sim')
+    candidate_pdr = actual_pdr(candidate, method)
+    predicted = (candidate.predicted_fitness if method == 'Naive-RF' else
+                 candidate.fitness if method in ('PSO-RF', 'Hybrid') else None)
+    return {
+        'comparison_logged_fitness': candidate.fitness if candidate.fitness is not None else '',
+        'comparison_predicted_best_fitness': predicted if predicted is not None else '',
+        'comparison_fitness_source': ('OMNeT++' if method in ('Naive-Sim', 'Naive-RF') else
+                                      'RF or hybrid optimizer output; may be predicted'),
+        'comparison_actual_pdr': candidate_pdr if candidate_pdr is not None else '',
+        'comparison_actual_pdr_source': candidate.simulated_pdr_label if candidate.simulated_pdr is not None
+            else ('Final global best fitness (simulation backend)' if method == 'Naive-Sim' else
+                  'Final global best fitness (Naive-RF final OMNeT++ run)'
+                  if method == 'Naive-RF' and candidate.predicted_fitness is not None else 'MISSING'),
+        'pdr_difference_from_pso_sim': (candidate_pdr - reference_pdr)
+            if candidate_pdr is not None and reference_pdr is not None else '',
+        'prediction_error_actual_minus_logged': (candidate_pdr - predicted)
+            if candidate_pdr is not None and predicted is not None else '',
+    }
+
 
 METHODS = [
     ("PSO-RF", "pso_rf"),
@@ -70,6 +136,9 @@ class Run:
     nodes: np.ndarray | None
     relays: np.ndarray
     fitness: float | None
+    predicted_fitness: float | None
+    simulated_pdr: float | None
+    simulated_pdr_label: str
 
 
 @dataclass
@@ -98,7 +167,7 @@ def coordinate_block(lines: list[str], name: str) -> np.ndarray | None:
     return None
 
 
-def parse_log(path: Path) -> Run:
+def parse_log(path: Path, extra_pattern: str | None = None) -> Run:
     text = path.read_text(encoding="utf-8", errors="replace")
     if "COULD NOT GENERATE RANDOM SOLUTION" in text.upper():
         raise ValueError("random solution generation failed")
@@ -127,6 +196,9 @@ def parse_log(path: Path) -> Run:
     network = NETWORK_RE.search(text)
     sink = SINK_RE.search(text)
     fitness = FITNESS_RE.search(text)
+    improvements = list(IMPROVEMENT_RE.finditer(text))
+    predicted_fitness = float(improvements[-1][1]) if improvements else None
+    verified_pdr, verified_label = final_simulated_pdr(text, extra_pattern)
     return Run(
         path=path,
         seed=int(seed[1]) if seed else None,
@@ -136,11 +208,14 @@ def parse_log(path: Path) -> Run:
         nodes=nodes,
         relays=relays,
         fitness=float(fitness[1]) if fitness else None,
+        predicted_fitness=predicted_fitness,
+        simulated_pdr=verified_pdr,
+        simulated_pdr_label=verified_label,
     )
 
 
 def load_runs(folder: Path, label: str, network_filter: int | None,
-              relay_filter: int | None) -> list[Run]:
+              relay_filter: int | None, extra_pattern: str | None = None) -> list[Run]:
     if not folder.is_dir():
         raise SystemExit(f"{label}: not a directory: {folder}")
     paths = sorted(folder.rglob("*.log"))
@@ -149,7 +224,7 @@ def load_runs(folder: Path, label: str, network_filter: int | None,
     runs = []
     for path in paths:
         try:
-            run = parse_log(path)
+            run = parse_log(path, extra_pattern)
         except ValueError as exc:
             print(f"  SKIP {label}: {path.name}: {exc}")
             continue
@@ -165,15 +240,15 @@ def load_runs(folder: Path, label: str, network_filter: int | None,
     return runs
 
 
-def parse_entry(path: Path) -> LogEntry:
+def parse_entry(path: Path, extra_pattern: str | None = None) -> LogEntry:
     try:
-        return LogEntry(path=path, run=parse_log(path))
+        return LogEntry(path=path, run=parse_log(path, extra_pattern))
     except ValueError as exc:
         # Keep this position in the sequence so later scenarios do not shift!
         return LogEntry(path=path, run=None, error=str(exc))
 
 
-def load_ordered(folder: Path, label: str) -> list[LogEntry]:
+def load_ordered(folder: Path, label: str, extra_pattern: str | None = None) -> list[LogEntry]:
     if not folder.is_dir():
         raise SystemExit(f"{label}: not a directory: {folder}")
     # The filenames generated by the logger have ISO timestamps, so sorting
@@ -181,13 +256,14 @@ def load_ordered(folder: Path, label: str) -> list[LogEntry]:
     paths = sorted(folder.rglob("*.log"), key=lambda p: (p.name, str(p)))
     if not paths:
         raise SystemExit(f"{label}: no .log files found under {folder}")
-    entries = [parse_entry(path) for path in paths]
+    entries = [parse_entry(path, extra_pattern) for path in paths]
     print(f"{label}: {len(entries)} logs in filename/timestamp order, "
           f"{sum(e.run is not None for e in entries)} with final positions")
     return entries
 
 
-def load_combined(folder: Path, sequence: list[str], layout: str) -> dict[str, list[LogEntry]]:
+def load_combined(folder: Path, sequence: list[str], layout: str,
+                  extra_pattern: str | None = None) -> dict[str, list[LogEntry]]:
     if not folder.is_dir():
         raise SystemExit(f"not a directory: {folder}")
     paths = sorted(folder.rglob("*.log"), key=lambda p: (p.name, str(p)))
@@ -200,10 +276,10 @@ def load_combined(folder: Path, sequence: list[str], layout: str) -> dict[str, l
     if layout == "interleaved":
         for i in range(n_scenarios):
             for j, method in enumerate(sequence):
-                result[method].append(parse_entry(paths[i * n_methods + j]))
+                result[method].append(parse_entry(paths[i * n_methods + j], extra_pattern))
     else:
         for j, method in enumerate(sequence):
-            result[method] = [parse_entry(p) for p in
+            result[method] = [parse_entry(p, extra_pattern) for p in
                               paths[j * n_scenarios:(j + 1) * n_scenarios]]
     print(f"Combined folder: {n_scenarios} scenarios x {n_methods} methods "
           f"({layout}); verify --sequence reflects your actual run order")
@@ -342,13 +418,8 @@ def make_plots(rows: list[dict], out: Path) -> None:
     fig, ax = plt.subplots(figsize=(10, 5.5))
     names = list(by_method)
     series = [[r["mean_matched_distance_m"] for r in by_method[m]] for m in names]
-    ax.boxplot(
-        series,
-        labels=[
-            f"{n}\n(n={len(by_method[n])})"
-            for n in names
-        ],
-    )
+    ax.boxplot(series, labels=[f"{n}\n(n={len(by_method[n])})" for n in names],
+               showmeans=True)
     ax.set(ylabel="Mean matched relay distance (m)",
            title="Layout similarity to PSO with simulation across scenarios")
     ax.grid(axis="y", alpha=0.35)
@@ -370,7 +441,8 @@ def compare_by_order(args: argparse.Namespace):
             raise SystemExit("--sequence must not contain duplicate methods")
         if "pso_sim" not in args.sequence or len(args.sequence) < 2:
             raise SystemExit("--sequence must include pso_sim and another method")
-        grouped = load_combined(args.combined_dir, args.sequence, args.combined_order)
+        grouped = load_combined(args.combined_dir, args.sequence, args.combined_order,
+                                args.actual_pdr_regex)
         reference_entries = grouped["pso_sim"]
         other_entries = {
             label: grouped[attr] for label, attr in METHODS if attr in grouped
@@ -380,9 +452,9 @@ def compare_by_order(args: argparse.Namespace):
             raise SystemExit("--pso-sim is required without --combined-dir")
         if not any(getattr(args, attr) for _, attr in METHODS):
             raise SystemExit("Provide at least one comparison directory")
-        reference_entries = load_ordered(args.pso_sim, "PSO-Sim")
+        reference_entries = load_ordered(args.pso_sim, "PSO-Sim", args.actual_pdr_regex)
         other_entries = {
-            label: load_ordered(getattr(args, attr), label)
+            label: load_ordered(getattr(args, attr), label, args.actual_pdr_regex)
             for label, attr in METHODS if getattr(args, attr) is not None
         }
 
@@ -440,7 +512,7 @@ def compare_by_order(args: argparse.Namespace):
             "sensor_count": len(reference.nodes) if reference.nodes is not None else "",
             "relay_count": len(reference.relays),
             "pso_sim_log": str(reference.path),
-            "pso_sim_pdr": reference.fitness if reference.fitness is not None else "",
+            "pso_sim_pdr": actual_pdr(reference, "PSO-Sim") if actual_pdr(reference, "PSO-Sim") is not None else "",
         }
 
         for method, candidates in other_entries.items():
@@ -481,12 +553,7 @@ def compare_by_order(args: argparse.Namespace):
             result_rows.append({
                 **base, "method": method, "comparison_log": str(candidate.path),
                 "pairing_status": status,
-                "comparison_logged_fitness": candidate.fitness if candidate.fitness is not None else "",
-                "comparison_fitness_source": "OMNeT++" if method == "Naive-Sim"
-                else "surrogate or hybrid (not necessarily actual PDR)",
-                "pdr_difference_from_pso_sim": (candidate.fitness - reference.fitness)
-                if method == "Naive-Sim" and candidate.fitness is not None
-                and reference.fitness is not None else "",
+                **pdr_fields(reference, candidate, method),
                 **metrics,
             })
 
@@ -521,10 +588,21 @@ def main() -> None:
                         help="One scenario then all methods, or all scenarios per method")
     parser.add_argument("--expected", type=int,
                         help="Require exactly N logs per method (e.g. --expected 12)")
+    parser.add_argument("--actual-pdr-regex", type=str,
+                        help="Optional Python regex for explicit FINAL OMNeT++ verification PDR; "
+                             "must contain one capturing group for the numeric PDR. "
+                             "Do not match intermediate simulations.")
     args = parser.parse_args()
 
     if args.tolerance <= 0:
         parser.error("--tolerance must be positive")
+    if args.actual_pdr_regex:
+        try:
+            regex = re.compile(args.actual_pdr_regex)
+        except re.error as exc:
+            parser.error(f"invalid --actual-pdr-regex: {exc}")
+        if regex.groups != 1:
+            parser.error("--actual-pdr-regex requires exactly one capturing group")
     if args.expected is not None and args.expected < 1:
         parser.error("--expected must be positive")
     if args.combined_dir is not None and not args.sequence:
@@ -539,9 +617,11 @@ def main() -> None:
     if args.combined_dir is not None or args.by_order:
         reference_runs, result_rows, selected, pairing_rows = compare_by_order(args)
     else:
-        reference_runs = load_runs(args.pso_sim, "PSO-Sim", args.network, args.relays)
+        reference_runs = load_runs(args.pso_sim, "PSO-Sim", args.network, args.relays,
+                                   args.actual_pdr_regex)
         other_runs = {
-            label: load_runs(getattr(args, arg), label, args.network, args.relays)
+            label: load_runs(getattr(args, arg), label, args.network, args.relays,
+                             args.actual_pdr_regex)
             for label, arg in METHODS if getattr(args, arg) is not None
         }
         if not reference_runs:
@@ -565,7 +645,7 @@ def main() -> None:
                 "sensor_count": len(reference.nodes) if reference.nodes is not None else "",
                 "relay_count": len(reference.relays),
                 "pso_sim_log": str(reference.path),
-                "pso_sim_pdr": reference.fitness if reference.fitness is not None else "",
+                "pso_sim_pdr": actual_pdr(reference, "PSO-Sim") if actual_pdr(reference, "PSO-Sim") is not None else "",
             }
             for method, candidates in other_runs.items():
                 matches = [run for run in candidates if is_same_scenario(
@@ -585,12 +665,7 @@ def main() -> None:
                 metrics = compare_layouts(reference, run)
                 result_rows.append({
                     **base, "method": method, "comparison_log": str(run.path),
-                    "comparison_logged_fitness": run.fitness if run.fitness is not None else "",
-                    "comparison_fitness_source": "OMNeT++" if method == "Naive-Sim"
-                    else "surrogate or hybrid (not necessarily actual PDR)",
-                    "pdr_difference_from_pso_sim": (run.fitness - reference.fitness)
-                    if method == "Naive-Sim" and run.fitness is not None
-                    and reference.fitness is not None else "",
+                    **pdr_fields(reference, run, method),
                     **metrics,
                 })
 
@@ -617,9 +692,42 @@ def main() -> None:
             "min_distance_m": float(distances.min()),
             "max_distance_m": float(distances.max()),
             "mean_pdr_difference_from_pso_sim": float(np.mean(gaps)) if gaps else "",
+            "actual_pdr_count": len([r for r in subset if isinstance(r["comparison_actual_pdr"], (int, float))]),
+            "mean_actual_pdr": float(np.mean([r["comparison_actual_pdr"] for r in subset
+                if isinstance(r["comparison_actual_pdr"], (int, float))]))
+                if any(isinstance(r["comparison_actual_pdr"], (int, float)) for r in subset) else "",
+            "mean_prediction_error_actual_minus_logged": float(np.mean([
+                r["prediction_error_actual_minus_logged"] for r in subset
+                if isinstance(r["prediction_error_actual_minus_logged"], (int, float))]))
+                if any(isinstance(r["prediction_error_actual_minus_logged"], (int, float)) for r in subset) else "",
         })
     write_csv(args.out / "summary.csv", summary)
     make_plots(result_rows, args.out)
+
+    # Plot final verified PDR across paired scenarios; no predictions allowed.
+    fig, ax = plt.subplots(figsize=(10, 5.5))
+    per_method = defaultdict(dict)
+    reference_pdr = {}
+    for row in result_rows:
+        if isinstance(row["pso_sim_pdr"], (int, float)):
+            reference_pdr[row["scenario_number"]] = row["pso_sim_pdr"]
+        if isinstance(row["comparison_actual_pdr"], (int, float)):
+            per_method[row["method"]][row["scenario_number"]] = row["comparison_actual_pdr"]
+    if reference_pdr:
+        indices = sorted(reference_pdr)
+        ax.plot(indices, [reference_pdr[i] for i in indices], marker="o", label="PSO-Sim")
+        for label, _ in METHODS:
+            if per_method[label]:
+                xs = sorted(per_method[label])
+                ax.plot(xs, [per_method[label][i] for i in xs], marker="o", label=label)
+        ax.set(xlabel="Scenario number (order-paired)", ylabel="Final verified OMNeT++ PDR",
+               title="Actual network performance of final relay layouts")
+        ax.grid(alpha=0.3)
+        ax.legend()
+        fig.tight_layout()
+        fig.savefig(args.out / "actual_pdr_by_scenario.png", dpi=250)
+        print(f"Saved {args.out / 'actual_pdr_by_scenario.png'}")
+    plt.close(fig)
 
     # An additional comparison directly tests the observation that Naive-RF
     # and Naive-Sim tend to select similar relay placements.
@@ -634,15 +742,21 @@ def main() -> None:
                 "seed": naive_sim.seed if naive_sim.seed is not None else "",
                 "naive_sim_log": str(naive_sim.path),
                 "naive_rf_log": str(naive_rf.path),
-                "naive_sim_pdr": naive_sim.fitness if naive_sim.fitness is not None else "",
+                "naive_sim_pdr": actual_pdr(naive_sim, "Naive-Sim") if actual_pdr(naive_sim, "Naive-Sim") is not None else "",
                 "naive_rf_logged_fitness": naive_rf.fitness if naive_rf.fitness is not None else "",
+                "naive_rf_predicted_best": naive_rf.predicted_fitness if naive_rf.predicted_fitness is not None else "",
+                "naive_rf_actual_pdr": actual_pdr(naive_rf, "Naive-RF") if actual_pdr(naive_rf, "Naive-RF") is not None else "",
+                "naive_rf_minus_naive_sim_actual_pdr": (
+                    actual_pdr(naive_rf, "Naive-RF") - actual_pdr(naive_sim, "Naive-Sim"))
+                    if actual_pdr(naive_rf, "Naive-RF") is not None
+                    and actual_pdr(naive_sim, "Naive-Sim") is not None else "",
                 **metrics,
             })
         write_csv(args.out / "naive_rf_vs_naive_sim.csv", naive_rows)
         if naive_rows:
             print("Naive-RF vs Naive-Sim mean matched distance: "
                   f"{np.mean([r['mean_matched_distance_m'] for r in naive_rows]):.2f} m "
-                  f"across {len(naive_rows)} verified scenarios")
+                  f"across {len(naive_rows)} paired scenarios (check log_pairing.csv)")
 
     print("\nSummary (reference: PSO-Sim):")
     for row in summary:
@@ -650,9 +764,15 @@ def main() -> None:
               f"mean={row['mean_distance_m']:8.2f} m  "
               f"sd={row['std_distance_m']:7.2f} m  "
               f"PDR gap={row['mean_pdr_difference_from_pso_sim']}")
-    print("Note: surrogate/hybrid logged fitness may be predicted, not actual "
-          "OMNeT++ PDR. Only the Naive-Sim PDR gap is computed here; "
-          "layout distances do not depend on fitness provenance.")
+    print("PDR differences use FINAL OMNeT++ verification results, never RF predictions.")
+    print("Naive-RF format: final global best fitness = final simulated PDR; "
+          "last new best fitness = RF prediction.")
+    for row in summary:
+        if row["actual_pdr_count"] < row["paired_scenarios"]:
+            print(f"  MISSING final simulation PDR for "
+                  f"{row['method']}: {row['paired_scenarios'] - row['actual_pdr_count']} "
+                  f"of {row['paired_scenarios']} paired logs. "
+                  "If your log uses another label, pass --actual-pdr-regex.")
     if any(row["paired_scenarios"] != len(reference_runs) for row in summary):
         print("WARNING: at least one method is missing verified scenario pairs. "
               "Inspect warnings above before drawing conclusions.")
