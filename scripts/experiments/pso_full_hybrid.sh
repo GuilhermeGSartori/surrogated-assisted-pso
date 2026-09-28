@@ -89,20 +89,19 @@ echo "=== Running optimizer surrogate ==="
 ./surrogated-assisted-optimizer pso 3_relays/high-high/10 2 20 0.8 1.7 1.3
 ./surrogated-assisted-optimizer pso 3_relays/high-high/11 2 20 0.8 1.7 1.3
 ./surrogated-assisted-optimizer pso 3_relays/high-high/12 2 20 0.8 1.7 1.3
-
-
-#./surrogated-assisted-optimizer pso 3_relays/high-mid/1 1 20 0.8 1.7 1.3
-#./surrogated-assisted-optimizer pso 3_relays/high-mid/2 1 20 0.8 1.7 1.3
-#./surrogated-assisted-optimizer pso 3_relays/high-mid/3 1 20 0.8 1.7 1.3
-#./surrogated-assisted-optimizer pso 3_relays/high-mid/4 1 20 0.8 1.7 1.3
-#./surrogated-assisted-optimizer pso 3_relays/high-mid/5 1 20 0.8 1.7 1.3
-#./surrogated-assisted-optimizer pso 3_relays/high-mid/6 1 20 0.8 1.7 1.3
-#./surrogated-assisted-optimizer pso 3_relays/high-mid/7 1 20 0.8 1.7 1.3
-#./surrogated-assisted-optimizer pso 3_relays/high-mid/8 1 20 0.8 1.7 1.3
-#./surrogated-assisted-optimizer pso 3_relays/high-mid/9 1 20 0.8 1.7 1.3
-#./surrogated-assisted-optimizer pso 3_relays/high-mid/10 1 20 0.8 1.7 1.3
-#./surrogated-assisted-optimizer pso 3_relays/high-mid/11 1 20 0.8 1.7 1.3
-#./surrogated-assisted-optimizer pso 3_relays/high-mid/12 1 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/13 2 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/14 2 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/15 2 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/16 2 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/17 2 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/18 2 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/19 2 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/20 2 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/21 2 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/22 2 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/23 2 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/24 2 20 0.8 1.7 1.3
+./surrogated-assisted-optimizer pso 3_relays/high-high/25 2 20 0.8 1.7 1.3
 
 echo
 
