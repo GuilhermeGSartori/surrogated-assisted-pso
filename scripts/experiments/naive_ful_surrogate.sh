@@ -77,18 +77,18 @@ cd ../../build
 
 echo "=== Running optimizer surrogate ==="
 
-./surrogated-assisted-optimizer naive 3_relays/high-high/1 1 400
-./surrogated-assisted-optimizer naive 3_relays/high-high/2 1 400
-./surrogated-assisted-optimizer naive 3_relays/high-high/3 1 400
-./surrogated-assisted-optimizer naive 3_relays/high-high/4 1 400
-./surrogated-assisted-optimizer naive 3_relays/high-high/5 1 400
-./surrogated-assisted-optimizer naive 3_relays/high-high/6 1 400
-./surrogated-assisted-optimizer naive 3_relays/high-high/7 1 400
-./surrogated-assisted-optimizer naive 3_relays/high-high/8 1 400
-./surrogated-assisted-optimizer naive 3_relays/high-high/9 1 400
-./surrogated-assisted-optimizer naive 3_relays/high-high/10 1 400
-./surrogated-assisted-optimizer naive 3_relays/high-high/11 1 400
-./surrogated-assisted-optimizer naive 3_relays/high-high/12 1 400
+#./surrogated-assisted-optimizer naive 3_relays/high-high/1 1 400
+#./surrogated-assisted-optimizer naive 3_relays/high-high/2 1 400
+#./surrogated-assisted-optimizer naive 3_relays/high-high/3 1 400
+#./surrogated-assisted-optimizer naive 3_relays/high-high/4 1 400
+#./surrogated-assisted-optimizer naive 3_relays/high-high/5 1 400
+#./surrogated-assisted-optimizer naive 3_relays/high-high/6 1 400
+#./surrogated-assisted-optimizer naive 3_relays/high-high/7 1 400
+#./surrogated-assisted-optimizer naive 3_relays/high-high/8 1 400
+#./surrogated-assisted-optimizer naive 3_relays/high-high/9 1 400
+#./surrogated-assisted-optimizer naive 3_relays/high-high/10 1 400
+#./surrogated-assisted-optimizer naive 3_relays/high-high/11 1 400
+#./surrogated-assisted-optimizer naive 3_relays/high-high/12 1 400
 ./surrogated-assisted-optimizer naive 3_relays/high-high/13 1 400
 ./surrogated-assisted-optimizer naive 3_relays/high-high/14 1 400
 ./surrogated-assisted-optimizer naive 3_relays/high-high/15 1 400
