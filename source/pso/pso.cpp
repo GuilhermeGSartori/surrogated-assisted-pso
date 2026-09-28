@@ -266,8 +266,8 @@ const Solution& pso(Swarm& swarm, const Scenario& scenario, std::mt19937& rng, s
         }
     } while (++iterations < iterations_max);
 
-    log << "-- ITERATION " << iterations << " --\n";
-    evaluateSolution(swarm, scenario, log);
+    //log << "-- ITERATION " << iterations << " --\n";
+    //evaluateSolution(swarm, scenario, log);
     
     if (scenario.backend == Method::Surrogate || scenario.backend == Method::Hybrid) {
     	double fitness = runSimulation(swarm.getGlobalBest().relay_positions, scenario);
