@@ -230,13 +230,12 @@ def main():
             )
 
             if area_width is None or area_height is None:
-                print("  No area dimensions found. Skipping.")
-                skipped += 1
-                continue
-            if not nodes:
-                print("  No sensor nodes found. Skipping.")
-                skipped += 1
-                continue
+                area_width = 500
+                area_height = 500
+            #if not nodes:
+                #print("  No sensor nodes found. Skipping.")
+                #skipped += 1
+                #continue
             if not final_relays:
                 print("  No final global best relays found. Skipping.")
                 skipped += 1
