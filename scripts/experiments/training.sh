@@ -59,8 +59,8 @@ source ../../.venv/bin/activate
 
 # To train, must change nodes.csv for cluster and trainer.py for hyperparameters
 # To use, must change scenarios.csv to match the number of clusters and the used model name!
-python3 ../../surrogate_model/trainer.py rf_4r_c1_hy1
-#python3 ../../surrogate_model/trainer.py rf_4r_c2_hy1
+#python3 ../../surrogate_model/trainer.py rf_4r_c1_hy1
+python3 ../../surrogate_model/trainer.py rf_4r_c2_hy1
 #python3 ../../surrogate_model/trainer.py rf_4r_c3_hy1
 #python3 ../../surrogate_model/trainer.py rf_4r_c1_hy2
 #python3 ../../surrogate_model/trainer.py rf_4r_c2_hy2
